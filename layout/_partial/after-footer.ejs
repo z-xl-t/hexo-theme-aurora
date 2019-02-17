@@ -1,0 +1,29 @@
+<noscript>
+  <strong>
+    We're sorry but aurora doesn't work properly without JavaScript enabled. Please enable it to continue.
+  </strong>
+</noscript>
+<% if (theme.bg_animes.enable){ %>
+  <ul id="bg">
+    <% for (var i in theme.bg_animes.images){ %>
+      <%
+      var num = Number(i.split('-')[1])
+      var str = 'animation-duration: ' + 8 * theme.bg_animes.images_num +'s;' + 'background-image: url('+ theme.bg_animes.images[i] + ');' + 'animation-delay: ' + 8 * (num-1) +'s;'
+      %>
+      <%# 下面一行会有css规则警告，但不影响最终渲染 %>
+      <li style="<%= str %>"></li>
+    <% } %>
+  </ul>
+  <script>
+    /* 延时加载图片 */
+    setTimeout(function() {
+      document.getElementById('bg').className += ' backstretch'
+    }, 4000);
+  </script>
+<% } %>
+
+<% if (theme.fireworks.enable){ %>
+  <canvas id="fireworks"></canvas>
+  <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+  <%- js('js/fireworks.js') %>
+<% } %>

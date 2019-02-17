@@ -1,0 +1,15 @@
+<div id="footer">
+  <div class="site-info">
+    <% if (theme.footer.show.enable){ %>
+      <p>
+        <i class="icon-copyright"></i>
+        <% var current = date(Date.now(), 'YYYY') %>
+        <%= theme.footer.since || current-1 %>&minus;<%= current %>
+        <%= theme.footer.title || theme.title %>
+      </p>
+      <p>
+        Theme-<a rel="noopener noreferrer" target="_blank" href="https://github.com/sanshiliuxiao/hexo-theme-aurora.git">Aurora</a> | <%= theme.footer.subtitle || theme.subtitle %> 
+      </p>
+    <% } %>
+  </div>
+</div>

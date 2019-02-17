@@ -1,0 +1,80 @@
+@import 'reset'
+@import 'mixin'
+@font-face
+  font-family: GuDianMingChaoTi
+  font-weight: bold
+  src: url('../fonts/HanYiXueFengTiFan.ttf')
+
+body,
+#app
+  min-height: 100vh
+
+body
+  font-family: 'Helvetica', 'PingFang SC', serif
+  font-size: 0.15rem
+  letter-spacing: 0.4px
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2)
+  user-select: none
+  scroll-behavior: smooth
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  cursor: url('../images/cursor.png'), auto
+
+h2,
+h3,
+h4
+  color: #666
+img
+  display: block
+a
+  color: inherit
+  text-decoration: none
+
+a,
+button,
+span[class*='img-box'],
+.cursor,
+  cursor: url('../images/cursor_link.png'), auto
+
+/* 卡片样式 */
+.card
+  border-radius: 0.03rem
+  background-color: rgba(255, 255, 255, 0.66)
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.24)
+  overflow: hidden
+
+/* 字体加载 */
+.fonts-loaded
+  body
+    fonts()
+  #gitalk
+    .gt-comment-body,
+    .gt-btn-text,
+    textarea
+      fonts()
+
+#app
+  position: relative
+  padding-bottom: 1rem
+  text-align: center
+  .back-to-top
+    position: fixed
+    right: 0.25rem
+    width: 70px
+    height: 900px
+    z-index: 99
+    opacity: 1
+    transition: all 0.6s ease-out
+    background: url(https://i.loli.net/2019/01/24/5c496f5c617f6.png) no-repeat center
+    background-size: contain
+    &.visible
+      animation: float 3s linear infinite
+  .page
+    margin: 0 auto
+    padding: 0 0.12rem
+    max-width: 900px
+    user-select: text
+  
+  @import "_partial/header"
+  @import "_partial/footer"
+
