@@ -1,5 +1,59 @@
-<div>
-  <div class="body" style="height: 1400px">
-    首页
+<div id="home">
+  <div class="main">
+    <% if (is_home()) {%>
+      <% page.posts.each(function(post){ %>
+        <article class="card">
+          <a href="<%- url_for(post.path) %>">
+          </a>
+          <div class="post-header">
+              <% if (theme.post_cover_image.enable) { %>
+                <% var url = post.image_url || theme.post_cover_image.default_image; %>
+                <img src="<%= url %>" alt="">
+              <% } %>
+              <% if (post.image_title) { %>
+                <div><%= post.image_title %></div>
+              <% } %>
+            </div>
+            
+              <div class="post-body">
+                <% if (post.title) { %>
+                  <div class="markdown"><h2><%= post.title %></h2></div>
+                <% } %>
+              </div>
+            <div class="post-meta">
+              <% if (post.categories && post.categories.length){ %>
+                <span class="calendar">
+                  <i class="icon icon-calendar"></i>
+                  <span><%= date(post.date, 'YYYY-MM-DD') %></span>
+                </span>
+              <% } %>
+              <% if (post.categories && post.categories.length){ %>
+                <span class="categories">
+                  <i class="icon icon-bookmark-empty"></i>
+                  <%= page.category %>
+                    <%- list_categories(post.categories, {
+                      show_count: false,
+                      class: 'category',
+                      style: 'none',
+                      separator: '、'
+                    }) %>
+                </span>
+              <% } %>
+              <% if (post.tags && post.tags.length){ %>
+                <span class="tags">
+                  <i class="icon icon-tag"></i>
+                    <%- list_tags(post.tags, {
+                      show_count: false,
+                      class: 'tag',
+                      style: 'none',
+                      separator: '、'
+                    }) %>
+                </span>
+              <% } %>
+            </div>
+        </article>
+      <% }) %>
+    <% } %>
   </div>
+  <%- partial('_partial/pagination') %>
 </div>

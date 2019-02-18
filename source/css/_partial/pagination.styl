@@ -1,0 +1,86 @@
+.pagination
+  position: relative
+  padding: 0 2rem
+  height: 0.6rem
+  width: 100%
+  z-index: 99
+  display: flex
+  justify-content: space-around
+  align-items: center
+  .prev, .next
+    position absolute
+    top: 0
+    width: 1.8rem
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 0.16rem
+    line-height: 0.4rem
+    background #fff
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.24)
+    transition: all 0.25s ease-out
+    text-shadow: 0 1px 1px #986db2
+    .rect
+      background #000
+      position: absolute
+      z-index: -1
+      width: 100%
+      height: 100%
+      border: 2px solid #fff
+      background: transparent
+    a
+      position: absolute
+      z-index: 1
+      top: 0
+      left 0
+      width: 100%
+      height: 100%
+      background: #fff
+      display: flex
+      justify-content: center
+      align-items: center
+      &::before
+        content: ''
+        position absolute
+        z-index: -1
+        top: 0
+        left: 0
+        width: 100%
+        height 100%
+        background: #986db2
+        color: #fff
+        display: flex
+        justify-content: center
+        align-items: center
+        transform: scaleX(0)
+        transition: all 0.25s ease-out
+    &:hover
+      &.prev
+        transform: translate(-50%, 2px)
+      &.next
+        transform: translate(50%, 2px)
+      & a
+        color: #fff
+        &::before
+          transform: scaleX(1)
+      & .rect
+        border-color: #986db2
+  .prev
+    left: 25%;
+    transform: translate(-50%, 0);
+    a
+      &::before
+         transform-origin: bottom right
+    & .rect
+      top: 0.1rem
+      left: -0.1rem
+  .next
+    right: 25%;
+    transform: translate(50%, 0);
+    a
+      &::before
+         transform-origin: bottom left
+    & .rect
+      top: 0.1rem
+      left: 0.1rem

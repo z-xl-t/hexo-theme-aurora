@@ -1,0 +1,90 @@
+#home
+  width: 100%
+  .main
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
+  article
+    display: flex
+    flex-direction: column
+    margin-bottom: 0.16rem
+    width: 49.2%
+    text-align: left
+    transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s
+    position relative
+    /*
+    & > a
+      position absolute
+      z-index: 1
+      top: 0
+      left 0
+      width: 100%
+      height: 100%
+      cursor: url('../images/cursor.png'), auto
+    */
+    &:hover
+      transform: translateY(-6px)
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.24)
+      img
+        transform: scale(1.06)
+    .post-header
+      position: relative
+      font-size: 0.15rem;
+      min-height: 0.41rem;
+      overflow: hidden
+      img
+        width: 100%
+        transition: transform 0.6s ease-out
+      & > div
+        position: absolute
+        bottom: 0
+        padding: 0.12rem 0.14rem
+        width: 100%
+        background: rgba(0, 0, 0, 0.4)
+        text-align: right 
+        font-size: 0.12rem
+        color: #eee
+        text-transform: capitalize
+    .post-body
+      flex: 1
+      .markdown
+        padding: 0.12rem 0.14rem
+        h2
+          font-weight: normal;
+          display: -webkit-box
+          -webkit-box-orient: vertical
+          -webkit-line-clamp: 2
+          font-size: 0.14rem
+          line-height: 1.6
+          text-align: justify
+          text-overflow: ellipsis
+          overflow: hidden
+    .post-meta
+      display: flex
+      padding: 0.12rem 0.01rem
+      height: 0.5rem
+      font-size: 0.14rem
+      border-top: 1px solid rgba(0, 0, 0, 0.08)
+      & > span
+        display: flex
+        justify-content: left
+        align-items: center
+        margin: 0 0.04rem
+        .icon
+          margin-right: 4px
+        &.calendar
+          width: 30%
+          flex-basis: 30%
+          flex-shrink: 0
+        &.categories, &.tags
+          flex-grow: 1
+          flex-shrink: 0
+  @media (max-width: 900px)
+    .main
+      justify-content: space-around
+      article
+        margin-bottom: 0.32rem
+        width: 98%
+
+    
+  

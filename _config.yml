@@ -36,6 +36,10 @@ menu:
     url: /about
     icon: 'icon-about'
 
+post_cover_image: 
+  enable: true
+  default_image: https://i.loli.net/2019/01/24/5c49bd8dad2f5.jpg
+
 footer:
   show:
     enable: true
@@ -44,7 +48,8 @@ footer:
   subtitle:
 
 bg_animes:
-  enable: true
+  default_bg_image: https://i.loli.net/2018/12/16/5c164034ac74c.jpg
+  enable: false
   images_num: 10
   images:
     i-1: https://i.loli.net/2018/12/16/5c164034ac74c.jpg
@@ -59,7 +64,7 @@ bg_animes:
     i-10: https://i.loli.net/2018/12/09/5c0cc1268cd42.jpg
 
 fireworks:
-  enable: true
+  enable: false
   
 
 
