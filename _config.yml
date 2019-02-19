@@ -68,7 +68,7 @@ bg_animes:
 
 # 点击页面的烟火效果
 fireworks:
-  enable: false
+  enable: true
 
 # 回到顶部挂件
 backToTop:
