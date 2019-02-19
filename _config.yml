@@ -3,7 +3,7 @@
 # ========================================
 title: '蝉时雨'
 subtitle: '蝉鸣如雨 花宵道中'
-favicon: /images/favicon.png
+favicon: https://i.loli.net/2019/02/19/5c6b824e6e83e.png
 
 # 只引入了部分字体图标 切勿更换
 menu:
@@ -36,10 +36,12 @@ menu:
     url: /about
     icon: 'icon-about'
 
+# 文章顶端大图
 post_cover_image: 
   enable: true
   default_image: https://i.loli.net/2019/01/24/5c49bd8dad2f5.jpg
 
+# 底部的信息设置
 footer:
   show:
     enable: true
@@ -47,6 +49,7 @@ footer:
   title:
   subtitle:
 
+# 背景图片 && 背景变化效果（通过enable设置）
 bg_animes:
   default_bg_image: https://i.loli.net/2018/12/16/5c164034ac74c.jpg
   enable: false
@@ -63,7 +66,16 @@ bg_animes:
     i-9: https://i.loli.net/2018/12/09/5c0cc0f409d63.jpg
     i-10: https://i.loli.net/2018/12/09/5c0cc1268cd42.jpg
 
+# 点击页面的烟火效果
 fireworks:
+  enable: false
+
+# 回到顶部挂件
+backToTop:
+  enable: false
+
+# 顶端进度条效果
+progressBar: 
   enable: false
   
 

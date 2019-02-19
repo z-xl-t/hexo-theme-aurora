@@ -4,6 +4,7 @@
   text-align: center
   .back-to-top
     position: fixed
+    top: -1200px
     right: 0.25rem
     width: 70px
     height: 900px
@@ -14,8 +15,22 @@
     background-size: contain
     &.visible
       animation: float 3s linear infinite
+    @keyframes float
+      0%
+        transform: translateY(0);
+      50%
+        transform: translateY(-6px);
+      100%
+        transform: translateY(0);
   .page
     margin: 0 auto
     padding: 0 0.12rem
     max-width: 900px
     user-select: text
+
+  @media (max-width: 1024px)
+    .back-to-top
+      display: none !important
+    #progress-indicator
+      display: none
+      

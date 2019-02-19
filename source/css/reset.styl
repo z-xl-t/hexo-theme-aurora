@@ -9,63 +9,38 @@
   color: #fff
   background: #b28fce
 
-/* 烟花特效 */
-#fireworks
-  position: fixed
-  top: 0
-  left: 0
-  z-index: -1
+html
+  height: 100%;
+  min-width: 375px;
+body
+  min-height: 100%;
+  font-family: 'Helvetica', 'PingFang SC', serif
+  font-size: 0.15rem
+  letter-spacing: 0.4px
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2)
+  user-select: none
+  scroll-behavior: smooth
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  cursor: url('../images/cursor.png'), auto
 
-/* 滚动条效果 */
-custom-scroll()
+h2,
+h3,
+h4
+  color: #666
+img
+  display: block
+a
+  color: inherit
+  text-decoration: none
 
-/* 轮播背景 */
-#bg
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  z-index: -1
-  background-size: cover
-  background-position: 50% 50%
-  background-repeat: no-repeat
-  &::after
-    content: ''
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    background-color: rgba(255, 255, 255, 0.6)
+a,
+button,
+span[class*='img-box'],
+.cursor
+  cursor: url('../images/cursor_link.png'), auto
 
-#bg li
-  font-size: 0
-  color: transparent
-
-.backstretch li
-  position: absolute
-  top: 0px
-  left: 0px
-  width: 100%
-  height: 100%
-  z-index: 0
-  background-size: cover
-  background-position: 50% 50%
-  background-repeat: no-repeat
-  opacity: 0
-  animation: imageAnimation linear infinite 0s
-
-@keyframes imageAnimation
-  0%
-    opacity: 0
-    animation-timing-function: ease-in
-  1.5%
-    opacity: 1
-  12%
-    opacity: 1
-    animation-timing-function: ease-out
-  13%
-    opacity: 0
-  100%
-    opacity: 0
+@font-face
+  font-family: GuDianMingChaoTi
+  font-weight: bold
+  src: url('../fonts/HanYiXueFengTiFan.ttf')

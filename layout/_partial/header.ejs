@@ -9,7 +9,7 @@
           url = theme.menu[i].url;
           icon = theme.menu[i].icon;
         %>
-        <li><a class="icon <%= icon %>" href="<%= url_for(url) %>"><%= name %></a></li>
+        <li><a class="icon <%= icon %>" href="<%= url_for(url) %>"><span><%= name %></span></a></li>
       <% } %>
     </ul>
   </div>

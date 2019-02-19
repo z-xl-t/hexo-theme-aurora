@@ -37,8 +37,7 @@
       animation-name: fadeIn
       animation-duration: 0.8s
       li
-        padding-top: 0.04rem
-        width: 0.5rem
+        width: 0.6rem
         font-size: 0.16rem
         list-style: none
         height: 86%
@@ -49,8 +48,25 @@
           justify-content: space-around
           align-items: center
           height: 100%
+          transition: color 0.25s ease-in-out
+          & > span
+            transition: color 0.25s ease-in-out
         &:hover
           color: #b854d4
+          & > a > span
+            color: #b854d4
+    @media (max-width: 900px)
+      ul
+        height: 0.65rem
+        li
+          width: 0.8rem
+    @media (max-width: 375px)
+      ul
+        height: 0.8rem
+    
+    
+  
+
         
       
     
