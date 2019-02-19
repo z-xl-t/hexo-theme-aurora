@@ -36,11 +36,11 @@ menu:
     url: /about
     icon: 'icon-about'
 
-# 文章顶端大图
+# 图文模式 建议默认背景颜色是默认图片的主色
 post_cover_image: 
   enable: true
   default_image: https://i.loli.net/2019/01/24/5c49bd8dad2f5.jpg
-
+  default_bg_color: 'rgba(233, 224, 207,0.66);'
 # 底部的信息设置
 footer:
   show:

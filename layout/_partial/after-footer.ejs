@@ -104,7 +104,16 @@
         var progressBar = new ProgressIndicator({color: "#986db2"});
       </script>
     <% } %>
-  </div> 
+  </div>
+  <div>
+    <%# 图片懒加载 %>
+    <%- js('js/lib/lazyload.min.js') %>
+    <script>
+      var myLazyLoad = new LazyLoad({
+        elements_selector: ".lazy"
+      });
+    </script>
+  </div>
 </div>
 
 

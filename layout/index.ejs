@@ -7,14 +7,20 @@
           </a>
           <div class="post-header">
               <% if (theme.post_cover_image.enable) { %>
-                <% var url = post.image_url || theme.post_cover_image.default_image; %>
-                <img src="<%= url %>" alt="">
+                <% 
+                  var url = post.image_url; 
+                  var defalut_image =  url ? '' : 'background-image: url('+ theme.post_cover_image.default_image + ");"
+                  var defalut_color = theme.post_cover_image.default_bg_color ? 'background-color: ' + theme.post_cover_image.default_bg_color  + ';' : ''
+                  var str = defalut_image + defalut_color
+                %>
+                <div class="img-wrapper" style="<%- str %>">
+                  <img class="lazy" data-src="<%= url %>" alt="">
+                </div>
               <% } %>
               <% if (post.image_title) { %>
                 <div><%= post.image_title %></div>
               <% } %>
             </div>
-            
               <div class="post-body">
                 <% if (post.title) { %>
                   <div class="markdown"><h2><%= post.title %></h2></div>
