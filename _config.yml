@@ -40,7 +40,7 @@ menu:
 post_cover_image: 
   enable: true
   default_image: https://i.loli.net/2019/01/24/5c49bd8dad2f5.jpg
-  default_bg_color: 'rgba(233, 224, 207,0.66);'
+  default_bg_color: 'rgba(233, 224, 207,0.66)'
 # 底部的信息设置
 footer:
   show:
@@ -77,6 +77,15 @@ backToTop:
 # 顶端进度条效果
 progressBar: 
   enable: false
-  
+
+# gitalk留言功能
+gitalk:
+  enable: true
+  owner: 
+  repo: 
+  admin: 
+  clientID: 
+  clientSecret: 
+    
 
 

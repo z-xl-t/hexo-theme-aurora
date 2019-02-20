@@ -5,7 +5,7 @@
         <% if (theme.post_cover_image.enable) { %>
           <% 
             var url = post.image_url; 
-            var defalut_image =  url ? '' : 'background-image: url('+ theme.post_cover_image.default_image + ");"
+            var defalut_image =  url ? '' : 'background-image: url('+ theme.post_cover_image.default_image + ');'
             var defalut_color = theme.post_cover_image.default_bg_color ? 'background-color: ' + theme.post_cover_image.default_bg_color  + ';' : ''
             var str = defalut_image + defalut_color
           %>
@@ -27,4 +27,9 @@
     </div>
   </article>
   <%- js('js/post.js') %>
+  <%# gitalk 功能 comment参数只要不是false 就默认有gitalk功能 %>
+  <% if (theme.gitalk.enable && post.comment != false){ %>
+    <%- partial('_partial/gitalk') %>
+  <% } %>
+  
 </div>

@@ -39,8 +39,10 @@
       var font = new FontFaceObserver('Noto Serif SC', { weight: '400' })
       font.load().then(() => {
         var body = document.querySelector('body')
-        body.style.fontFamily = "'Noto Serif SC', 'Helvetica', 'PingFang SC', serif"
-        console.log('加载字体成功')
+        body.setAttribute(
+          'class',
+          'fonts-loaded'
+        )
       }).catch((e) => {
         console.error('尝试在线加载 Noto Serif SC 字体失败 ，使用其他字体')
       })
