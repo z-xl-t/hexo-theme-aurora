@@ -1,0 +1,30 @@
+<div id="post">
+  <% var post = page %>
+  <article class="card">
+    <div class="post-header">
+        <% if (theme.post_cover_image.enable) { %>
+          <% 
+            var url = post.image_url; 
+            var defalut_image =  url ? '' : 'background-image: url('+ theme.post_cover_image.default_image + ");"
+            var defalut_color = theme.post_cover_image.default_bg_color ? 'background-color: ' + theme.post_cover_image.default_bg_color  + ';' : ''
+            var str = defalut_image + defalut_color
+          %>
+          <div class="img-wrapper" style="<%- str %>">
+            <img class="lazy" data-src="<%= url %>" alt="">
+          </div>
+        <% } %>
+        <div>
+          <h1 class="title"><%= post.title %></h1>
+          <div class="meta">
+            <%- partial('_partial/post/date.ejs', {post: post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post}) %>
+            <%- partial('_partial/post/tag.ejs', {post: post}) %>
+          </div>
+        </div>
+    </div>
+    <div class="post-body">
+      <%- post.content %>
+    </div>
+  </article>
+  <%- js('js/post.js') %>
+</div>

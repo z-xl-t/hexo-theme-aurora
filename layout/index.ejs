@@ -17,46 +17,17 @@
                   <img class="lazy" data-src="<%= url %>" alt="">
                 </div>
               <% } %>
-              <% if (post.image_title) { %>
-                <div><%= post.image_title %></div>
-              <% } %>
-            </div>
-              <div class="post-body">
-                <% if (post.title) { %>
-                  <div class="markdown"><h2><%= post.title %></h2></div>
-                <% } %>
-              </div>
-            <div class="post-meta">
-              <% if (post.categories && post.categories.length){ %>
-                <span class="calendar">
-                  <i class="icon icon-calendar"></i>
-                  <span><%= date(post.date, 'YYYY-MM-DD') %></span>
-                </span>
-              <% } %>
-              <% if (post.categories && post.categories.length){ %>
-                <span class="categories">
-                  <i class="icon icon-bookmark-empty"></i>
-                  <%= page.category %>
-                    <%- list_categories(post.categories, {
-                      show_count: false,
-                      class: 'category',
-                      style: 'none',
-                      separator: '、'
-                    }) %>
-                </span>
-              <% } %>
-              <% if (post.tags && post.tags.length){ %>
-                <span class="tags">
-                  <i class="icon icon-tag"></i>
-                    <%- list_tags(post.tags, {
-                      show_count: false,
-                      class: 'tag',
-                      style: 'none',
-                      separator: '、'
-                    }) %>
-                </span>
-              <% } %>
-            </div>
+          </div>
+          <div class="post-body">
+            <% if (post.title) { %>
+              <div class="title"><h2><%= post.title %></h2></div>
+            <% } %>
+          </div>
+          <div class="post-meta">
+            <%- partial('_partial/post/date.ejs', {post: post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post}) %>
+            <%- partial('_partial/post/tag.ejs', {post: post}) %>
+          </div>
         </article>
       <% }) %>
     <% } %>
