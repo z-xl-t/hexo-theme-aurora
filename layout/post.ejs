@@ -14,11 +14,11 @@
           </div>
         <% } %>
         <div>
-          <h1 class="title"><%= post.title %></h1>
+          <%- partial('_partial/post/title.ejs', {post: post}) %>
           <div class="meta">
             <%- partial('_partial/post/date.ejs', {post: post}) %>
-            <%- partial('_partial/post/category.ejs', {post: post}) %>
-            <%- partial('_partial/post/tag.ejs', {post: post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post, depth: 0}) %>
+            <%- partial('_partial/post/tag.ejs', {post: post, amount: 0}) %>
           </div>
         </div>
     </div>
@@ -27,8 +27,10 @@
     </div>
   </article>
   <%- js('js/post.js') %>
-  <%# gitalk 功能 comment参数只要不是false 就默认有gitalk功能 %>
-  <% if (theme.gitalk.enable && post.comment != false){ %>
+  <%# gitalk 功能
+    文章中的Front-matter, comments参数只要不是false 就默认有gitalk功能 
+   %>
+  <% if (theme.gitalk.enable && post.comments != false){ %>
     <%- partial('_partial/gitalk') %>
   <% } %>
   

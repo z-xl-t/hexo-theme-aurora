@@ -19,14 +19,12 @@
               <% } %>
           </div>
           <div class="post-body">
-            <% if (post.title) { %>
-              <div class="title"><h2><%= post.title %></h2></div>
-            <% } %>
+            <%- partial('_partial/post/title.ejs', {post: post}) %>
           </div>
           <div class="post-meta">
             <%- partial('_partial/post/date.ejs', {post: post}) %>
-            <%- partial('_partial/post/category.ejs', {post: post}) %>
-            <%- partial('_partial/post/tag.ejs', {post: post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post, depth: 1}) %>
+            <%- partial('_partial/post/tag.ejs', {post: post, amount: 2}) %>
           </div>
         </article>
       <% }) %>

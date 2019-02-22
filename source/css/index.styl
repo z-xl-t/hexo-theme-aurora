@@ -49,37 +49,41 @@
       flex: 1
       .title
         padding: 0.12rem 0.14rem
-        h2
-          font-weight: normal;
-          display: -webkit-box
-          -webkit-box-orient: vertical
-          -webkit-line-clamp: 2
-          font-size: 0.18rem
-          font-weight: 400
-          line-height: 1.6
-          text-align: justify
-          text-overflow: ellipsis
-          overflow: hidden
+        font-weight: normal;
+        display: -webkit-box
+        -webkit-box-orient: vertical
+        -webkit-line-clamp: 2
+        font-size: 0.18rem
+        font-weight: 400
+        line-height: 1.6
+        text-align: justify
+        text-overflow: ellipsis
+        overflow: hidden
     .post-meta
       display: flex
-      padding: 0.12rem 0.01rem
-      height: 0.5rem
+      padding: 0.12rem 0.1rem
       font-size: 0.14rem
       border-top: 1px solid rgba(0, 0, 0, 0.08)
       & > span
         display: flex
         justify-content: left
+        margin-right: 0.06rem
         align-items: center
-        margin: 0 0.04rem
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        & > a
+          text-overflow:ellipsis;
         .icon
           margin-right: 4px
         &.calendar
-          width: 30%
-          flex-basis: 30%
+          width: 24%
+          flex-basis: 24%
           flex-shrink: 0
-        &.categories, &.tags
-          flex-grow: 1
-          flex-shrink: 0
+        &.categories
+          flex: 3
+        &.tags
+          flex: 4
   @media (max-width: 900px)
     .main
       justify-content: space-around
