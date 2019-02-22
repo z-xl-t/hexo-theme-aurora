@@ -6,9 +6,9 @@
           <% if (theme.themeColors.enable){ %>
             <%
               var s = 'c-' + (i % theme.themeColors.num  + 1)
-              var color = theme.themeColors.colors[s]
-              var str = 'border-top-color: ' + color + ';'
-              %>
+              var c = theme.themeColors.colors[s]
+              var str = 'border-top-color: ' + c + ';'
+            %>
           <% } %>
           <li style="<%- str %>">
             <a href="<%- url_for(post.path) %>"></a>

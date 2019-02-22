@@ -1,1 +1,15 @@
-<%- partial('post') %>
+<%if (page.type === "categories"){%>
+  <%- partial('categories') %>
+<% } else if (page.type === "tags"){ %>
+  <%- partial('tags') %>
+<% } else if (page.type === "books"){ %>
+  <%- partial('books') %>
+<% } else if (page.type === "moods"){ %>
+    <%- partial('moods') %>
+<% } else if (page.type === "friends"){ %>
+    <%- partial('friends') %>
+<% } else if (page.type === "about"){ %>
+    <%- partial('about') %> 
+<% } else { %>
+  <%- partial('post') %>
+<% } %>

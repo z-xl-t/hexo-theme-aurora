@@ -27,6 +27,10 @@ menu:
     name: '心情'
     url: /moods
     icon: 'icon-moods'
+  books:
+    name: '书单'
+    url: /books
+    icon: 'icon-books'
   friends:
     name: '友链'
     url: /friends
@@ -35,6 +39,31 @@ menu:
     name: '关于'
     url: /about
     icon: 'icon-about'
+
+# 配置页面的quote, 其中首页和归档页不需要配置
+quotes:
+  enable: true
+  categories:
+    enable: true
+    quote: '行云流水，落笔生花'
+  tags:
+    enable: true
+    quote: '列卒周匝，星罗云布'
+  moods:
+    enable: true
+    quote: '欲言又止，止言又欲'
+  books:
+    enable: true
+    quote: '吾生也有涯，而知也无涯'
+  friends:
+    enable: true
+    quote: '青青子衿，悠悠我心'
+  about:
+    enable: true
+    quote: '蝉鸣如雨，花宵道中'
+
+  
+
 
 # 图文模式 建议默认背景颜色是默认图片的主色
 post_cover_image: 
