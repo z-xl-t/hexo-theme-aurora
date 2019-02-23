@@ -1,0 +1,12 @@
+<% site.tags.forEach(function(tag, i) { %>
+  <%
+    var s = 'c-' + (i % theme.themeColors.num  + 1)
+    var c = theme.themeColors.colors[s]
+    var str = 'color: ' + c + ';'
+  %>
+  <li>
+    <span style="<%- str %>">
+      <a href="<%- url_for(tag.path) %>"><%= tag.name %></a>
+    </span>
+  </li>
+<% }) %>

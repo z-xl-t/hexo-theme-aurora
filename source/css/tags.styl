@@ -1,32 +1,33 @@
 #tags
-  .content
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0.16rem;
+  & > .card > .content
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    padding: 0.16rem
     .message
-      margin-top: .8rem;
-      width: 100%;
-      text-align: center;
-      display: flex;
-      justify-content: center;
+      margin-top: .8rem
+      width: 100%
+      text-align: center
+      display: flex
+      justify-content: center
       span
         color: #B28FCE
       &:hover > span
         color: #fff
     li
-      display: flex;
-      list-style: none;
-      margin: 0.1rem 0.12rem;
+      display: flex
+      list-style: none
+      margin: 0.1rem 0.12rem
       span
-        padding: 0.04rem 0.1rem;
-        border-radius: 3px;
-        background: rgba(0, 0, 0, .5);
-        transition: all 0.25s ease-out;
-        font-size: 18px;
+        padding: 0.04rem 0.1rem
+        border-radius: 3px
+        background: rgba(0, 0, 0, .5)
+        transition: all 0.25s ease-out
+        font-size: 18px
         a
           cursor: url('../images/cursor.png'), auto
         &:hover
-          background: rgba(0, 0, 0, 0.3);
+          background: rgba(0, 0, 0, 0.3)
           a
             color: #fff
+  @import 'archive_container.styl'

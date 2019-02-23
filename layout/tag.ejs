@@ -1,7 +1,13 @@
 <div id="tags">
-  <div class="card">
-      <%- partial('_partial/quote.ejs', {enable: theme.quotes.tags.enable, quote: theme.quotes.tags.quote}) %>
-      <ul class="content"></ul>
-      <li>展示标签文章</li>
+    <div class="card">
+        <%- partial('_partial/quote.ejs', {enable: theme.quotes.tags.enable, quote: theme.quotes.tags.quote}) %>
+      <ul class="content">
+        <% if (site.tags.length === 0 ){ %>
+          <li class="message"><span>暂无标签</span></li>
+        <% } else { %>
+          <%- partial('_partial/tags-header.ejs') %>
+        <% } %>
+      </ul>
+      <%- partial('_partial/archive.ejs', {posts: page.posts}) %>
+    </div>
   </div>
-</div>

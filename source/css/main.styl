@@ -10,6 +10,10 @@
 @import "_partial/footer"
 @import "_partial/pagination.styl"
 
+/* 解决移动端 滚动条导致width溢出*/
+html, body, #app
+  overflow-y: scroll
+
 /* 卡片样式 */
 .card
   border-radius: 0.03rem
@@ -52,10 +56,7 @@
         bottom: 0
         right: 0.16rem
     .content
-      padding: .16rem;
-      
-    
-
+      padding: .16rem
 
 
 /* 如果字体加载成功 在html上会出现class=".fonts-loaded" */

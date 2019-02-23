@@ -5,16 +5,7 @@
       <% if (site.categories.length === 0 ){ %>
         <li class="message"><span>暂无分类</span></li>
       <% } else { %>
-        <%# 
-          样式有点难弄，考虑自己封装一个类似辅助函数list_categories的模板文件
-        %>
-        <%- list_categories(site.categories, {
-          show_count: false,
-          class: 'category',
-          style: 'none',
-          separator: ' ',
-          depth: 1
-        }) %>
+        <%- partial('_partial/category-header.ejs') %>
       <% } %>
     </ul>
   </div>

@@ -5,18 +5,7 @@
       <% if (site.tags.length === 0 ){ %>
         <li class="message"><span>暂无标签</span></li>
       <% } else { %>
-        <% site.tags.forEach(function(tag, i) { %>
-          <%
-            var s = 'c-' + (i % theme.themeColors.num  + 1)
-            var c = theme.themeColors.colors[s]
-            var str = 'color: ' + c + ';'
-          %>
-          <li>
-            <span style="<%- str %>">
-              <a href="<%- url_for(tag.path) %>"><%= tag.name %></a>
-            </span>
-          </li>
-        <% }) %>
+        <%- partial('_partial/tags-header.ejs') %>
       <% } %>
     </ul>
   </div>

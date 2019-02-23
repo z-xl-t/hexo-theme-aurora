@@ -1,0 +1,50 @@
+
+<%# 样式有点难弄，考虑自己封装一个类似辅助函数list_categories的模板文件%>
+
+<%
+  var categories = site.categories
+  var orderby = 'name'
+  var order = 1
+  function prepareQuery(parent) {
+    var query = {};
+    if (parent) {
+      query.parent = parent
+    } else {
+      query.parent = {$exists: false};
+    }
+    return categories.find(query).sort(orderby, order).filter(cat => cat.length);
+  }
+  var categories = prepareQuery()
+%>
+<% categories.forEach(function(cat, i){ %>
+  <%
+    var s = 'cat-' + (i % theme.categories.cates.num + 1)
+    var bgUrl = theme.categories.cates[s].bg
+    var avatarUrl = theme.categories.cates[s].avatar
+    var desc = theme.categories.cates[s].desc
+  %>
+  <li class="card">
+    <a href="<%- url_for(cat.path) %>"></a>
+    <% if (theme.categories.enable && bgUrl ){ %>
+      <img src="<%= bgUrl %>" alt="">
+    <% } %>
+    <div class="meta">
+      <div>
+        <% if (theme.categories.enable && avatarUrl ){ %>
+          <div class="avatar">
+            <img src="<%= avatarUrl %>">
+          </div>
+        <% } %>
+        <span class="info">
+          <span class="name"><%= cat.name %></span>
+          <span class="num">(<%= cat.length %>)</span>
+        </span>
+      </div>
+    </div>
+    <% if (theme.categories.enable && desc ){ %>
+      <p class="desc"><%= desc %></p>
+    <% } %>
+  </li>
+<% }) %>
+
+

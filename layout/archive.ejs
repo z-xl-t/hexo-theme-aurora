@@ -1,29 +1,5 @@
 <div id="archive">
   <div class="card">
-    <div class="archive">
-      <ul class="content">
-        <% page.posts.each(function(post, i){ %>
-          <% if (theme.themeColors.enable){ %>
-            <%
-              var s = 'c-' + (i % theme.themeColors.num  + 1)
-              var c = theme.themeColors.colors[s]
-              var str = 'border-top-color: ' + c + ';'
-            %>
-          <% } %>
-          <li style="<%- str %>">
-            <a href="<%- url_for(post.path) %>"></a>
-            <div class="post-body">
-              <%- partial('_partial/post/title.ejs', {post: post}) %>
-            </div>
-            <div class="post-meta">
-              <%- partial('_partial/post/date.ejs', {post: post}) %>
-              <%- partial('_partial/post/category.ejs', {post: post, depth: 1}) %>
-              <%- partial('_partial/post/tag.ejs', {post: post, amount: 2}) %>
-            </div>
-          </li>
-        <% }) %>
-      </ul>
-    </div>
-    <%- partial('_partial/pagination') %>
+    <%- partial('_partial/archive.ejs', {posts: page.posts}) %>
   </div>
 </div>
