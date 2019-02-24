@@ -1,23 +1,29 @@
-;(function(){
+;(function($){
     /**  二次处理文章
       *  文章是由hexo的marked渲染
       *  解决 p > img 的图片显示问题
       *  使用一个img-box包装图片
+      *  增加fancybox 和 fancybox.image 用以大图
       */
      function handleImg() {
       var imgs = document.querySelectorAll('#post p > img')
       for (var i=0; i<imgs.length; ++i) {
+        var url = imgs[i].src ? imgs[i].src : ''
         var text = imgs[i].alt ? imgs[i].alt : ''
         // <span class="img-box"><img src="" alt="">text</span>
-        var spanPaNode = document.createElement('span')
+        // 只有a节点才行 这样才能形成fancybox 图片组
+        var aPaNode = document.createElement('a') 
         var spanChNode = document.createElement('span')
         spanChNode.text = text
-        spanPaNode.setAttribute('class', 'img-box')
-        spanPaNode.appendChild(imgs[i].cloneNode(true))
+        aPaNode.setAttribute('class', 'img-box fancybox fancybox.image')
+        aPaNode.setAttribute('href', url)
+        aPaNode.setAttribute('data-fancybox', 'group')
+        aPaNode.setAttribute('rel', 'group')
+        aPaNode.appendChild(imgs[i].cloneNode(true))
         if (text) {
-          spanPaNode.appendChild(spanChNode)
+          aPaNode.appendChild(spanChNode)
         }
-        imgs[i].parentNode.replaceChild(spanPaNode, imgs[i])
+        imgs[i].parentNode.replaceChild(aPaNode, imgs[i])
       }
     }
     /** 二次处理文章
@@ -61,4 +67,14 @@
 
     handleImg()
     addIcon()
-})()
+    /** jquery */
+    $(document).ready(function () {
+      $( ".fancybox").fancybox({
+        helpers: {
+          overlay: {
+            locked: false
+          }
+        }
+      });
+    });
+})(jQuery)

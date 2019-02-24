@@ -5,9 +5,9 @@
     <ul>
       <% for (var i in theme.menu){ %>
         <% var name, url, icon;
-          name = theme.menu[i].name;
-          url = theme.menu[i].url;
-          icon = theme.menu[i].icon;
+          name = theme.menu[i].name || '';
+          url = theme.menu[i].url || '';
+          icon = theme.menu[i].icon || '';
         %>
         <li><a class="icon <%= icon %>" href="<%= url_for(url) %>"><span><%= name %></span></a></li>
       <% } %>

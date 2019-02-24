@@ -1,127 +1,47 @@
 <div id="after-footer">
-  <div>
-    <% if (theme.bg_animes.default_bg_image) { %>
-      <% var str= 'background-image: url('+ theme.bg_animes.default_bg_image + ');' %>
-    <% } else { %>
-      <% var str= 'background-color: #ccc ' %>
-    <% } %>
-    <%# 下面一行会有css规则警告，但不影响最终渲染 %>
-    <ul id="bg" style="<%= str %>">
-      <% if (theme.bg_animes.enable){ %>
-        <% for (var i in theme.bg_animes.images){ %>
-          <%
-          var num = Number(i.split('-')[1])
-          var str = 'animation-duration: ' + 8 * theme.bg_animes.images_num +'s;' + 'background-image: url('+ theme.bg_animes.images[i] + ');' + 'animation-delay: ' + 8 * (num-1) +'s;'
-          %>
-          <li style="<%= str %>"></li>
-        <% } %>
-      <% } %>
-    </ul>
+  <%# 背景图片设置 %>
+  <% if (theme.bg_animes.enable) { %>
+    <% var str= 'background-image: url('+ theme.bg_animes.default_bg_image + ');' %>
+  <% } else { %>
+    <% var str= 'background-color: #ccc ' %>
+  <% } %>
+  <%# 下面一行会有css规则警告，但不影响最终渲染 %>
+  <div id="bg" style="<%= str %>"></div>
+  <%# 烟花效果加载 %>
+  <% if (theme.fireworks.enable){ %>
+    <canvas id="fireworks"></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <%- js('js/fireworks.js') %>
+  <% } %>
+  <%# 字体加载 %>
+  <script src="https://cdn.bootcss.com/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
+  <%# 回到顶端  %>
+  <% if (theme.backToTop.enable){ %>
+    <!-- 点击锚# 会自动回到顶层 -->
+    <a href="#" class="back-to-top"></a>
+  <%} %>
+  <%# 顶端进度条 %>
+  <% if (theme.progressBar.enable){ %>
+    <%- js('lib/progress/progress-indicator.min.js') %>
+  <% } %>
+  <%# 图片懒加载 %>
+  <%- js('lib/lazyload/lazyload.min.js') %>
+  <%# 文章热度 %>
+  <% if (theme.leancloud.enable) {%>
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
     <script>
-      /* 延时加载图片 */
-      setTimeout(function() {
-        document.getElementById('bg').className += ' backstretch'
-      }, 4000);
+      AV.initialize(
+        '<%= theme.leancloud.app_id %>',
+        '<%= theme.leancloud.app_key %>'
+      )
     </script>
-  </div>
-  <div>
-    <%# 烟花效果加载 %>
-    <% if (theme.fireworks.enable){ %>
-      <canvas id="fireworks"></canvas>
-      <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-      <%- js('js/fireworks.js') %>
-    <% } %>
-  </div>
-  <div>
-    <%# 字体加载 %>
-    <script src="https://cdn.bootcss.com/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
-    <script>
-      var font = new FontFaceObserver('Noto Serif SC', { weight: '400' })
-      font.load().then(() => {
-        var body = document.querySelector('body')
-        body.setAttribute(
-          'class',
-          'fonts-loaded'
-        )
-      }).catch((e) => {
-        console.error('尝试在线加载 Noto Serif SC 字体失败 ，使用其他字体')
-      })
-    </script>
-  </div>
-  <div>
-    <%# 回到顶端  %>
-    <% if (theme.backToTop.enable){ %>
-      <!-- 点击锚# 会自动回到顶层 -->
-      <a href="#" class="back-to-top"></a>
-      <script>
-        var data = {
-          showBackTop: false,
-          topDistance: -950,
-          clientHeight: 0,
-          lastScroll: new Date(),
-          scrollTimer: ''
-        }
-        var backToTop = document.querySelector('.back-to-top')
-        window.addEventListener('scroll',function() {
-          handleScroll()
-        })
-        function handleScroll(forced) {
-          var now = new Date()
-          if (now - data.lastScroll <= 100 && !forced ) return
-          if (!forced) {
-            // 尾更新 task
-            clearTimeout(data.scrollTimer)
-            data.scrollTimer = setTimeout(() => {
-              handleScroll(true)
-            }, 1000)
-          }
-          data.lastScroll = now
-          var clientHeight = document.documentElement.clientHeight
-          var pageYOffset = window.pageYOffset
-          // 判断位置，控制滚动到顶部
-          var showBackTop = pageYOffset >= 200
-          if (showBackTop !== data.showBackTop || data.clientHeight !== clientHeight) {
-            data.showBackTop = showBackTop
-            data.topDistance = -950 + (showBackTop ? clientHeight : 0)
-            data.clientHeight = clientHeight
-            // 为true 是 可见 为flase时 收起
-            if (showBackTop) {
-              backToTop.classList.toggle('visible')
-              backToTop.style.top = '-12px'
-            } else {
-              backToTop.classList.toggle('visible')
-              backToTop.style.top = '-1200px' 
-            }
-          }
-          console.log(data)
-        }
-      </script>
-    <%} %>
-  </div>
-  <div>
-    <%# 顶端进度条 %>
-    <% if (theme.progressBar.enable){ %>
-      <%- js('js/lib/progress-indicator.min') %>
-      <script>
-        var progressBar = new ProgressIndicator({color: "#986db2"});
-      </script>
-    <% } %>
-  </div>
-  <div>
-    <%# 图片懒加载 %>
-    <%- js('js/lib/lazyload.min.js') %>
-    <script>
-      var myLazyLoad = new LazyLoad({
-        elements_selector: ".lazy"
-      });
-    </script>
-  </div>
-  <div>
-    <%# 代码高亮 %>
-    <%- css('css/lib/atelier-dune-dark.css') %>
-    <%- js('js/lib/highlight.pack.js') %>
-    <script>hljs.initHighlightingOnLoad();</script>
-  </div>
+  <% } %>
+  <%- js('js/leancloud-hot.js') %>
+  <%# 代码高亮 %>
+  <%- css('lib/highlight/atelier-dune-dark.css') %>
+  <%- js('lib/highlight/highlight.pack.js') %>
+  <%# 引入自定义js文件 初始化上面引入的js库 %>
+  <%- js('js/index.js') %>
 </div>
 
 
