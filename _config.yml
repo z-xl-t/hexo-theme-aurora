@@ -146,9 +146,9 @@ gitalk:
   enable: true
   owner: sanshiliuxiao
   repo: comments
-  admin: sanshiliu
-  clientID: 02a8646fb47500207ba5
-  clientSecret: 34329ab4516471939dbfff103e29669b7f7ae515
+  admin: sanshiliuxiao
+  clientID: c3c4eb35697a81f30972
+  clientSecret: a09e19c67465d4bdfb74a1dc84f7ad8c562dafc3
 
 # 浏览次数(热度)
 # https://leancloud.cn 注册后得到 AppID and AppKey.
