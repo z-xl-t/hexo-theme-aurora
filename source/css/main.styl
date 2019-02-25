@@ -12,6 +12,24 @@
 @import "_partial/footer"
 @import "_partial/pagination"
 
+/*
+* 预设html跟元素的font-size
+* 不直接依赖于js运算后的font-size
+*/
+@media (min-width: 750px)
+  html
+    font-size: 100px;
+@media (max-width: 750px)
+  html
+    font-size: 100px;
+@media (max-width: 560px)
+  html
+    font-size: 75px;
+@media (max-width: 375px)
+  html
+    font-size: 50px;
+
+
 /* 解决移动端 滚动条导致width溢出*/
 html, body, #app
   overflow-y: scroll

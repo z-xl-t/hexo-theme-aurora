@@ -28,7 +28,6 @@
     const fz = hWidth / 7.5
     html.style.fontSize = fz <= 50 ? '50px' : (fz <= 100 ? fz + 'px' : '100px')
   }
-  SetRem()
   window.addEventListener('resize', throttle(SetRem, 500, 1000))
   // 字体加载
   if (typeof FontFaceObserver !== 'undefined') {
