@@ -90,9 +90,10 @@ function addCount(Counter) {
 $(function () {
   
   var Counter = AV.Object.extend("Counter");
-  if ($('.leancloud_visitors').length == 1) {
+  // 只有在文章页面添加 访问次数
+  if ($('#post').length == 1 && $('.leancloud_visitors').length == 1) {
       addCount(Counter);
-  } else if ($('.post-body .title').length > 1) {
+  } else if ($('.post-body .title').length > 0) {
       showTime(Counter);
   }
 });
