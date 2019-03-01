@@ -7,7 +7,7 @@
           <div class="post-header">
             <% if (theme.post_cover_image.enable) { %>
               <% 
-                var url = post.image_url; 
+                var url = post.imageUrl; 
                 var defalut_image =  url ? '' : 'background-image: url('+ theme.post_cover_image.default_image + ");"
                 var defalut_color = theme.post_cover_image.default_bg_color ? 'background-color: ' + theme.post_cover_image.default_bg_color  + ';' : ''
                 var str = defalut_image + defalut_color
