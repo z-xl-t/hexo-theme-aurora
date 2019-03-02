@@ -1,5 +1,5 @@
 ---
-date: 2019-02-17 22:04:34
+date: 2019-03-02 15:38:00
 type: about
 comments: true
 avatar: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
@@ -13,8 +13,13 @@ contact:
     icon: 
     link:
 ---
+
 ## 说明
 
-以下内容，将会被解析成html文件，作为页面的说明。
+记得修改date数据，因为优先使用了date，作为gitalk的id
+
+此内容将会被解析成html文件，作为页面的说明。
 其中contact字段能够自行添加，请遵循yaml语法。
+
+此处可以添加关于页面的一些注意事项， 遵循markdown语法
 
