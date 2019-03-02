@@ -72,10 +72,22 @@
     lastScroll: new Date(),
     scrollTimer: ''
     }
-    var backToTop = document.querySelector('.back-to-top')
-    window.addEventListener('scroll',function() {
-      handleScroll()
+    // 用于事件的移除和添加
+    var listener = function(){handleScroll()}
+    window.addEventListener('scroll',listener)
+    var backToTop = backToTopNode[0]
+    backToTop.addEventListener('click', function(){
+      if (data.showBackTop) {
+        data.showBackTop = false
+        // 移除scroll事件
+        window.removeEventListener('scroll', listener)
+        // 滚回顶部,添加一个回调函数
+        scrollSmoothTo(0, hiddenBcakToTop);
+      }
     })
+    /** 
+     * 处理windows的滚动事件
+    */
     function handleScroll(forced) {
       var now = new Date()
       if (now - data.lastScroll <= 100 && !forced ) return
@@ -96,14 +108,48 @@
         data.topDistance = -950 + (showBackTop ? clientHeight : 0)
         data.clientHeight = clientHeight
         // 为true 是 可见 为flase时 收起
-        if (showBackTop) {
-          backToTop.classList.toggle('visible')
-          backToTop.style.top = '-12px'
+        if (data.showBackTop) {
+          backToTop.style.top = '-40px'
         } else {
-          backToTop.classList.toggle('visible')
           backToTop.style.top = '-1200px' 
         }
       }
+    }
+    /**
+    *  页面垂直平滑滚动到指定滚动高度
+    */
+    function scrollSmoothTo (position, cb) {
+      if (!window.requestAnimationFrame) {
+          window.requestAnimationFrame = function(callback, element) {
+              return setTimeout(callback, 17);
+          };
+      }
+      // 当前滚动高度
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      // 滚动step方法
+      var step = function () {
+          // 距离目标滚动距离
+          var distance = position - scrollTop;
+          // 目标滚动位置
+          scrollTop = scrollTop + distance / 5;
+          if (Math.abs(distance) < 1) {
+              window.scrollTo(0, position);
+              cb()
+          } else {
+              window.scrollTo(0, scrollTop);
+              requestAnimationFrame(step);
+          }
+      };
+      step();
+    };
+    /**
+     * 隐藏挂件，同时添加windows的scroll事件
+     */
+    function hiddenBcakToTop() {
+      var backToTop = document.getElementsByClassName('back-to-top')[0]
+      backToTop.style.top = '-1200px'
+      // 添加滚动事件
+      window.addEventListener('scroll', listener)
     }
   }
 
