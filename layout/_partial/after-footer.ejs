@@ -9,7 +9,7 @@
   <div id="bg" style="<%= str %>"></div>
   <%# 烟花效果加载 %>
   <% if (theme.fireworks.enable){ %>
-    <canvas id="fireworks"></canvas>
+    <canvas class="fireworks"></canvas>
     <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
     <%- js('js/fireworks.js') %>
   <% } %>

@@ -1,15 +1,4 @@
 ;(function(){
-  // 生成节点 插入到文档中
-  var Pcanvas = document.createElement('canvas');
-  Pcanvas.setAttribute('class', 'fireworks')
-  document.body.insertBefore(Pcanvas, document.body.firstElementChild)
-  /** pointer-events: none; 穿透canvas, 到达其他元素  */
-  Pcanvas.setAttribute(
-    'style',
-    'position: fixed; top:0; left: 0; pointer-events: none;'
-  )
-
-  // 点击效果
   window.human = false;
   var canvasEl = document.querySelector('.fireworks');
   var ctx = canvasEl.getContext('2d');
