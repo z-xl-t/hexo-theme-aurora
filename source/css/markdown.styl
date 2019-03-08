@@ -36,12 +36,15 @@
     ol,
     ul
       margin: 0 0.16rem 0.16rem 0.52rem
+      li
+        margin: 0.02rem 0
+      li ul,
+      li ol
+        margin-left: 0.2rem !important
     ul li
       list-style-type: disc !important
     ol li
       list-style-type: decimal !important
-    li
-      margin: 0.02rem 0
     a
       position: relative
       color: #b854d4
@@ -75,7 +78,7 @@
         background-color: rgba(0, 0, 0, 0.1)
     a[class*='img-box'],span[class*='img-box']
       img
-        margin: 0 auto
+        margin: 0.08rem auto;
         max-width: 100%
         border-radius: 3px
         border: 6px solid transparent
@@ -93,6 +96,8 @@
       &:hover
         img
           border-color: #b28fce
+      &::after
+        content: none;
     pre,
     blockquote
       margin-bottom: 0.16rem

@@ -6,7 +6,7 @@
       *  增加fancybox 和 fancybox.image 用以大图
       */
      function handleImg() {
-      var imgs = document.querySelectorAll('#post p > img')
+      var imgs = document.querySelectorAll('#post img')
       for (var i=0; i<imgs.length; ++i) {
         var url = imgs[i].src ? imgs[i].src : ''
         var text = imgs[i].alt ? imgs[i].alt : ''
