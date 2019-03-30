@@ -27,6 +27,7 @@
           <div class="post-meta">
             <%- partial('_partial/post/date.ejs', {post: post}) %>
             <%- partial('_partial/post/hot.ejs', {post, post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post, depth: 1}) %>
           </div>
         </article>
       <% }) %>

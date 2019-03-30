@@ -97,6 +97,7 @@
       font-size: 0.16rem
       border-top: 1px solid rgba(0, 0, 0, 0.08)
       & > span
+        flex: 1
         display: flex
         justify-content: left
         margin-right: 0.06rem
@@ -109,8 +110,7 @@
         .icon
           margin-right: 4px
         &.calendar
-          width: 30%
-          flex-basis: 30%
+          min-width: 30%
           flex-shrink: 0
   @media (max-width: 900px)
     .main
