@@ -1,0 +1,39 @@
+<div class="index">
+  <div class="posts">
+    <% if (is_home()) {%>
+      <% page.posts.each(function(post){ %>
+        <article class="card">
+          <a class="post-url pjax-a-page" href="<%- url_for(post.path) %>"></a>
+          <% if (theme.postCoverImage.enable) { %>
+            <% 
+              var url = post.imageUrl; 
+              var defalut_image =  url ? '' : 'background-image: url('+ theme.postCoverImage.defaultImage + ");"
+              var defalut_color = theme.postCoverImage.defaultBgColor ? 'background-color: ' + theme.postCoverImage.defaultBgColor  + ';' : ''
+              var str = defalut_image + defalut_color
+            %>
+          <% } %>
+          <div class="post-image">
+            <div class="img-wrapper" style="<%- str %>">
+              <%# chrome75 默认启用延迟加载功能， 使用 loading 属性 %>
+              <% if (url){ %>
+                <img src="<%= url %>" loading="lazy">
+              <% } %>
+            </div>
+          </div>
+          <div class="post-title">
+            <%- partial('_partial/post/title.ejs', {post: post}) %>
+          </div>
+          <div class="post-meta">
+            <%- partial('_partial/post/date.ejs', {post: post}) %>
+            <%- partial('_partial/post/hot.ejs', {post, post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post, depth: 1}) %>
+          </div>
+        </article>
+      <% }) %>
+    <% } %>
+  </div>
+  <% if (is_home()) {%>
+    <%- partial('_partial/pagination') %>
+  <% } %>
+
+</div>

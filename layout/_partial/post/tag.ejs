@@ -1,0 +1,16 @@
+<% if (post.tags && post.tags.length){ %>
+  <span class="tags">
+    <i class="icon icon-tag"></i>
+    <%# 不需要按name排序，而需要按顺序排序 
+      使用id关键字 
+    %>
+    <%- list_tags(post.tags, {
+      show_count: false,
+      orderby: 'id',
+      class: 'tag',
+      style: 'none',
+      separator: '、',
+      amount: amount
+    }) %>
+  </span>
+<% } %>

@@ -1,0 +1,18 @@
+<% if (page.total > 1){ %>
+  <div class="pagination">
+    <div class="container">
+      <% if (page.prev) { %>
+        <li class="prev">
+          <a class="pjax-a-page" href="<%- url_for(page.prev_link) %>">Prev</a>
+          <div class="rect"></div>
+        </li>
+      <% } %>
+      <% if (page.next) { %>
+        <li class="next">
+          <a class="pjax-a-page" href="<%- url_for(page.next_link) %>">Next</a>
+          <div class="rect"></div>
+        </li>
+      <% } %>
+    </div>
+  </div>
+<% } %> 

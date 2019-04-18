@@ -1,0 +1,17 @@
+<%- partial('_partial/head') %>
+<body>
+  <div id="app">
+    <%- partial('_partial/header') %>
+    <div class="page">
+      <div class="container pjax-main-page">
+      <%- body %>
+      </div>
+      <div class="loading">
+      <%- image_tag('images/loading.gif') %>
+      </div>
+    </div>
+    <%- partial('_partial/footer') %>
+    <%- partial('_partial/after-footer') %>
+  </div>
+</body>
+</html>

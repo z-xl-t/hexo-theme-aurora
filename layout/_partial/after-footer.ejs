@@ -1,0 +1,46 @@
+<div class="after-footer">
+  <%# 移动端点击问题 %>
+  <%- js('lib/fastclick/fastclick.min.js') %>
+  <%# jQuery v2.1.3 %>
+  <%- js('lib/jQuery/jQuery.min.js') %>
+  <%# pjax %>
+  <%- js('lib/pjax/pjax.min.js') %>
+  <%# APlayer %>
+  <% if(theme.APlayer.enable) {%>
+    <%- css('lib/APlayer/APlayer.min.css') %>
+    <%- js('lib/APlayer/APlayer.min.js') %>
+    <div id="aplayer"></div>
+    <script>
+      let list = JSON.parse('<%- JSON.stringify(theme.APlayer.list) %>')
+      const ap = new APlayer({
+          container: document.getElementById('aplayer'),
+          theme: '#b28fce',
+          audio: list,
+          fixed: true,
+      });
+      ap.list.show()
+    </script>
+  <% } %>
+  <%# 回到顶端  %>
+  <% if (theme.backToTop.enable){ %>
+    <span class="back-to-top"></span>
+  <%} %>
+  <%# 背景图片设置 %>
+  <% if (theme.background.enable) { %>
+    <% var str= 'background-image: url('+ theme.background.imageUrl + ');' %>
+  <% } %>
+  <%# 下面一行会有规则警告，但不影响最终渲染 %>
+  <div class="bg" style="<%- str %>"></div>
+  
+  <%# 烟花效果加载 %>
+  <% if (theme.fireworks.enable){ %>
+    <canvas class="fireworks"></canvas>
+    <%- js('lib/anime/anime.min.js') %>
+    <%- js('lib/anime/fireworks.js') %>
+  <% } %>
+  
+  <%# 加载第三方字体的js %>
+  <%- js('lib/fontfaceobserver/fontfaceobserver.min.js') %>
+  <%# 引入自定义js %>
+  <%- js('js/index.js') %>
+</div>

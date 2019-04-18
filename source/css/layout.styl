@@ -1,0 +1,196 @@
+/*
+* 预设html跟元素的font-size
+* 不直接依赖于js运算后的font-size
+*/
+@media (min-width: 750px)
+  html
+    font-size: 100px;
+@media (max-width: 750px)
+  html
+    font-size: 100px;
+@media (max-width: 560px)
+  html
+    font-size: 75px;
+@media (max-width: 375px)
+  html
+    font-size: 50px;
+
+/* 卡片样式 */
+.card
+  border-radius: 0.03rem;
+  background-color: rgba(255, 255, 255, 0.66);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+
+/* quote 样式 */
+.quote
+  flexColumnCenter()
+  position: relative;
+  margin-bottom: 0.16rem;
+  padding: 0.32rem 0;
+  font-size: 0.16rem;
+  span
+    letter-spacing: 1px
+  i
+    color: #666;
+    position: absolute;
+    font-size: 0.24rem;
+    &:first-child
+      top: 0;
+      left: 0.16rem;
+    &:last-child
+      bottom: 0;
+      right: 0.16rem;
+  .content
+    padding: 0.16rem;
+
+/* 如果字体加载成功 在html上会出现class=".fonts-loaded" */
+.fonts-loaded
+    fonts()
+  #gitalk
+    .gt-comment-body,
+    .gt-btn-text,
+    textarea
+      fonts()
+
+/* 烟花特效 */
+.fireworks
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+
+/* 滚动条效果 */
+custom-scroll()
+
+/* 背景图片 */
+.bg
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-color: #ccc;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  &::after
+    content: '';
+    positionCoverFather()
+    background-color: rgba(255, 255, 255, 0.6);
+
+/* 返回顶部挂件 */
+.back-to-top
+  position: fixed;
+  top: -1200px;
+  right: 0.25rem;
+  width: 70px;
+  height: 100%;
+  z-index: 99;
+  opacity: 1;
+  transition: all 0.6s ease-out;
+  background: url(../images/backToBack.png) no-repeat top;
+  background-size: contain;
+  animation: float 3s linear infinite;
+  @keyframes float
+    0%
+      transform: translateY(0)
+    50%
+      transform: translateY(-6px)
+    100%
+      transform: translateY(0)
+/* 小于 1100px 就不显示挂件 */
+@media (max-width: 1100px)
+  .back-to-top
+    display: none !important;
+
+/* 烟花特效 */
+.fireworks
+  position: fixed
+  top: 0
+  left: 0
+  z-index: -1
+  pointer-events: none;
+
+
+/* loading 加载样式 */
+.loading
+  positionCoverFather(2)
+  /* 取消htight 100%，改用padding-top:100% 确保loading 宽高固定 
+    原因是因为父元素得到数据时，高度会变大，导致加载高度也变化
+  */
+  height: 0;
+  padding-top: 50%;
+  background-color: transparent;
+  display: none;
+  img
+    position: absolute;
+    top: 60%;
+    width: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @media (max-width: 375px)
+      width: 30%;
+
+/* APlayer 覆盖部分默认样式 */
+.aplayer
+  background-color: transparent;
+  transition: all .3s ease-out;
+  /* 有 aplayer-narrow 样式时 启用左偏移 */
+  &.aplayer-narrow
+    transform: translateX(-66px) !important;
+    &:hover
+      transform: translateX(0) !important
+  .aplayer-list
+    background-color: hsla(0,0%,100%,.88) !important;
+    li:hover, .aplayer-list-light
+      background-color:#b28fce !important;
+  .aplayer-miniswitcher .aplayer-icon
+    background-color:#b28fce !important;
+  &::before
+    content: '';
+    positionCoverFather()
+    background-color: rgba(255,255,255,0.3)!important;
+    pointer-events: none;
+
+/* 主要的一些结构 */
+
+html, body, #app
+  height: 100%;
+
+body
+  font-family: 'Helvetica', 'PingFang SC', serif;
+  font-size: 0.15rem;
+  letter-spacing: 0.4px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: url('../images/cursor.png'), auto;
+  
+#app
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .page
+    flex: 1;
+    width: 100%;
+    padding: 0 .12rem;
+    max-width: 900px;
+    user-select: text;
+    margin: 0 auto;
+    position: relative;
+
+/* 给归档 分类 标签 心情 书单 友链 关于 设置最小高度 */
+#archive, #categories, #tags, #moods, #books, #friends, #about
+  min-height: 5rem;
+  border-radius: 0.03rem;
+  background-color: rgba(255, 255, 255, 0.66);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.24);
+  & > .card
+    padding-top: 0.16rem;
+    background-color: transparent;
+    box-shadow: none;

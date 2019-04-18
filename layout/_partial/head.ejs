@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="<%= theme.author %>">
+  <meta name="keywords" content="<%= page.title %>">
+  <title><%= theme.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1,user-scalable=no, shrink-to-fit=no">
+  <% if (theme.favicon){ %>
+    <link rel="icon" href="<%- theme.favicon %>">
+  <% } %>
+  <%# 加载第三方字体的CSS %>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Serif+SC">
+  <%# 图标 %>
+  <%- css('fonts/fontello') %>
+  <%# 引入网页布局的css %>
+  <%- css('css/main') %>
+</head>

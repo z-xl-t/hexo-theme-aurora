@@ -1,0 +1,17 @@
+<header class="header">
+  <div class="inner">
+    <a class="title" href="<%- url_for() %>"><%= theme.title %></a>
+    <div class="subtitle"><%= theme.subtitle %></div>
+    <ul>
+      <% for (var i in theme.menu){ %>
+        <% var name, url, icon;
+          name = theme.menu[i].name || '';
+          url = theme.menu[i].url || '';
+          icon = theme.menu[i].icon || '';
+        %>
+        <%# 有 pjax-a-page 的 a 标签 会通过 pjax 的方式去替换 .page .container 中的节点 %>
+        <li><a class="pjax-a-page icon <%= icon %>" href="<%= url_for(url) %>"><span><%= name %></span></a></li>
+      <% } %>
+    </ul>
+  </div>
+</header>
