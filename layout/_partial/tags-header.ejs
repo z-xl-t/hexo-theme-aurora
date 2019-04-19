@@ -6,7 +6,7 @@
   %>
   <li>
     <span style="<%- str %>">
-      <a href="<%- url_for(tag.path) %>"><%= tag.name %></a>
+      <a class="<%- pjaxClass %>" href="<%- url_for(tag.path) %>"><%= tag.name %></a>
     </span>
   </li>
 <% }) %>

@@ -1,34 +1,91 @@
-<div id="after-footer">
-  <%# 背景图片设置 %>
-  <% if (theme.bg_animes.enable) { %>
-    <% var str= 'background-image: url('+ theme.bg_animes.default_bg_image + ');' %>
-  <% } else { %>
-    <% var str= 'background-color: #ccc ' %>
+<div class="after-footer">
+
+  <% if (theme.cdnAcelerate.enable){ %>
+    <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+    <script src="https://cdn.bootcss.com/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
+    <% if(theme.APlayer.enable) {%>
+      <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+      <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+      <div id="aplayer"></div>
+      <script>
+        let list = JSON.parse('<%- JSON.stringify(theme.APlayer.list) %>')
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            theme: '#b28fce',
+            audio: list,
+            fixed: true,
+        });
+        ap.list.show()
+      </script>
+    <% } %>
+    <% if (theme.fireworks.enable){ %>
+      <canvas class="fireworks"></canvas>
+      <script src="https://cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+      <%- js('lib/anime/fireworks.js') %>
+    <% } %>
+  <% } else {%>
+
+    <%# 移动端点击问题 %>
+    <%- js('lib/fastclick/fastclick.min.js') %>
+    
+    <%# pjax %>
+    <%- js('lib/pjax/pjax.min.js') %>
+    
+    <%# 加载第三方字体的js %>
+    <%- js('lib/fontfaceobserver/fontfaceobserver.min.js') %>
+
+    <%# APlayer %>
+    <% if(theme.APlayer.enable) {%>
+      <%- css('lib/APlayer/APlayer.min.css') %>
+      <%- js('lib/APlayer/APlayer.min.js') %>
+      <div id="aplayer"></div>
+      <script>
+        let list = JSON.parse('<%- JSON.stringify(theme.APlayer.list) %>')
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            theme: '#b28fce',
+            audio: list,
+            fixed: true,
+        });
+        ap.list.show()
+      </script>
+    <% } %>
+
+    <%# 烟花效果加载 %>
+    <% if (theme.fireworks.enable){ %>
+      <canvas class="fireworks"></canvas>
+      <%- js('lib/anime/anime.min.js') %>
+      <%- js('lib/anime/fireworks.js') %>
+    <% } %>
+
   <% } %>
-  <%# 下面一行会有css规则警告，但不影响最终渲染 %>
-  <div id="bg" style="<%= str %>"></div>
-  <%# 烟花效果加载 %>
-  <% if (theme.fireworks.enable){ %>
-    <canvas class="fireworks"></canvas>
-    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-    <%- js('js/fireworks.js') %>
-  <% } %>
-  <%# 字体加载 %>
-  <script src="https://cdn.bootcss.com/fontfaceobserver/2.1.0/fontfaceobserver.js"></script>
+  
   <%# 回到顶端  %>
   <% if (theme.backToTop.enable){ %>
-    <!--回到顶层 -->
     <span class="back-to-top"></span>
   <%} %>
+
   <%# 顶端进度条 %>
   <% if (theme.progressBar.enable){ %>
-    <%- js('lib/progress/progress-indicator.min.js') %>
+    <%- js('lib/progress/progress.min.js') %>
   <% } %>
-  <%# 图片懒加载 %>
-  <%- js('lib/lazyload/lazyload.min.js') %>
+
+  <%# 背景图片设置 %>
+  <% if (theme.background.enable) { %>
+    <% var str= 'background-image: url('+ theme.background.imageUrl + ');' %>
+  <% } %>
+  <%# 下面一行会有规则警告，但不影响最终渲染 %>
+  <div class="bg" style="<%- str %>"></div>
+  
+  <%# 加载 medium-zoom %>
+  <div class="zoom">
+  <%- js('lib/medium-zoom/medium-zoom.min.js') %>
+  </div>
+  
   <%# 文章热度 %>
   <% if (theme.leancloud.enable) {%>
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+    <%- js('lib/leanclound/av-core-mini-0.6.4.js') %>
     <script>
       AV.initialize(
         '<%= theme.leancloud.app_id %>',
@@ -36,15 +93,14 @@
       )
     </script>
   <% } %>
-  <%- js('js/leancloud-hot.js') %>
+
   <%# 代码高亮 %>
   <%- css('lib/highlight/atelier-dune-dark.css') %>
-  <%- js('lib/highlight/highlight.pack.js') %>
-  <%# 引入自定义js文件 初始化上面引入的js库 %>
+  <%# 为了方便选取才使用 div 包裹 %>
+  <div class="hljs">
+    <%- js('lib/highlight/highlight.pack.js') %>
+  </div>
+
+  <%# 引入自定义js，初始化一些效果 %>
   <%- js('js/index.js') %>
 </div>
-
-
-
-
-

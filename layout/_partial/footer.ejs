@@ -1,15 +1,13 @@
-<div id="footer">
+<footer class="footer">
   <div class="site-info">
-    <% if (theme.footer.show.enable){ %>
+    <% if (theme.footer.enable){ %>
       <p>
         <i class="icon-copyright"></i>
         <% var current = date(Date.now(), 'YYYY') %>
         <%= theme.footer.since || current-1 %>&minus;<%= current %>
         <%= theme.footer.title || theme.title %>
       </p>
-      <p>
-        hexo-theme-<a target="_blank" href="https://github.com/sanshiliuxiao/hexo-theme-aurora.git">Aurora</a> | <%= theme.footer.subtitle || theme.subtitle %> 
-      </p>
+      <p><a target="_blank" href="https://github.com/sanshiliuxiao/hexo-theme-aurora.git">hexo-theme-Aurora</a> | <%= theme.footer.subtitle || theme.subtitle %></p>
     <% } %>
   </div>
-</div>
+</footer>

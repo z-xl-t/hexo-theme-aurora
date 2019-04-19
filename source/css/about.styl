@@ -1,53 +1,54 @@
-#about 
+.about
   .content
     .header
-      margin: .16rem 0
-      display: flex
-      justify-content: flex-start
+      margin: 0.16rem 0;
+      display: flex;
+      justify-content: flex-start;
       .avatar-wrapper
-        margin-left: .16rem
-        width: 1rem
-        flex-shrink: 0
-        height: 1rem
-        overflow: hidden
-        border-radius: 50%
-        border: 4px solid transparent
-        box-shadow: 0 0 10px #999
-        transition: transform 1s ease-out
+        margin-left: 0.16rem;
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        box-shadow: 0 0 10px #999;
+        transition: transform 1s ease-out;
         &:hover
-          animation-play-state: paused
-          transform: rotateZ(360deg)
+          transform: rotateZ(360deg);
         img
-          width: 100%
-          height: 100%
-          object-fit: cover
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
       .info
-        margin-left: 0.16rem
-        display: flex
-        flex-direction: column
-        align-items: flex-start
+        margin-left: 0.16rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         line-height: 1.8
         .name, .sign
-          font-size: .2rem
+          font-size: 0.2rem;
         .icon
-          margin-right: 0.03rem
+          margin-right: 0.03rem;
     .contact
-      display: flex
-      justify-content: flex-end
-      flex-wrap: wrap
-      margin-top: 0.16rem
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: 0.16rem;
       a
-        display: flex
-        justify-content: center
-        align-items: center
-        margin: 0.3rem
-        width: 0.54rem
-        height: 0.54rem
-        border-radius: 50%
-        border: 4px solid rgba(255, 255, 255, 0.66)
-        box-shadow: 0 0 10px #999
-        background-color: rgba(0, 0, 0, 0.1)
-        transition: all 0.25s ease-out
+        flexCenter()
+        margin: 0.3rem;
+        width: 0.54rem;
+        height 0.54rem;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.66);
+        box-shadow: 0 0 10px #999;
+        background-color: rgba(0, 0, 0, 0.1);
+        transition: all 0.25s ease-out;
+        img
+          width: 0.3rem;
+          height: 0.3rem;
+          object-fit: cover;
         &:nth-child(n+1)
           &:hover
             background-color: #ffba84
@@ -64,12 +65,7 @@
           &:hover
             background-color: #f596aa
             box-shadow: 0 0 10px #f596aa
-        img
-          width: 0.3rem
-          height: 0.3rem
   .about-post
-    padding: 0.16rem;
-    @import 'markdown'
-    p
-      font-size: 0.18rem !important
-    
+    padding: 0 0.16rem 0.16rem;
+        
+

@@ -1,12 +1,17 @@
-<div id="tags">
-  <div class="card">
-      <%- partial('_partial/quote.ejs', {enable: theme.quotes.tags.enable, quote: theme.quotes.tags.quote}) %>
-    <ul class="content">
-      <% if (site.tags.length === 0 ){ %>
-        <li class="message"><span>暂无标签</span></li>
-      <% } else { %>
-        <%- partial('_partial/tags-header.ejs') %>
-      <% } %>
-    </ul>
+<div class="tags card">
+  <%- partial('_partial/quote.ejs', {enable: theme.quotes.tags.enable, quote: theme.quotes.tags.quote}) %>
+  <div class="content">
+      <div class="pjax-content-page">
+        <div class="layout-content">
+          <% if (site.tags.length === 0 ){ %>
+            <li class="message"><span>暂无标签</span></li>
+          <% } else { %>
+            <%- partial('_partial/tags-header.ejs', {pjaxClass: 'pjax-a-content'}) %>
+          <% } %>
+        </div>
+      </div>
+  </div>
+  <div class="loading content-loading">
+      <%- image_tag('images/loading.gif') %>
   </div>
 </div>

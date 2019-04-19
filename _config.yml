@@ -60,6 +60,9 @@ menu:
 # 配置页面的quote, 其中首页和归档页不需要配置
 quotes:
   enable: true
+  archive:
+    enable: true
+    quote: 文章千古事，得失寸心知
   categories:
     enable: true
     quote: 行云流水，落笔生花
@@ -77,9 +80,7 @@ quotes:
 # since 为起始年，可选
 # (sub)title，可选
 footer:
-  show:
-    enable: true
-  since: 
+  enable: true
   title: 椎咲良田
   subtitle: 昨日、今日、明日
 
@@ -99,9 +100,10 @@ themeColors:
     c-7: '#2EA9DF' # 露草
     c-8: '#FFBA84' # 洒落柿
     c-9: '#7DB9DE' # 勿忘草
-    c-10: '#FF99FF' #
+    c-10: '#FF99FF' # 粉红
 
-# 分类页面每个分类的
+
+# 分类页面每个分类
 # bg、avatar、desc, 可选
 
 categories:
@@ -113,32 +115,67 @@ categories:
       avatar: https://i.loli.net/2019/02/24/5c71bf0544b21.jpg
       desc: 
 
-# 图文模式 建议默认背景颜色是默认图片的主色
-post_cover_image: 
-  enable: true
-  default_image: https://i.loli.net/2019/02/24/5c71bf0534682.jpg
-  default_bg_color: rgba(233, 224, 207, 0.66)
 
 # 背景图片 
-bg_animes:
+background:
   enable: true
-  default_bg_image: https://i.loli.net/2019/02/24/5c71bf05ea594.jpg
-
-# 点击页面的烟火效果
-fireworks:
-  enable: true
+  imageUrl: https://i.loli.net/2019/02/24/5c71bf05ea594.jpg
 
 # 回到顶部挂件
 backToTop:
   enable: true
 
-# 顶端进度条效果
+# 顶部进度条
 progressBar: 
   enable: true
 
-# fancybox 相册功能
-fancybox:
+# 点击页面的烟火效果
+fireworks:
   enable: true
+
+
+# 图文模式 建议默认背景颜色是默认图片的主色
+postCoverImage: 
+  enable: true
+  defaultImage: https://i.loli.net/2019/02/24/5c71bf0534682.jpg
+  defaultBgColor: rgba(233, 224, 207, 0.66)
+
+# 浏览次数(热度)
+# https://leancloud.cn 注册后得到 AppID and AppKey.
+leancloud:
+  enable: true
+  app_id: zsXIwfsAOXq9j5T8aI8TSeXg-gzGzoHsz
+  app_key: jF8GAJU2aJdgB6qQC9XGtwJw
+
+# 加载音乐插件 
+APlayer:
+  enable: true
+  list: [
+    {
+      name: Once more,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/13boxb.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb87157c617e.jpg
+    },
+    {
+      name: All or None,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/4x69y9.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb87157b537a.jpg
+    },
+    {
+      name: Karma,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/r5dsuh.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb871583cfb7.jpg,
+    },
+    {
+      name: 星の奏でる歌,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/m1wd57.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb871585123b.jpg
+    }
+  ]
 
 # gitalk留言功能
 # https://github.com/gitalk/gitalk
@@ -150,9 +187,8 @@ gitalk:
   clientID: 80910941dd28e5c3bab4
   clientSecret: 477f74941847318fe65d300ec0a985e7e402748c
 
-# 浏览次数(热度)
-# https://leancloud.cn 注册后得到 AppID and AppKey.
-leancloud:
+# 是否对部分库 采用 cdn 加速
+# 即不会从 source/lib 中加载，而是 cdn 平台提供链接
+# 建议 开启
+cdnAcelerate:
   enable: true
-  app_id: zsXIwfsAOXq9j5T8aI8TSeXg-gzGzoHsz
-  app_key: jF8GAJU2aJdgB6qQC9XGtwJw

@@ -24,7 +24,7 @@
     var desc = theme.categories.cates[s].desc
   %>
   <li class="card">
-    <a href="<%- url_for(cat.path) %>"></a>
+    <a class="<%- pjaxClass %>" href="<%- url_for(cat.path) %>"></a>
     <% if (theme.categories.enable && bgUrl ){ %>
       <img src="<%= bgUrl %>">
     <% } %>

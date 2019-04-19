@@ -1,116 +1,101 @@
-#categories
-  & > .card > .content
-    display: flex
-    flex-wrap: wrap
-    align-items: center
-    .message
-      margin-top: .8rem
-      width: 100%
-      text-align: center
-      display: flex
-      justify-content: center
-      span
-        padding: 0.04rem 0.1rem
-        border-radius: 3px
-        background: rgba(0, 0, 0, .5)
-        transition: all 0.25s ease-out
-        font-size: 18px
-        color: #2EA9DF
-      &:hover > span
-        color: #fff
-    & > .card
-      position: relative
-      width: 32%
-      margin: 0 0.6666%
-      padding-top: 0
-      margin-bottom: 0.16rem
-      height: 1.6rem
-      list-style: none
-      overflow: hidden
-      transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s
-      @media (max-width: 800px)
-        &
-          width: 48%
-      a
-        position: absolute
-        cursor: url('../images/cursor.png'), auto
-        z-index: 1
-        top: 0
-        left 0
-        width: 100%
-        height: 100%
-      img
-        position: absolute
-        z-index: 0
-        top: 0
-        left 0
-        width: 100%
-        height: 100%
-        object-fit: cover
-      &:hover
-        transform: translateY(-4px)
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.24)
-        .avatar
-          animation-play-state: paused
-          transform: rotateZ(360deg)
-      .meta
-        position: relative
-        padding: 0 0.16rem
-        width: 100%
-        height: 100%
-        text-align: justify
-        text-shadow: 0 0 1px #666
-        background-color: rgba(255, 255, 255, 0.66)
-        & > div
-          display: flex
-          justify-content: space-between
-          align-items: center
-          height: 80%
+.categories
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .content
+    flex: 1;
+    .layout-content
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      .message
+        margin-top: 0.8rem;
+        width: 100%;
+        flexCenter()
+        span
+          padding: 0.04rem 0.1rem;
+          border-radius: 3px;
+          background: rgba(0, 0, 0, .5)
+          transition: all 0.25s ease-out;
+          font-size: 18px;
+          color: #2ea9df
+        &:hover > span
+          color: #fff
+      .card
+        position: relative;
+        width: 32%;
+        margin: 0 0.6666%;
+        padding-top: 0;
+        margin-bottom: 0.16rem;
+        height: 1.6rem;
+        overflow: hidden;
+        transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+        @media (max-width: 800px)
+          &
+            width: 48%;
+        a
+          positionCoverFather(1)
+        img
+          positionCoverFather(0)
+          object-fit: cover
+        &:hover
+          transform: translateY(-4px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.24);
           .avatar
-            width: 0.8rem
-            height: 0.8rem
-            border-radius: 50%
-            border: 4px solid rgba(255, 255, 255, 0.66)
-            box-shadow: 0 0 10px #999
-            background-color: rgba(0, 0, 0, 0.1)
-            transition: transform 1s ease-out
-            position: relative
-            overflow: hidden
-            img
-              position: absolute
-              top: 0
-              left: 0
-              width: 100%
-              height: 100%
-          .info
-            max-width: 60%
-            overflow: hidden
-            margin-left: .1rem
-            padding: 0 0.12rem
-            height: 0.4rem
-            line-height: 0.4rem
-            border-radius: 0.03rem
-            background: rgba(255, 255, 255, 0.8)
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4)
-            display: flex
-            justify-content: flex-start
-            align-items: center
-            .name
-              max-width: 80%
-              word-break: break-all
-              white-space: nowrap
-              text-overflow: ellipsis
-              overflow: hidden
-            .num
-              margin-left: 0.1rem
-    p
-      position: absolute
-      width: 100%
-      word-break: break-all
-      white-space: nowrap
-      text-overflow: ellipsis
-      overflow: hidden
-      bottom: 0
-      padding: 0.12rem 0.16rem
-#categories
-    @import 'archive_container.styl'
+            transform: rotateZ(360deg);
+        .meta
+          position: relative;
+          padding: 0 0.16rem;
+          width: 100%;
+          height 100%;
+          text-align: justify;
+          text-shadow: 0 0 1px #666;
+          background-color: rgba(255, 255, 255, 0.66);
+          & > div
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80%;
+            .avatar
+              width: 0.8rem;
+              height: 0.8rem;
+              border-radius: 50%;
+              border: 4px solid rgba(255, 255, 255, 0.66);
+              box-shadow: 0 0 10px #999;
+              background-color: rgba(0, 0, 0, 0.1);
+              transition: transform 1s ease-out;
+              position: relative;
+              overflow: hidden;
+              img
+                positionCoverFather(0)
+            .info
+                max-width: 60%;
+                ellipsis()
+                margin-left: .1rem;
+                padding: 0 0.12rem;
+                height: 0.4rem;
+                line-height: 0.4rem;
+                border-radius: 0.03rem;
+                background: rgba(255, 255, 255, 0.8);
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .name
+                  max-width: 80%;
+                  ellipsis()
+                .num
+                  margin-left: 0.1rem;
+      p
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        ellipsis()
+        padding: 0.12rem 0.16rem;
+
+
+
+
+    

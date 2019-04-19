@@ -1,123 +1,71 @@
-#home
-  width: 100%
-  .main
-    display: flex
-    justify-content: space-between
-    flex-wrap: wrap
+.index
+  width: 100%;
+  .posts
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   article
-    display: flex
-    flex-direction: column
-    margin-bottom: 0.16rem
-    width: 49.2%
-    text-align: left
-    transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s
-    position relative
-    overflow: hidden
-    /* 链接覆盖在文章上，点击跳转文章 */
-    & > a
-      position absolute
-      z-index: 1
-      top: 0
-      left 0
-      width: 100%
-      height: 100%
-      cursor: url('../images/cursor.png'), auto
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.16rem;
+    width: 49.2%;
+    text-align: left;
+    transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+    position: relative;
+    overflow: hidden;
+    .post-url
+      positionCoverFather(1)
     &:hover
-      transform: translateY(-6px)
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.24)
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.24);
       .img-wrapper, img
-        transform: scale(1.06)
-    .post-header
-      position: relative
-      font-size: 0.15rem
-      overflow: hidden
-      .test
-        position absolute;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left 0;
-        background: rgba(0,0,0,0.6);
-        opacity 0;
-        transform: scale(4);
-        transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s
-        font-size: 28px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        & > span
-          padding: .1rem;
-          word-break:break-all;
-          overflow: hidden;
-          text-align: justify
-          text-overflow: ellipsis;
-          text-align: center;
-          color: rgb(187, 187, 187, 0.66) !important;
-          .icon
-            color: rgb(187, 187, 187, 0.66) !important;
-      &:hover
-        .test
-          color: #fff !important;
-          opacity: 1;
-          transform: scale(1);
-      .img-wrapper
-        width: 100%
-        padding-top: 56%
-        background-color: rgba(233, 224, 207,0.66)
-        background-size: cover
-        background-repeat: no-repeat
-        position relative
-        transition: transform 0.6s ease-out
-        img
-          position absolute
-          top: 0
-          left 0
-          width: 100%
-          height: 100%
-          transition: transform 0.6s ease-out
-    .post-body
-      flex: 1
+        transform: scale(1.06);
       .title
-        padding: 0.12rem 0.14rem
-        font-weight: normal
-        display: -webkit-box
-        -webkit-box-orient: vertical
-        -webkit-line-clamp: 2
-        font-size: 0.20rem
-        font-weight: 400
-        line-height: 1.6
-        text-align: justify
-        text-overflow: ellipsis
-        overflow: hidden
+        color: #b854d4;
+    .post-image
+      width: 100%;
+      padding-top: 56%;
+      position: relative;
+      overflow: hidden;
+      .img-wrapper
+        positionCoverFather()
+        background-color: rgba(233, 224, 207, 0.66);
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: transform 0.6s ease-out;
+        overflow: hidden;
+        img
+          positionCoverFather()
+          transition: transform 0.6s ease-out;
+    .post-title
+      padding: 0.12rem 0.14rem;
+      .title
+        font-weight: normal;
+        transition: color 0.25s ease-in-out;
+        ellipsis()
     .post-meta
-      display: flex
-      padding: 0.12rem 0.1rem
-      font-size: 0.16rem
-      border-top: 1px solid rgba(0, 0, 0, 0.08)
+      display: flex;
+      padding: 0.12rem 0.1rem;
+      font-size: 0.16rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
       & > span
-        flex: 1
-        display: flex
-        justify-content: left
-        margin-right: 0.06rem
-        align-items: center
-        white-space:nowrap
-        text-overflow:ellipsis
-        overflow:hidden
-        & > a
-          text-overflow:ellipsis
+        flex: 1;
+        display: flex;
+        margin-right: 0.06rem;
+        align-items: center;
+        ellipsis()
         .icon
-          margin-right: 4px
-        &.calendar
-          min-width: 30%
-          flex-shrink: 0
+            margin-right: 4px;
+        &.meta-calendar
+          min-width: 30%;
+          flex-shrink: 0;
   @media (max-width: 900px)
-    .main
-      justify-content: space-around
+    .posts
+      justify-content: space-around;
       article
-        margin-bottom: 0.32rem
-        width: 98%
+        margin-bottom: 0.32rem;
+        width: 98%;
 
-    
-  
+
+      
+      

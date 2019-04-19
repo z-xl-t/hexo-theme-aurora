@@ -1,12 +1,17 @@
-<div id="categories">
-  <div class="card">
-      <%- partial('_partial/quote.ejs', {enable: theme.quotes.categories.enable, quote: theme.quotes.categories.quote}) %>
-    <ul class="content">
-      <% if (site.categories.length === 0 ){ %>
-        <li class="message"><span>暂无分类</span></li>
-      <% } else { %>
-        <%- partial('_partial/category-header.ejs') %>
-      <% } %>
-    </ul>
+<div class="categories card">
+  <%- partial('_partial/quote.ejs', {enable: theme.quotes.categories.enable, quote: theme.quotes.categories.quote}) %>
+  <div class="content">
+    <div class="pjax-content-page">
+      <div class="layout-content">
+        <% if (site.categories.length === 0 ){ %>
+          <li class="message"><span>暂无分类</span></li>
+        <% } else { %>
+          <%- partial('_partial/category-header.ejs', {pjaxClass: 'pjax-a-content'}) %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="loading content-loading">
+      <%- image_tag('images/loading.gif') %>
   </div>
 </div>

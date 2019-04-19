@@ -1,4 +1,6 @@
-@import 'mixin'
+/* 这个文件不直接引入main中，并且不放入 css/_partial
+* 而是独立出来，由 gitalk.ejs 引用
+*/
 #gitalk
   .gt-container
     text-align: left
@@ -67,7 +69,6 @@
     .gt-comment-body
       max-height: 6rem
       overflow: auto
-      custom-scroll()
   textarea,
   .gt-btn-login,
   .gt-btn-preview,
