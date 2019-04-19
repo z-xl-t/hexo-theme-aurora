@@ -1,47 +1,45 @@
 
-<div class="about">
-  <div class="card">
-    <%- partial('_partial/quote.ejs', {enable: theme.quotes.about.enable, quote: theme.quotes.about.quote}) %>
-    <div class="content">
-      <div class="header">
-        <% if (page.avatar || theme.avatar){ %>
-          <%
-            var avatar = page.avatar || theme.avatar || ''
-          %>
-          <div class="avatar-wrapper">
-            <img src="<%= avatar %>">
-          </div>
-        <% } %>
-        <div class="info">
-          <% if (page.name || theme.title){ %>
-            <%
-              var name = page.name || theme.title || ''
-            %>
-            <div class="name"><i class="icon icon-fort-awesome"></i><%= name %></div>
-          <% } %>
-          <% if (page.sign || theme.subtitle){ %>
-            <%
-              var sign = page.sign || theme.subtitle || ''
-            %>
-            <div class="sign"><i class="icon icon-pagelines"></i><%= sign %></div>
-          <% } %>
+<div class="about card">
+  <%- partial('_partial/quote.ejs', {enable: theme.quotes.about.enable, quote: theme.quotes.about.quote}) %>
+  <div class="content">
+    <div class="header">
+      <% if (page.avatar || theme.avatar){ %>
+        <%
+          var avatar = page.avatar || theme.avatar || ''
+        %>
+        <div class="avatar-wrapper">
+          <img src="<%= avatar %>">
         </div>
-      </div>
-      <div class="contact">
-        <% for (var i in page.contact){ %>
-          <% 
-            var icon = page.contact[i].icon || ' '
-            var link = page.contact[i].link || ' '
+      <% } %>
+      <div class="info">
+        <% if (page.name || theme.title){ %>
+          <%
+            var name = page.name || theme.title || ''
           %>
-          <a href="<%= link %>" target="_blank">
-            <img src="<%= icon %>">
-          </a>
+          <div class="name"><i class="icon icon-fort-awesome"></i><%= name %></div>
+        <% } %>
+        <% if (page.sign || theme.subtitle){ %>
+          <%
+            var sign = page.sign || theme.subtitle || ''
+          %>
+          <div class="sign"><i class="icon icon-pagelines"></i><%= sign %></div>
         <% } %>
       </div>
     </div>
-    <div class="about-post markdown">
-      <%- page.content %>
+    <div class="contact">
+      <% for (var i in page.contact){ %>
+        <% 
+          var icon = page.contact[i].icon || ' '
+          var link = page.contact[i].link || ' '
+        %>
+        <a href="<%= link %>" target="_blank">
+          <img src="<%= icon %>">
+        </a>
+      <% } %>
     </div>
+  </div>
+  <div class="about-post markdown">
+    <%- page.content %>
   </div>
 </div>
 <% if (theme.gitalk.enable && page.comments != false){ %>

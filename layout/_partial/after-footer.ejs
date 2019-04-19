@@ -47,14 +47,24 @@
   <div class="zoom">
   <%- js('lib/medium-zoom/medium-zoom.min.js') %>
   </div>
-  
-  <%# 引入自定义js，初始化一些效果 %>
-  <%# 引入一个全局变量 %>
+  <%# 文章热度 %>
+  <% if (theme.leancloud.enable) {%>
+    <%- js('lib/leanclound/av-core-mini-0.6.4.js') %>
+    <script>
+      AV.initialize(
+        '<%= theme.leancloud.app_id %>',
+        '<%= theme.leancloud.app_key %>'
+      )
+    </script>
+  <% } %>
+
   <%# 代码高亮 %>
   <%- css('lib/highlight/atelier-dune-dark.css') %>
   <%# 为了方便选取才使用 div 包裹 %>
   <div class="hljs">
     <%- js('lib/highlight/highlight.pack.js') %>
   </div>
+
+  <%# 引入自定义js，初始化一些效果 %>
   <%- js('js/index.js') %>
 </div>

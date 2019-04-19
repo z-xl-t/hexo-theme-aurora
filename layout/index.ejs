@@ -33,7 +33,6 @@
     <% } %>
   </div>
   <% if (is_home()) {%>
-    <%- partial('_partial/pagination') %>
+    <%- partial('_partial/pagination', {pjaxClass: 'pjax-a-page'}) %>
   <% } %>
-
 </div>

@@ -60,6 +60,9 @@ menu:
 # 配置页面的quote, 其中首页和归档页不需要配置
 quotes:
   enable: true
+  archive:
+    enable: true
+    quote: 文章千古事，得失寸心知
   categories:
     enable: true
     quote: 行云流水，落笔生花
@@ -80,6 +83,38 @@ footer:
   enable: true
   title: 椎咲良田
   subtitle: 昨日、今日、明日
+
+# 顶部边框颜色和标签颜色设置
+# num为颜色数目
+# 因为#属于特殊字符， 需要用引号。
+themeColors:
+  enable: true
+  num: 10
+  colors:
+    c-1: '#B28FCE' # 薄
+    c-2: '#86C166' # 苗
+    c-3: '#F9BF45' # 玉子
+    c-4: '#FAD689' # 浅黄
+    c-5: '#F596AA' # 桃
+    c-6: '#E79460' # 洗柿
+    c-7: '#2EA9DF' # 露草
+    c-8: '#FFBA84' # 洒落柿
+    c-9: '#7DB9DE' # 勿忘草
+    c-10: '#FF99FF' # 粉红
+
+
+# 分类页面每个分类
+# bg、avatar、desc, 可选
+
+categories:
+  enable: true
+  cates:
+    num: 1
+    cat-1:
+      bg: https://i.loli.net/2019/02/24/5c71bf0544b21.jpg
+      avatar: https://i.loli.net/2019/02/24/5c71bf0544b21.jpg
+      desc: 
+
 
 # 背景图片 
 background:

@@ -3,11 +3,11 @@
   <div id="app">
     <%- partial('_partial/header') %>
     <div class="page">
-      <div class="container pjax-main-page">
-      <%- body %>
+      <div class="container">
+        <div class="pjax-main-page"><%- body %></div>
       </div>
-      <div class="loading">
-      <%- image_tag('images/loading.gif') %>
+      <div class="loading main-loading">
+        <%- image_tag('images/loading.gif') %>
       </div>
     </div>
     <%- partial('_partial/footer') %>

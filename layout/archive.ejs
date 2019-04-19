@@ -1,0 +1,12 @@
+<div class="archive card">
+  <%- partial('_partial/quote.ejs', {enable: theme.quotes.archive.enable, quote: theme.quotes.archive.quote}) %>
+  <div class="content">
+    <div class="pjax-content-page">
+      <%- partial('_partial/short-post.ejs', {posts: page.posts}) %>
+      <%- partial('_partial/pagination', {pjaxClass: 'pjax-a-content'}) %>
+    </div>
+  </div>
+  <div class="loading content-loading">
+      <%- image_tag('images/loading.gif') %>
+  </div>
+</div>

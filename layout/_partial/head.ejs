@@ -17,4 +17,11 @@
   <%- css('css/main') %>
   <%# jQuery v2.1.3 %>
   <%- js('lib/jQuery/jQuery.min.js') %>
+  <%# gitalk %>
+  <% if (theme.gitalk.enable){ %>
+    <%- css('lib/gitalk/gitalk.min.css') %>
+    <%- js('lib/gitalk/gitalk.min.js') %>
+    <%# 自定义部分gitalk样式 %>
+    <%- css('css/gitalk') %>
+  <% } %>
 </head>

@@ -1,0 +1,21 @@
+<div class="tags card">
+  <%- partial('_partial/quote.ejs', {enable: theme.quotes.tags.enable, quote: theme.quotes.tags.quote}) %>
+  <div class="content">
+      <div class="pjax-content-page">
+        <% if (site.tags.length === 0 ){ %>
+          <div class="layout-content">
+            <li class="message"><span>暂无标签</span></li>
+          </div>
+        <% } else { %>
+          <div class="layout-content">
+            <%- partial('_partial/tags-header.ejs',  {pjaxClass: 'pjax-a-content'}) %>
+          </div>
+          <%- partial('_partial/short-post.ejs', {posts: page.posts}) %>
+          <%- partial('_partial/pagination.ejs', {pjaxClass: 'pjax-a-content'}) %>
+        <% } %>
+      </div>
+  </div>
+  <div class="loading content-loading">
+      <%- image_tag('images/loading.gif') %>
+    </div>
+</div>

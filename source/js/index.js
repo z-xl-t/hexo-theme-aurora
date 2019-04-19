@@ -155,8 +155,8 @@ Aurora.reload = {
     // 需要重新加载 highlight.js 文件才能刷新生效
     this.replaceScript('.hljs', Aurora.markdown.hljsLoad)
   },
-  replaceScript: function(str, cb){
-    var parentNode = document.querySelector(str)
+  replaceScript: function(cssSelector, cb){
+    var parentNode = document.querySelector(cssSelector)
     var oldChild = parentNode.querySelector('script')
     var newChild = document.createElement('script')
     newChild.src = oldChild.src
@@ -164,6 +164,128 @@ Aurora.reload = {
     newChild.addEventListener('load',function(){cb()})
   }
 }
+
+Aurora.leanCloud = {
+  start: function() {
+    var Counter = AV.Object.extend("Counter");
+    if ($('.post').length == 1 && $('.post-meta').length == 1) {
+      this.addHot(Counter);
+    } else if ($('.post-meta').length > 0) {
+      this.showHot(Counter);
+    }
+  },
+  showHot: function(Counter) {
+    var query = new AV.Query(Counter);
+    var entries = [];
+    var $visitors = $(".leancloud_visitors");
+  
+    $visitors.each(function () {
+      entries.push($(this).attr("id").trim());
+    });
+  
+    query.containedIn('url', entries);
+    query.find()
+      .done(function (results) {
+        var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+  
+        if (results.length === 0) {
+          $visitors.find(COUNT_CONTAINER_REF).text(0);
+          return;
+        }
+        for (var i = 0; i < results.length; i++) {
+          var item = results[i];
+          var url = item.get('url');
+          var time = item.get('time');
+          var element = document.getElementById(url);
+          $(element).find(COUNT_CONTAINER_REF).text(time);
+        }
+        for (var i = 0; i < entries.length; i++) {
+          var url = entries[i];
+          var element = document.getElementById(url);
+          var countSpan = $(element).find(COUNT_CONTAINER_REF);
+          if (countSpan.text() == '') {
+            countSpan.text(0);
+          }
+        }
+      })
+      .fail(function (object, error) {
+        console.log("Error: " + error.code + " " + error.message);
+      });
+  },
+  addHot: function(Counter) {
+    var $visitors = $(".leancloud_visitors");
+    var url = $visitors.attr('id').trim();
+    var title = $visitors.attr('data-flag-title').trim();
+    var query = new AV.Query(Counter);
+    query.equalTo("url", url);
+    query.find({
+      success: function (results) {
+        if (results.length > 0) {
+          var counter = results[0];
+          counter.fetchWhenSave(true);
+          counter.increment("time");
+          counter.save(null, {
+            success: function (counter) {
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            },
+            error: function (counter, error) {
+              console.log('Failed to save Visitor num, with error message: ' + error.message);
+            }
+          });
+        } else {
+          var newcounter = new Counter();
+          /* Set ACL */
+          var acl = new AV.ACL();
+          acl.setPublicReadAccess(true);
+          acl.setPublicWriteAccess(true);
+          newcounter.setACL(acl);
+          /* End Set ACL */
+          newcounter.set("title", title);
+          newcounter.set("url", url);
+          newcounter.set("time", 1);
+          newcounter.save(null, {
+            success: function (newcounter) {
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+            },
+            error: function (newcounter, error) {
+              console.log('Failed to create');
+            }
+          });
+        }
+      },
+      error: function (error) {
+        console.log('Error:' + error.code + " " + error.message);
+      }
+    });
+  }
+}
+
+Aurora.pjax = {
+  bind: function(selector, container, options, start, end) {
+    $(document).pjax(selector, container, options)
+    var container = container.slice(1)
+    this[container] = {}
+    this[container]['start'] = start || function() {}
+    this[container]['end'] = end || function() {}
+    var _this = this
+    console.log(this)
+    $(document).on('pjax:start', function(e){
+      // console.log('111', e.target)
+      var container = $(e.target).attr('class')
+      _this[container].start()
+      e.stopPropagation()
+    })
+    $(document).on('pjax:end', function(e){
+      var container = $(e.target).attr('class')
+      _this[container].end()
+      e.stopPropagation()
+    })
+  },
+  
+}
+
 /**************************
  *     初始化功能        *
  **************************/
@@ -177,28 +299,23 @@ window.addEventListener('resize', Aurora.utils.throttle(Aurora.utils.setRem, 500
  *  pjax 功能
  */
 if ($.support.pjax) {
-  $(document).pjax('.pjax-a-page', '.pjax-main-page', {fragment: '.container', timeout: 8000});
-  var pjaxContainer = $('.pjax-main-page');
-  var pjaxLoading = $('.loading');
-  var pjaxBackToTop = $('.back-to-top');
-
-  $(document).on({
-    /*点击链接后触发的事件*/
-    'pjax:click': function () {
+  function mainPjax() {
+    Aurora.pjax.bind('.pjax-a-page', '.pjax-main-page', {fragment: '.pjax-main-page', timeout: 8000}, start, end);
+    function start() {
+      var pjaxContainer = $('.pjax-main-page');
+      var pjaxLoading = $('.main-loading');
+      var pjaxBackToTop = $('.back-to-top');
       pjaxContainer.css('display', 'none');
       pjaxLoading.fadeIn();
       pjaxBackToTop.css({
         'display':'none',
         'top': '-1200px'
       });
-    },
-
-    /*pjax开始请求页面时触发的事件*/
-    'pjax:start': function () {
-    },
-
-    /*pjax请求回来页面后触发的事件*/
-    'pjax:end': function () {
+    }
+    function end() {
+      var pjaxContainer = $('.pjax-main-page');
+      var pjaxLoading = $('.main-loading');
+      var pjaxBackToTop = $('.back-to-top');
       pjaxBackToTop.css('display', 'block');
       setTimeout(function(){
         pjaxLoading.fadeOut();
@@ -210,8 +327,42 @@ if ($.support.pjax) {
       Aurora.reload.reloadZoomLoad()
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
+      Aurora.leanCloud.start()
     }
-});
+  }
+  function contentPjax() {
+    Aurora.pjax.bind('.pjax-a-content', '.pjax-content-page',  {fragment: '.pjax-content-page', timeout: 8000}, start, end)
+    function start() {
+      var pjaxContainer = $('.pjax-content-page');
+      var pjaxLoading = $('.content-loading');
+      var pjaxBackToTop = $('.back-to-top');
+      pjaxContainer.css('display', 'none');
+      pjaxLoading.fadeIn();
+      pjaxBackToTop.css({
+        'display':'none',
+        'top': '-1200px'
+      });
+    }
+    function end() {
+      var pjaxContainer = $('.pjax-content-page');
+      var pjaxLoading = $('.content-loading');
+      var pjaxBackToTop = $('.back-to-top');
+      pjaxBackToTop.css('display', 'block');
+      setTimeout(function(){
+        pjaxLoading.fadeOut();
+      }, 400)
+      setTimeout(function(){
+        pjaxContainer.css('display', 'block');
+      }, 500)
+      Aurora.reload.reloadHljsLoad()
+      Aurora.reload.reloadZoomLoad()
+      Aurora.markdown.handleMarkdownImg()
+      Aurora.markdown.handleMarkdownIcon()
+      Aurora.leanCloud.start()
+    }
+  }
+  mainPjax()
+  contentPjax()
 }
 
 /**
@@ -325,3 +476,8 @@ if (markdown.length) {
     Aurora.markdown.zoomLoad()
   }
 }
+
+/**
+ *  热度（浏览次数）
+ */
+Aurora.leanCloud.start()
