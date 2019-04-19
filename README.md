@@ -11,6 +11,7 @@
 主题移植（hexo）
 
 主题: [hexo-theme-aurora](https://github.com/sanshiliuxiao/hexo-theme-aurora)
+
 网站：[椎咲良田](https://sanshiliuxiao.top)
 
 ## 食用指南
