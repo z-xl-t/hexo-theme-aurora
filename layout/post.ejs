@@ -1,0 +1,39 @@
+<div class="post">
+  <% var post = page %>
+  <article class="card">
+      <div class="post-header">
+        <% if (theme.postCoverImage.enable) { %>
+          <% 
+            var url = post.imageUrl; 
+            var defaultImage =  url ? '' : 'background-image: url('+ theme.postCoverImage.defaultImage + ');'
+            var defalut_color = theme.postCoverImage.defaultBgColor ? 'background-color: ' + theme.postCoverImage.defaultBgColor  + ';' : ''
+            var str = defaultImage + defalut_color
+          %>
+          <div class="img-wrapper" style="<%- str %>">
+            <%# chrome75 默认启用延迟加载功能， 使用 loading 属性 %>
+            <% if (url){ %>
+              <img src="<%= url %>" loading="lazy">
+            <% } %>
+          </div>
+        <% } %>
+        <div class="post-data">
+          <%- partial('_partial/post/title.ejs', {post: post}) %>
+          <div class="post-meta">
+            <%- partial('_partial/post/date.ejs', {post: post}) %>
+            <%- partial('_partial/post/hot.ejs',{post: post}) %>
+            <%- partial('_partial/post/category.ejs', {post: post, depth: 0}) %>
+            <%- partial('_partial/post/tag.ejs', {post: post, amount: 0}) %>
+          </div>
+        </div>
+    </div>
+    <div class="post-body markdown">
+      <%- post.content %>
+    </div>
+  </article>
+  <%# gitalk 功能
+    文章中的Front-matter, comments参数只要不是false，就默认有gitalk功能 
+  %>
+  <% if (theme.gitalk.enable && post.comments != false){ %>
+    <%- partial('_partial/gitalk') %>
+  <% } %>
+</div>

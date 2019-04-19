@@ -1,0 +1,19 @@
+<%- css('lib/gitalk/gitalk.min.css') %>
+<%- js('lib/gitalk/gitalk.min.js') %>
+<%# 自定义部分gitalk样式 %>
+<%- css('css/gitalk') %>
+<div id="gitalk"></div>
+<script>
+    // 优先使用文字的日期作为id
+    var id = '<%= page.date %>' || '<%= page.title %>';
+    var gitalk = new Gitalk({
+        clientID: '<%= theme.gitalk.clientID %>',
+        clientSecret: '<%= theme.gitalk.clientSecret %>',
+        id: id,
+        repo: '<%= theme.gitalk.repo %>',
+        owner: '<%= theme.gitalk.owner %>',
+        admin: '<%= theme.gitalk.admin %>',
+        distractionFreeMode: '<%= theme.gitalk.enable %>'
+    })
+    gitalk.render('gitalk')
+</script>

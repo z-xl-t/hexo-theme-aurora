@@ -89,6 +89,7 @@ background:
 # 回到顶部挂件
 backToTop:
   enable: true
+
 # 顶部进度条
 progressBar: 
   enable: true
@@ -140,4 +141,14 @@ APlayer:
       cover: https://i.loli.net/2019/04/18/5cb871585123b.jpg
     }
   ]
+
+# gitalk留言功能
+# https://github.com/gitalk/gitalk
+gitalk:
+  enable: true
+  owner: sanshiliuxiao
+  repo: comments
+  admin: sanshiliuxiao
+  clientID: 80910941dd28e5c3bab4
+  clientSecret: 477f74941847318fe65d300ec0a985e7e402748c
 

@@ -1,8 +1,6 @@
 <div class="after-footer">
   <%# 移动端点击问题 %>
   <%- js('lib/fastclick/fastclick.min.js') %>
-  <%# jQuery v2.1.3 %>
-  <%- js('lib/jQuery/jQuery.min.js') %>
   <%# pjax %>
   <%- js('lib/pjax/pjax.min.js') %>
   <%# APlayer %>
@@ -25,6 +23,10 @@
   <% if (theme.backToTop.enable){ %>
     <span class="back-to-top"></span>
   <%} %>
+  <%# 顶端进度条 %>
+  <% if (theme.progressBar.enable){ %>
+    <%- js('lib/progress/progress.min.js') %>
+  <% } %>
   <%# 背景图片设置 %>
   <% if (theme.background.enable) { %>
     <% var str= 'background-image: url('+ theme.background.imageUrl + ');' %>
@@ -41,6 +43,18 @@
   
   <%# 加载第三方字体的js %>
   <%- js('lib/fontfaceobserver/fontfaceobserver.min.js') %>
-  <%# 引入自定义js %>
+  <%# 加载 medium-zoom %>
+  <div class="zoom">
+  <%- js('lib/medium-zoom/medium-zoom.min.js') %>
+  </div>
+  
+  <%# 引入自定义js，初始化一些效果 %>
+  <%# 引入一个全局变量 %>
+  <%# 代码高亮 %>
+  <%- css('lib/highlight/atelier-dune-dark.css') %>
+  <%# 为了方便选取才使用 div 包裹 %>
+  <div class="hljs">
+    <%- js('lib/highlight/highlight.pack.js') %>
+  </div>
   <%- js('js/index.js') %>
 </div>

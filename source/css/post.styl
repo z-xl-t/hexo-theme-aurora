@@ -1,0 +1,51 @@
+.post
+  width: 100%;
+  article
+    background-color: rgba(255, 255, 255, 0.66);
+    .post-header
+      position: relative;
+      font-size: 0.15rem;
+      overflow: hidden;
+      margin-bottom: .14rem;
+      &:hover
+        .img-wrapper, img
+          transform: scale(1.06);
+      .img-wrapper
+        width: 100%;
+        padding-top: 56%;
+        background-color: rgba(233, 224, 207, 0.66);
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        transition: transform 0.6s ease-out;
+        overflow: hidden;
+        img
+          positionCoverFather()
+          transition: transform 0.6s ease-out;
+      .post-data
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 0.12rem 0.14rem;
+        background: rgba(0, 0, 0, 0.4);
+        .title
+          font-weight: 400;
+          color: #eee;
+          text-transform: capitalize;
+        .post-meta
+          display: flex;
+          margin-top: 0.08rem;
+          & > span
+            flexCenter()
+            margin-right: 0.08rem;
+            flex-wrap: wrap;
+            font-weight: 400;
+            color: #eee;
+            &,
+            span,
+            .icon
+              font-weight: 400
+              color: #eee
+            .icon
+              margin-right: 8px;
+      
