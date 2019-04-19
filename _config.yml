@@ -187,3 +187,8 @@ gitalk:
   clientID: 80910941dd28e5c3bab4
   clientSecret: 477f74941847318fe65d300ec0a985e7e402748c
 
+# 是否对部分库 采用 cdn 加速
+# 即不会从 source/lib 中加载，而是 cdn 平台提供链接
+# 建议 开启
+cdnAcelerate:
+  enable: true

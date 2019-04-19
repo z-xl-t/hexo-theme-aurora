@@ -4,16 +4,14 @@
 
 主题来源（vue）
 
-主题：[蝉时雨](https://github.com/chanshiyucx/aurora)
+主题：[aurora](https://github.com/chanshiyucx/aurora)
 
-网站：[蝉时雨](https://chanshiyu.com/#/)
+网站：[蝉时雨](https://chanshiyu.com)
 
 主题移植（hexo）
 
-二次施工中，对主题进行重写
-
-使用pjax，并优化代码结构，同时添加更多功能。
-
+主题: [hexo-theme-aurora](https://github.com/sanshiliuxiao/hexo-theme-aurora)
+网站：[椎咲良田](https://sanshiliuxiao.top)
 
 ## 食用指南
 

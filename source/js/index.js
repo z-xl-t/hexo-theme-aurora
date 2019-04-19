@@ -270,7 +270,6 @@ Aurora.pjax = {
     this[container]['start'] = start || function() {}
     this[container]['end'] = end || function() {}
     var _this = this
-    console.log(this)
     $(document).on('pjax:start', function(e){
       // console.log('111', e.target)
       var container = $(e.target).attr('class')
