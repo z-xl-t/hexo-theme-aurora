@@ -144,26 +144,15 @@ Aurora.markdown = {
     if (typeof hljs === 'undefined') return 
     hljs.initHighlighting()
   },
-}
-/**
- *  一些由于 pjax 的缘故需要重新加载，然后重新初始化的方法
- */
-Aurora.reload = {
-  reloadZoomLoad: function(){
-    // 需要重新加载 zoom 才能重新生效
-    this.replaceScript('.js-zoom', Aurora.markdown.zoomLoad)
-  },
-  reloadHljsLoad: function(){
-    // 需要重新加载 highlight.js 文件才能刷新生效
-    this.replaceScript('.js-hljs', Aurora.markdown.hljsLoad)
-  },
-  replaceScript: function(cssSelector, cb){
-    var parentNode = document.querySelector(cssSelector)
-    var oldChild = parentNode.querySelector('script')
-    var newChild = document.createElement('script')
-    newChild.src = oldChild.src
-    parentNode.replaceChild(newChild, oldChild)
-    newChild.addEventListener('load',function(){cb()})
+  /**
+   *  代码块高亮，初始化只需要一次就可以了，其他时候用 highlightBlock 渲染
+   */
+  hljsLoadCode: function(selector){
+    if (typeof hljs === 'undefined') return 
+     // 重新渲染代码块 
+     document.querySelectorAll(selector).forEach((block) => {
+      hljs.highlightBlock(block);
+    });
   }
 }
 
@@ -171,9 +160,9 @@ Aurora.leanCloud = {
   startHot: function() {
     if (typeof AV === 'undefined') return
     var Counter = AV.Object.extend("Counter");
-    if ($('.post').length == 1 && $('.post-meta').length == 1) {
+    if ($('.post').length == 1 && $('.post-meta .meta-hot').length == 1) {
       this.addHot(Counter);
-    } else if ($('.post-meta').length > 0) {
+    } else if ($('.post-meta .meta-hot').length > 0) {
       this.showHot(Counter);
     }
   },
@@ -374,9 +363,9 @@ if ($.support.pjax) {
       }, 400)
       setTimeout(function(){
         pjaxContainer.css('display', 'block');
+        Aurora.markdown.zoomLoad()
       }, 500)
-      Aurora.reload.reloadHljsLoad()
-      Aurora.reload.reloadZoomLoad()
+      Aurora.markdown.hljsLoadCode('pre code')
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
       Aurora.leanCloud.startHot()
@@ -405,9 +394,9 @@ if ($.support.pjax) {
       }, 400)
       setTimeout(function(){
         pjaxContainer.css('display', 'block');
+        Aurora.markdown.zoomLoad()
       }, 500)
-      Aurora.reload.reloadHljsLoad()
-      Aurora.reload.reloadZoomLoad()
+      Aurora.markdown.hljsLoadCode('pre code')
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
       Aurora.leanCloud.startHot()
