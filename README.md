@@ -60,11 +60,6 @@
 
 将`/aurora/page/`下的所有文件，复制到`blog/source/`中。具体字段请看各文件的说明，其中`categories`和`tags`内的文件可以不做更改。
 
-## 预览篇
-
-点击下面链接，前往预览。
-
-[aurora_site_live](https://sanshiliuxiao.github.io/aurora_site_live/)
 
 
 
