@@ -51,14 +51,12 @@
         ap.list.show()
       </script>
     <% } %>
-
     <%# 烟花效果加载 %>
     <% if (theme.fireworks.enable){ %>
       <canvas class="fireworks"></canvas>
       <%- js('lib/anime/anime.min.js') %>
       <%- js('lib/anime/fireworks.js') %>
     <% } %>
-
   <% } %>
   
   <%# 回到顶端  %>
@@ -77,12 +75,8 @@
   <% } %>
   <%# 下面一行会有规则警告，但不影响最终渲染 %>
   <div class="bg" style="<%- str %>"></div>
-  
   <%# 加载 medium-zoom %>
-  <div class="js-zoom">
   <%- js('lib/medium-zoom/medium-zoom.min.js') %>
-  </div>
-  
   <%# 文章热度 %>
   <% if (theme.leancloud.enable) {%>
     <%- js('lib/leanclound/av-core-mini-0.6.4.js') %>
@@ -93,14 +87,9 @@
       )
     </script>
   <% } %>
-
   <%# 代码高亮 %>
   <%- css('lib/highlight/atelier-dune-dark.css') %>
-  <%# 为了方便选取才使用 div 包裹 %>
-  <div class="js-hljs">
-    <%- js('lib/highlight/highlight.pack.js') %>
-  </div>
-
+  <%- js('lib/highlight/highlight.pack.js') %>
   <%# 引入自定义js，初始化一些效果 %>
   <%- js('js/index.js') %>
 </div>
