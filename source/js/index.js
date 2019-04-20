@@ -149,11 +149,11 @@ Aurora.markdown = {
 Aurora.reload = {
   reloadZoomLoad: function(){
     // 需要重新加载 zoom 才能重新生效
-    this.replaceScript('.zoom', Aurora.markdown.zoomLoad)
+    this.replaceScript('.js-zoom', Aurora.markdown.zoomLoad)
   },
   reloadHljsLoad: function(){
     // 需要重新加载 highlight.js 文件才能刷新生效
-    this.replaceScript('.hljs', Aurora.markdown.hljsLoad)
+    this.replaceScript('.js-hljs', Aurora.markdown.hljsLoad)
   },
   replaceScript: function(cssSelector, cb){
     var parentNode = document.querySelector(cssSelector)
@@ -262,29 +262,6 @@ Aurora.leanCloud = {
   }
 }
 
-Aurora.pjax = {
-  bind: function(selector, container, options, start, end) {
-    $(document).pjax(selector, container, options)
-    var container = container.slice(1)
-    this[container] = {}
-    this[container]['start'] = start || function() {}
-    this[container]['end'] = end || function() {}
-    var _this = this
-    $(document).on('pjax:start', function(e){
-      // console.log('111', e.target)
-      var container = $(e.target).attr('class')
-      _this[container].start()
-      e.stopPropagation()
-    })
-    $(document).on('pjax:end', function(e){
-      var container = $(e.target).attr('class')
-      _this[container].end()
-      e.stopPropagation()
-    })
-  },
-  
-}
-
 /**************************
  *     初始化功能        *
  **************************/
@@ -298,8 +275,25 @@ window.addEventListener('resize', Aurora.utils.throttle(Aurora.utils.setRem, 500
  *  pjax 功能
  */
 if ($.support.pjax) {
-  function mainPjax() {
-    Aurora.pjax.bind('.pjax-a-page', '.pjax-main-page', {fragment: '.pjax-main-page', timeout: 8000}, start, end);
+  function pjaxBind(selector, container, options, start, end, cb){
+    $(document).pjax(selector, container, options)
+    this[container] = {}
+    this[container]['start'] = start || function() {}
+    this[container]['end'] = end || function() {}
+    this[container]['cb'] = cb || function() {}
+    var _this = this
+    $(container).on('pjax:start', function(e){
+      _this[container].start()
+      e.stopPropagation()
+    })
+    $(container).on('pjax:end', function(e){
+      _this[container].end()
+      _this[container].cb()
+      e.stopPropagation()
+    })
+  }
+  function mainPjax(cb) {
+    pjaxBind('.pjax-a-page', '.pjax-main-page', {fragment: '.pjax-main-page', timeout: 8000}, start, end, cb);
     function start() {
       var pjaxContainer = $('.pjax-main-page');
       var pjaxLoading = $('.main-loading');
@@ -329,8 +323,8 @@ if ($.support.pjax) {
       Aurora.leanCloud.start()
     }
   }
-  function contentPjax() {
-    Aurora.pjax.bind('.pjax-a-content', '.pjax-content-page',  {fragment: '.pjax-content-page', timeout: 8000}, start, end)
+  function contentPjax(cb) {
+    pjaxBind('.pjax-a-content', '.pjax-content-page',  {fragment: '.pjax-content-page', timeout: 8000}, start, end, cb)
     function start() {
       var pjaxContainer = $('.pjax-content-page');
       var pjaxLoading = $('.content-loading');
@@ -360,7 +354,13 @@ if ($.support.pjax) {
       Aurora.leanCloud.start()
     }
   }
-  mainPjax()
+  /* 因为 DOM 的结构 是 .pjax-main-page > ... > .pjax-content-page
+   * 所以每当是 .pjax-main-page 更换 就需要检查是否存在 .pjax-content-page
+   * 而 每当 .pjax-content-page 存在，就一定会有 .pjax-main-page
+   * 因此一个需要回调，重新监听子元素事件，另一个一个不需要
+   * 其实最方便的还是 全局只需要 .pjax-main-page 这一个需替换节点。
+   */
+  mainPjax(contentPjax)
   contentPjax()
 }
 

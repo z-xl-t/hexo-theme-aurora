@@ -81,6 +81,7 @@ quotes:
 # (sub)title，可选
 footer:
   enable: true
+  since: 2018
   title: 椎咲良田
   subtitle: 昨日、今日、明日
 
