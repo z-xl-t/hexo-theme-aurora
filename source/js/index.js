@@ -7,9 +7,9 @@ Aurora.utils = {
    * rem 用于自适应屏幕
    */
   setRem: function() {
-    const html = document.documentElement
-    const hWidth = html.getBoundingClientRect().width
-    const fz = hWidth / 7.5
+    var html = document.documentElement
+    var hWidth = html.getBoundingClientRect().width
+    var fz = hWidth / 7.5
     html.style.fontSize = fz <= 50 ? '50px' : (fz <= 100 ? fz + 'px' : '100px')
   },
   /** 
@@ -19,7 +19,7 @@ Aurora.utils = {
     let previous = null //记录上一次运行的时间
     let timer = null // 定时器
     return () => {
-      const now = +new Date()
+      var now = +new Date()
       if(!previous) { 
         previous = now 
       }
@@ -132,6 +132,7 @@ Aurora.markdown = {
    *  图片缩放初始化
    */
   zoomLoad: function() {
+    if (typeof mediumZoom === 'undefined') return
     mediumZoom(document.querySelectorAll('.img-box img'), {
       background: '#212530',
     })
@@ -140,6 +141,7 @@ Aurora.markdown = {
    * 代码高亮初始化
    */
   hljsLoad: function(){
+    if (typeof hljs === 'undefined') return 
     hljs.initHighlighting()
   },
 }
@@ -166,7 +168,8 @@ Aurora.reload = {
 }
 
 Aurora.leanCloud = {
-  start: function() {
+  startHot: function() {
+    if (typeof AV === 'undefined') return
     var Counter = AV.Object.extend("Counter");
     if ($('.post').length == 1 && $('.post-meta').length == 1) {
       this.addHot(Counter);
@@ -259,6 +262,62 @@ Aurora.leanCloud = {
         console.log('Error:' + error.code + " " + error.message);
       }
     });
+  },
+  VisitorForm: function() {
+    if (typeof AV === 'undefined') return
+
+    var referrer = getLocation(document.referrer);
+    var hostname = referrer.hostname;
+
+    var Visitor = AV.Object.extend("Visitor");
+    var query = new AV.Query(Visitor);
+    
+    query.equalTo('referrer', hostname);
+    query.find({
+      success: function(results) {
+        if (results.length > 0) {
+          // 存在则增加访问次数
+          var visitors = results[0];
+          visitors.fetchWhenSave(true);
+          visitors.increment("time");
+          visitors.save(null,{
+            success: function(){
+              console.log('success')
+            },
+            error: function(visitors, error) {
+              console.log('Failed to save Visitor num, with error message: ' + error.message);
+            }
+          });
+        } else {
+           // 不存在则新增来访者
+          var newVisitor = new Visitor()
+          /* Set ACL */
+          var acl = new AV.ACL();
+          acl.setPublicReadAccess(true);
+          acl.setPublicWriteAccess(true);
+          newVisitor.setACL(acl);
+          newVisitor.set('referrer', hostname);
+          newVisitor.set('time', 1);
+          newVisitor.save(null, {
+            success: function(newVisitor) {
+              console.log('success')
+            },
+            error: function(newVisitor, error) {
+              console.log('Failed to create');
+            }
+          })
+        }
+      },
+      error: function (error) {
+        console.log('Error:' + error.code + " " + error.message);
+      }
+    })
+    // 转换访问来源地址
+    function getLocation(href) {
+      var a = document.createElement('a');
+      a.href = href;
+      return a
+    }
   }
 }
 
@@ -320,7 +379,7 @@ if ($.support.pjax) {
       Aurora.reload.reloadZoomLoad()
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
-      Aurora.leanCloud.start()
+      Aurora.leanCloud.startHot()
     }
   }
   function contentPjax(cb) {
@@ -351,7 +410,7 @@ if ($.support.pjax) {
       Aurora.reload.reloadZoomLoad()
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
-      Aurora.leanCloud.start()
+      Aurora.leanCloud.startHot()
     }
   }
   /* 因为 DOM 的结构 是 .pjax-main-page > ... > .pjax-content-page
@@ -461,22 +520,21 @@ if ('addEventListener' in document) {
   }, false);
 }
 
+/**
+ * 存在 markdown 节点才需要进行操作
+ */
 var markdown = document.getElementsByClassName('markdown');
 if (markdown.length) {
   Aurora.markdown.handleMarkdownImg()
   Aurora.markdown.handleMarkdownIcon()
-  if (typeof hljs !== 'undefined') {
-    Aurora.markdown.hljsLoad()
-  }
-  /**
-   *  图片缩放 同上
-   */
-  if (typeof mediumZoom !== 'undefined') {
-    Aurora.markdown.zoomLoad()
-  }
+
+  Aurora.markdown.hljsLoad()
+  Aurora.markdown.zoomLoad()
 }
 
 /**
- *  热度（浏览次数）
+ *  热度（浏览次数)，访客来源
  */
-Aurora.leanCloud.start()
+Aurora.leanCloud.startHot()
+Aurora.leanCloud.VisitorForm()
+
