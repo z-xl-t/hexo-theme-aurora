@@ -173,14 +173,22 @@ body
   cursor: url('../images/cursor.png'), auto;
   /* 设置滚动 让它一直有滚动条 */
   overflow-y: scroll;
-  
+
+/*
+ 
+ 解决 flex 布局下 高度的不正常（移动端）
+ 使用 calc 替代 flex: 1，
+ 保证 .footer 永远在最下面 而不是首屏内容的下面。
+*/
 #app
   position: relative;
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  .header
+    height: 2.36rem;
+  .footer
+    height: 0.82rem;
   .page
-    flex: 1;
+    min-height: calc(100% - 3.18rem);
     width: 100%;
     padding: 0 .12rem;
     max-width: 900px;
@@ -195,4 +203,3 @@ body
       .pjax-main-page
         flex: 1;
         width: 100%;
-      
