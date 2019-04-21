@@ -77,7 +77,7 @@
   <div class="bg" style="<%- str %>"></div>
   <%# 加载 medium-zoom %>
   <%- js('lib/medium-zoom/medium-zoom.min.js') %>
-  <%# 文章热度 %>
+  <%# 初始化 leanclound %>
   <% if (theme.leancloud.enable) {%>
     <%- js('lib/leanclound/av-core-mini-0.6.4.js') %>
     <script>
@@ -87,6 +87,14 @@
       )
     </script>
   <% } %>
+  <%# 埋点 对 文章热度 和 访问者来源 进行功能控制 %>
+  <% if(theme.leancloud.enable && theme.leancloud.counter.enable) {%>
+    <div class="leancloud-hot"></div>
+  <% } %>
+  <% if(theme.leancloud.enable && theme.leancloud.visitor.enable) {%>
+    <div class="leancloud-visitor"></div>
+  <% } %>
+
   <%# 代码高亮 %>
   <%- css('lib/highlight/atelier-dune-dark.css') %>
   <%- js('lib/highlight/highlight.pack.js') %>

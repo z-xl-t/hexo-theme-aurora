@@ -159,11 +159,13 @@ Aurora.markdown = {
 Aurora.leanCloud = {
   startHot: function() {
     if (typeof AV === 'undefined') return
-    var Counter = AV.Object.extend("Counter");
-    if ($('.post').length == 1 && $('.post-meta .meta-hot').length == 1) {
-      this.addHot(Counter);
-    } else if ($('.post-meta .meta-hot').length > 0) {
-      this.showHot(Counter);
+    if ($('.leancloud-hot').length) {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.post').length == 1 && $('.post-meta .meta-hot').length == 1) {
+        this.addHot(Counter);
+      } else if ($('.post-meta .meta-hot').length > 0) {
+        this.showHot(Counter);
+      }
     }
   },
   showHot: function(Counter) {
@@ -252,15 +254,17 @@ Aurora.leanCloud = {
       }
     });
   },
-  VisitorForm: function() {
+  startVisitor: function() {
+    if ($('.leancloud-visitor').length) {
+      var Visitor = AV.Object.extend("Visitor");
+      this.addVistor(Visitor);
+    }
+  },
+  addVistor: function(Visitor) {
     if (typeof AV === 'undefined') return
-
     var referrer = getLocation(document.referrer);
     var hostname = referrer.hostname;
-
-    var Visitor = AV.Object.extend("Visitor");
     var query = new AV.Query(Visitor);
-    
     query.equalTo('referrer', hostname);
     query.find({
       success: function(results) {
@@ -270,9 +274,7 @@ Aurora.leanCloud = {
           visitors.fetchWhenSave(true);
           visitors.increment("time");
           visitors.save(null,{
-            success: function(){
-              console.log('success')
-            },
+            success: function(){},
             error: function(visitors, error) {
               console.log('Failed to save Visitor num, with error message: ' + error.message);
             }
@@ -524,6 +526,13 @@ if (markdown.length) {
 /**
  *  热度（浏览次数)，访客来源
  */
+
+/**
+ *  因为 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+ *  而本地的 serve 预览 是 http:localhost 导致部分 pjax 请求失败，变成加载全部页面
+ *  如 /abc -> /def  pjax 请求失败 而 /abc -> /abc/hij  pjax 请求失败
+ *  但部署到服务器后， 上述两种情况 ，pjax 请求均成功。
+ */
 Aurora.leanCloud.startHot()
-Aurora.leanCloud.VisitorForm()
+Aurora.leanCloud.startVisitor()
 

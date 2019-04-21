@@ -148,6 +148,10 @@ leancloud:
   enable: true
   app_id: zsXIwfsAOXq9j5T8aI8TSeXg-gzGzoHsz
   app_key: jF8GAJU2aJdgB6qQC9XGtwJw
+  counter:
+    enable: true
+  visitor:
+    enable: true
 
 # 加载音乐插件 
 APlayer:
