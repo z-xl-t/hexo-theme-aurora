@@ -38,23 +38,23 @@ menu:
     icon: icon-home
   archives:
     name: 归档
-    url: /archives
+    url: /archives/
     icon: icon-archives
   categories:
     name: 分类
-    url: /categories
+    url: /categories/
     icon: icon-categories
   tags:
     name: 标签
-    url: /tags
+    url: /tags/
     icon: icon-tags
   friends:
     name: 友链
-    url: /friends
+    url: /friends/
     icon: icon-friends
   about:
     name: 关于
-    url: /about
+    url: /about/
     icon: icon-about
 
 # 配置页面的quote, 其中首页和归档页不需要配置

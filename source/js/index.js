@@ -155,7 +155,9 @@ Aurora.markdown = {
     });
   }
 }
-
+/**
+ *  文章热度 和 访问者来源功能
+ */
 Aurora.leanCloud = {
   startHot: function() {
     if (typeof AV === 'undefined') return
@@ -312,6 +314,30 @@ Aurora.leanCloud = {
   }
 }
 
+/**
+ *  pjax 功能
+ */
+
+Aurora.pjax = {
+  pjaxBind: function(selector, containerSelector, options, start, end, cb) {
+    $(document).pjax(selector, containerSelector, options)
+    this[containerSelector] = {}
+    this[containerSelector].start = start || function() {}
+    this[containerSelector].end = end || function() {}
+    this[containerSelector].cb = cb || function() {}
+    var _this = this
+    $(containerSelector).on('pjax:start', function(e) {
+      _this[containerSelector].start()
+      e.stopPropagation()
+    })
+    $(containerSelector).on('pjax:end', function(e) {
+      _this[containerSelector].end()
+      _this[containerSelector].cb()
+      e.stopPropagation()
+    })
+  }
+}
+
 /**************************
  *     初始化功能        *
  **************************/
@@ -325,26 +351,9 @@ window.addEventListener('resize', Aurora.utils.throttle(Aurora.utils.setRem, 500
  *  pjax 功能
  */
 if ($.support.pjax) {
-  function pjaxBind(selector, container, options, start, end, cb){
-    $(document).pjax(selector, container, options)
-    this[container] = {}
-    this[container]['start'] = start || function() {}
-    this[container]['end'] = end || function() {}
-    this[container]['cb'] = cb || function() {}
-    var _this = this
-    $(container).on('pjax:start', function(e){
-      _this[container].start()
-      e.stopPropagation()
-    })
-    $(container).on('pjax:end', function(e){
-      _this[container].end()
-      _this[container].cb()
-      e.stopPropagation()
-    })
-  }
+
   function mainPjax(cb) {
-    pjaxBind('.pjax-a-page', '.pjax-main-page', {fragment: '.pjax-main-page', timeout: 8000}, start, end, cb);
-    function start() {
+    var start = function () {
       var pjaxContainer = $('.pjax-main-page');
       var pjaxLoading = $('.main-loading');
       var pjaxBackToTop = $('.back-to-top');
@@ -355,7 +364,7 @@ if ($.support.pjax) {
         'top': '-1200px'
       });
     }
-    function end() {
+    var end = function () {
       var pjaxContainer = $('.pjax-main-page');
       var pjaxLoading = $('.main-loading');
       var pjaxBackToTop = $('.back-to-top');
@@ -365,17 +374,17 @@ if ($.support.pjax) {
       }, 400)
       setTimeout(function(){
         pjaxContainer.css('display', 'block');
-        Aurora.markdown.zoomLoad()
-      }, 500)
-      Aurora.markdown.hljsLoadCode('pre code')
+      }, 600)
+      Aurora.leanCloud.startHot()
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
-      Aurora.leanCloud.startHot()
+      Aurora.markdown.zoomLoad()
+      Aurora.markdown.hljsLoadCode('pre code')
     }
+    Aurora.pjax.pjaxBind('.pjax-a-page', '.pjax-main-page', {container: '.pjax-main-page',fragment: '.pjax-main-page', timeout: 8000}, start, end, cb);
   }
-  function contentPjax(cb) {
-    pjaxBind('.pjax-a-content', '.pjax-content-page',  {fragment: '.pjax-content-page', timeout: 8000}, start, end, cb)
-    function start() {
+  function contentPjax() {
+    var start = function () {
       var pjaxContainer = $('.pjax-content-page');
       var pjaxLoading = $('.content-loading');
       var pjaxBackToTop = $('.back-to-top');
@@ -386,7 +395,7 @@ if ($.support.pjax) {
         'top': '-1200px'
       });
     }
-    function end() {
+    var end = function () {
       var pjaxContainer = $('.pjax-content-page');
       var pjaxLoading = $('.content-loading');
       var pjaxBackToTop = $('.back-to-top');
@@ -396,21 +405,24 @@ if ($.support.pjax) {
       }, 400)
       setTimeout(function(){
         pjaxContainer.css('display', 'block');
-        Aurora.markdown.zoomLoad()
-      }, 500)
-      Aurora.markdown.hljsLoadCode('pre code')
+      }, 600)
+      Aurora.leanCloud.startHot()
       Aurora.markdown.handleMarkdownImg()
       Aurora.markdown.handleMarkdownIcon()
-      Aurora.leanCloud.startHot()
+      Aurora.markdown.zoomLoad()
+      Aurora.markdown.hljsLoadCode('pre code')
     }
+    Aurora.pjax.pjaxBind('.pjax-a-content', '.pjax-content-page',  {container: '.pjax-content-page' ,fragment: '.pjax-content-page', timeout: 8000}, start, end);
   }
   /* 因为 DOM 的结构 是 .pjax-main-page > ... > .pjax-content-page
    * 所以每当是 .pjax-main-page 更换 就需要检查是否存在 .pjax-content-page
-   * 而 每当 .pjax-content-page 存在，就一定会有 .pjax-main-page
-   * 因此一个需要回调，重新监听子元素事件，另一个一个不需要
-   * 其实最方便的还是 全局只需要 .pjax-main-page 这一个需替换节点。
+   * 当刷新页面时，因为 DOM 会发生变化，因此祖级元素一个需要回调，重新监听子孙级元素事件。
+   * 其实最方便的还是 全局只需要 .pjax-main-page 这一个需替换节点，但不好看了。
    */
+
+  // 这是为了第一次访问时，存在 .pjax-main-page 的页面
   mainPjax(contentPjax)
+  // 这是为了第一次访问时，存在 .pjax-content-page 的页面
   contentPjax()
 }
 
@@ -518,7 +530,6 @@ var markdown = document.getElementsByClassName('markdown');
 if (markdown.length) {
   Aurora.markdown.handleMarkdownImg()
   Aurora.markdown.handleMarkdownIcon()
-
   Aurora.markdown.hljsLoad()
   Aurora.markdown.zoomLoad()
 }
@@ -527,12 +538,6 @@ if (markdown.length) {
  *  热度（浏览次数)，访客来源
  */
 
-/**
- *  因为 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
- *  而本地的 serve 预览 是 http:localhost 导致部分 pjax 请求失败，变成加载全部页面
- *  如 /abc -> /def  pjax 请求失败 而 /abc -> /abc/hij  pjax 请求失败
- *  但部署到服务器后， 上述两种情况 ，pjax 请求均成功。
- */
 Aurora.leanCloud.startHot()
 Aurora.leanCloud.startVisitor()
 
