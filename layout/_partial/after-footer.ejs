@@ -68,13 +68,6 @@
   <% if (theme.progressBar.enable){ %>
     <%- js('lib/progress/progress.min.js') %>
   <% } %>
-
-  <%# 背景图片设置 %>
-  <% if (theme.background.enable) { %>
-    <% var str= 'background-image: url('+ theme.background.imageUrl + ');' %>
-  <% } %>
-  <%# 下面一行会有规则警告，但不影响最终渲染 %>
-  <div class="bg" style="<%- str %>"></div>
   <%# 加载 medium-zoom %>
   <%- js('lib/medium-zoom/medium-zoom.min.js') %>
   <%# 初始化 leanclound %>
