@@ -198,3 +198,7 @@ gitalk:
 # 建议 开启
 cdnAcelerate:
   enable: true
+
+# 默认是开启代码块高亮的，不过你需要在站点 _config.yml 关闭自带高亮
+# height:
+#  enable: false
