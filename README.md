@@ -38,6 +38,8 @@
 
    ```
    # blog/_config.yml
+   
+   ## 这个是必须要关闭的，不然就会使用 hexo 默认的代码高亮模式
    height:
    	enable: false
    
@@ -60,8 +62,9 @@
 
 将`/aurora/page/`下的所有文件，复制到`blog/source/`中。具体字段请看各文件的说明，其中`categories`和`tags`内的文件可以不做更改。
 
+### 其他
 
-
+欢迎提 ISSUES，欢迎 PR。
 
 
 
