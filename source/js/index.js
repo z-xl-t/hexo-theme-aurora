@@ -37,14 +37,15 @@ Aurora.utils = {
   /**
    *  页面垂直平滑滚动到指定滚动高度
    */
-  scrollSmoothTo: function(position, cb) {
+  scrollSmoothTo: function(position, scrollSelecter,  cb) {
     if (!window.requestAnimationFrame) {
       window.requestAnimationFrame = function(callback, element) {
         return setTimeout(callback, 17);
       };
     }
     // 当前滚动高度
-    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var scrollNode = document.querySelector(scrollSelecter) || window;
+    var scrollTop =  document.querySelector(scrollSelecter).scrollTop || document.documentElement.scrollTop || document.body.scrollTop;
     // 滚动step方法
     var step = function () {
       // 距离目标滚动距离
@@ -52,10 +53,10 @@ Aurora.utils = {
       // 目标滚动位置
       scrollTop = scrollTop + distance / 5;
       if (Math.abs(distance) < 1) {
-        window.scrollTo(0, position);
+        scrollNode.scrollTo(0, position);
         cb()
       } else {
-        window.scrollTo(0, scrollTop);
+        scrollNode.scrollTo(0, scrollTop);
         requestAnimationFrame(step);
       }
     }
@@ -443,7 +444,8 @@ font.load().then(() => {
 /**
  * 回到顶端
  */
-var backToTopNode = document.getElementsByClassName('back-to-top')
+var blogNode = $('#blog')
+var backToTopNode = $('.back-to-top')
 if (backToTopNode.length) {
   var data = {
   showBackTop: false,
@@ -453,34 +455,44 @@ if (backToTopNode.length) {
   scrollTimer: ''
   }
   // 用于事件的移除和添加
-  var listener = function(){handleScroll()}
-  window.addEventListener('scroll',listener)
-  var backToTop = backToTopNode[0]
-  backToTop.addEventListener('click', function(){
+  var listener = function(){ handleScroll(false, backToTopNode) }
+  blogNode.on('scroll',listener)
+  backToTopNode.on('click', function(){
     if (data.showBackTop) {
       data.showBackTop = false
       // 移除scroll事件
-      window.removeEventListener('scroll', listener)
+      blogNode.unbind('scroll', listener)
       // 滚回顶部,添加一个回调函数
-      Aurora.utils.scrollSmoothTo(0, hiddenBcakToTop);
+      Aurora.utils.scrollSmoothTo(0, '#blog', hiddenBcakToTop);
     }
   })
+ /**
+   * 隐藏挂件，同时添加windows的scroll事件
+   */
+  function hiddenBcakToTop() {
+    var backToTopNode = $('.back-to-top')
+    backToTopNode.css('top', '-1200px');
+    // 添加滚动事件
+    $('#blog').on('scroll', listener)
+  }
+}
+
   /** 
    * 处理windows的滚动事件
   */
-  function handleScroll(forced) {
+  function handleScroll(forced, backToTopNode) {
     var now = new Date()
     if (now - data.lastScroll <= 100 && !forced ) return
     if (!forced) {
       // 尾更新 task
       clearTimeout(data.scrollTimer)
       data.scrollTimer = setTimeout(() => {
-        handleScroll(true)
+        handleScroll(true, backToTopNode)
       }, 1000)
     }
     data.lastScroll = now
     var clientHeight = document.documentElement.clientHeight
-    var pageYOffset = window.pageYOffset
+    var pageYOffset = document.documentElement.scrollTop || document.body.scrollTop || document.getElementById('blog').scrollTop
     // 判断位置，控制滚动到顶部
     var showBackTop = pageYOffset >= 200
     if (showBackTop !== data.showBackTop || data.clientHeight !== clientHeight) {
@@ -489,22 +501,12 @@ if (backToTopNode.length) {
       data.clientHeight = clientHeight
       // 为true 是 可见 为flase时 收起
       if (data.showBackTop) {
-        backToTop.style.top = '-40px'
+        backToTopNode.css('top', '-40px');
       } else {
-        backToTop.style.top = '-1200px' 
+        backToTopNode.css('top', '-1200px');
       }
     }
   }
-  /**
-   * 隐藏挂件，同时添加windows的scroll事件
-   */
-  function hiddenBcakToTop() {
-    var backToTop = document.getElementsByClassName('back-to-top')[0]
-    backToTop.style.top = '-1200px'
-    // 添加滚动事件
-    window.addEventListener('scroll', listener)
-  }
-}
 
 /** 
  * 顶端进度条

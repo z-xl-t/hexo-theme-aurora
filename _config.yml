@@ -128,11 +128,11 @@ backToTop:
 
 # 顶部进度条
 progressBar: 
-  enable: true
+  enable: false
 
 # 点击页面的烟火效果
 fireworks:
-  enable: true
+  enable: false
 
 
 # 图文模式 建议默认背景颜色是默认图片的主色
