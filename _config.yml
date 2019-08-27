@@ -24,7 +24,7 @@
 
 # 主标题、副标题、作者、头像、网站图标
 title: 椎咲良田
-subtitle: 
+subtitle: 快走吧，趁风停止之前
 author: 椎咲良田
 avatar: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
 favicon: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
@@ -33,26 +33,42 @@ favicon: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
 # 但是icon只有那么几个(fontello.styl)
 menu:
   home:
+    enable: true
     name: 首页
     url: /
     icon: icon-home
   archives:
+    enable: true
     name: 归档
     url: /archives/
     icon: icon-archives
   categories:
+    enable: true
     name: 分类
     url: /categories/
     icon: icon-categories
   tags:
+    enable: true
     name: 标签
     url: /tags/
     icon: icon-tags
+  books:
+    enable: true
+    name: 书单
+    url: /books/
+    icon: icon-books
+  inspiration:
+    enable: true
+    name: 灵感
+    url: /inspiration/
+    icon: icon-inspiration
   friends:
+    enable: true
     name: 友链
     url: /friends/
     icon: icon-friends
   about:
+    enable: true
     name: 关于
     url: /about/
     icon: icon-about
@@ -69,6 +85,12 @@ quotes:
   tags:
     enable: true
     quote: 列卒周匝，星罗云布
+  books:
+    enable: true
+    quote: 吾生也有涯，而知也无涯
+  inspiration:
+    enable: true
+    quote: 欲言又止，止言又欲
   friends:
     enable: true
     quote: 青青子衿，悠悠我心
@@ -83,7 +105,7 @@ footer:
   enable: true
   since: 2018
   title: 椎咲良田
-  subtitle: 昨日、今日、明日
+  subtitle: 快走吧，趁风停止之前
 
 # 顶部边框颜色和标签颜色设置
 # num为颜色数目
@@ -116,11 +138,11 @@ categories:
       avatar: https://i.loli.net/2019/02/24/5c71bf0544b21.jpg
       desc: 
 
-
-# 背景图片 
+## 网站的背景图片
 background:
   enable: true
   imageUrl: https://i.loli.net/2019/02/24/5c71bf05ea594.jpg
+
 
 # 回到顶部挂件
 backToTop:

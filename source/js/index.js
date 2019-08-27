@@ -374,7 +374,7 @@ if ($.support.pjax) {
         pjaxLoading.fadeOut();
       }, 400)
       setTimeout(function(){
-        pjaxContainer.css('display', 'block');
+        pjaxContainer.css('display', 'flex');
       }, 600)
       Aurora.leanCloud.startHot()
       Aurora.markdown.handleMarkdownImg()
@@ -405,7 +405,7 @@ if ($.support.pjax) {
         pjaxLoading.fadeOut();
       }, 400)
       setTimeout(function(){
-        pjaxContainer.css('display', 'block');
+        pjaxContainer.css('display', 'flex');
       }, 600)
       Aurora.leanCloud.startHot()
       Aurora.markdown.handleMarkdownImg()

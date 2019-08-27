@@ -4,10 +4,10 @@
       <%
         var s = 'c-' + (i % theme.themeColors.num  + 1)
         var c = theme.themeColors.colors[s]
-        var str = 'border-top-color: ' + c + ';'
+        var colorStr = 'color: ' + c + ';'
       %>
     <% } %>
-    <li style="<%- str %>">
+    <li style="<%- colorStr %>">
       <a class="pjax-a-page" href="<%- url_for(post.path) %>"></a>
       <div class="post-body">
         <%- partial('post/title.ejs', {post: post}) %>

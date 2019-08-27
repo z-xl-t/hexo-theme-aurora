@@ -60,7 +60,11 @@
 
 ### 页面篇
 
-将`/aurora/page/`下的所有文件，复制到`blog/source/`中。具体字段请看各文件的说明，其中`categories`和`tags`内的文件可以不做更改。
+将`/aurora/page/`下的所有文件，复制到`blog/source/`中。具体字段请看各文件的说明。
+
+`categories`和`tags`内的文件可以不做更改。
+
+`CNAME` 文件的内容需要改成自己的域名。
 
 ### 其他
 

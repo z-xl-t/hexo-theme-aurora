@@ -1,9 +1,14 @@
 .about
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   .content
-    .header
+    flex: 1;
+    .about-me
       margin: 0.16rem 0;
       display: flex;
       justify-content: flex-start;
+      align-items: center;
       .avatar-wrapper
         margin-left: 0.16rem;
         width: 1rem;
@@ -25,19 +30,18 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        line-height: 1.8
-        .name, .sign
-          font-size: 0.2rem;
+        line-height: 1.8;
         .icon
-          margin-right: 0.03rem;
+          margin-right: 1em;
     .contact
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
       margin-top: 0.16rem;
       a
         flexCenter()
-        margin: 0.3rem;
+        margin: 0 .3rem;
         width: 0.54rem;
         height 0.54rem;
         border-radius: 50%;

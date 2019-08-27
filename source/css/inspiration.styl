@@ -1,0 +1,65 @@
+.inspiration
+  flex: 1;
+  .content
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: .16rem;
+    .inspiration-list
+      li
+        margin-top: .16rem;
+        padding: .14rem .16rem;
+        border-top: 2px solid currentColor;
+        text-align: justify;
+        position: relative;
+        line-height: 1.6;
+        transition: all 0.25s ease 0s, transform 0.6s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+        &:hover
+          transform: translateY(-6px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 6px 6px rgba(0,0,0,0.24);
+        &.card
+          overflow: visible;
+        .time-wrapper
+          position: relative;
+          top: 0;
+          left: -0.32rem;
+          display: inline-block;
+          margin-bottom: .1rem;
+          padding: 0 .14rem 0 .32rem;
+          height: .32rem;
+          line-height: .32rem;
+          border-radius: 0 3px 3px 0;
+          color: currentColor;
+          background: currentColor;
+          &:after
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 0;
+            height: 0;
+            background-color: transparent;
+            border-style: solid;
+            border-width: 0 .16rem .16rem 0;
+            border-color: transparent;
+            border-right-color: currentColor;
+            -webkit-filter: brightness(120%);
+            filter: brightness(120%);
+          .time
+            color: #fff;
+        .moment
+          margin: .12rem;
+        .img-wrapper
+          width: 50%;
+          margin: 0 auto;
+          text-align: center;
+          &:hover img
+            border-color: #b28fce;
+          img
+            max-width: 100%;
+            border-radius: 3px;
+            border: 6px solid transparent;
+            transition: all .3s ease-out;
+            background-color: #fff;
+          span
+            margin-top: .02rem;

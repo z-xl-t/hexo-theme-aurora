@@ -1,0 +1,55 @@
+<div class="inspiration card">
+    <%- partial('_partial/quote.ejs', {enable: theme.quotes.inspiration.enable, quote: theme.quotes.inspiration.quote}) %>
+  <div class="content">
+    <ul class="inspiration-list">
+      <% 
+        var maxShowMum = page.inspiration.maxShowMum || 0;
+        var currentIndex = 0
+      %>
+      <% for(var i in page.inspiration.inspirationList) {%> 
+        <%
+          currentIndex++;
+          var ins = page.inspiration.inspirationList[i];
+          var time = ins.time;
+          var moment = ins.moment;
+          var imgUrl = ins.imgUrl;
+          var imgDesc = ins.imgDesc;
+        %>
+        <% if(currentIndex <= maxShowMum ) {%>
+          <% if (theme.themeColors.enable){ %>
+            <%
+              var s = 'c-' + (currentIndex % theme.themeColors.num)
+              var c = theme.themeColors.colors[s]
+              var colorStr = 'color: ' + c + ';'
+            %>
+          <% } %>
+          <li class="card" style="<%= colorStr %>">
+            <% if(time) {%>
+              <span class="time-wrapper">
+                <span class="time"><%= time %></span>
+              </span>
+              
+            <%} %>
+            <% if(moment) {%>
+              <p class="moment"><%= moment %></p>
+            <%} %>
+            <% if(imgUrl) {%>
+              <div class="img-wrapper">
+                <img src="<%= imgUrl %>" alt>
+                <% if(imgDesc) {%>
+                    <span>◭ </span><span><%= imgDesc %></span>
+                <%} %>
+              </div>
+            <%} %>
+          </li>
+        <%} %>
+      <% } %>
+    </ul>
+    <div class="friends-post markdown">
+      <%- page.content %>
+    </div>
+  </div>
+</div>
+<% if (theme.gitalk.enable && page.comments != false){ %>
+  <%- partial('_partial/gitalk') %>
+<% } %>

@@ -2,7 +2,7 @@
 <div class="about card">
   <%- partial('_partial/quote.ejs', {enable: theme.quotes.about.enable, quote: theme.quotes.about.quote}) %>
   <div class="content">
-    <div class="header">
+    <div class="about-me">
       <% if (page.avatar || theme.avatar){ %>
         <%
           var avatar = page.avatar || theme.avatar || ''
@@ -14,23 +14,35 @@
       <div class="info">
         <% if (page.name || theme.title){ %>
           <%
-            var name = page.name || theme.title || ''
+            var name = page.name || theme.title || '';
           %>
           <div class="name"><i class="icon icon-fort-awesome"></i><%= name %></div>
         <% } %>
         <% if (page.sign || theme.subtitle){ %>
           <%
-            var sign = page.sign || theme.subtitle || ''
+            var sign = page.sign || theme.subtitle || '';
           %>
           <div class="sign"><i class="icon icon-pagelines"></i><%= sign %></div>
+        <% } %>
+        <% if (page.graduation){ %>
+          <%
+            var graduation = page.graduation|| '';
+          %>
+          <div class="graduation"><i class="icon icon-graduation"></i><%= graduation %></div>
+        <% } %>
+        <% if (page.profession){ %>
+          <%
+            var profession = page.profession || '';
+          %>
+          <div class="profession"><i class="icon icon-profession"></i><%= profession %></div>
         <% } %>
       </div>
     </div>
     <div class="contact">
       <% for (var i in page.contact){ %>
         <% 
-          var icon = page.contact[i].icon || ' '
-          var link = page.contact[i].link || ' '
+          var icon = page.contact[i].icon || '';
+          var link = page.contact[i].link || '';
         %>
         <a href="<%= link %>" target="_blank">
           <img src="<%= icon %>">
