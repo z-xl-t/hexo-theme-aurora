@@ -6,7 +6,9 @@
           <% if (site.tags.length === 0 ){ %>
             <li class="message"><span>暂无标签</span></li>
           <% } else { %>
-            <%- partial('_partial/tags-header.ejs', {pjaxClass: 'pjax-a-content'}) %>
+            <div class="layout-content">
+              <%- partial('_partial/tags-header.ejs', {pjaxClass: 'pjax-a-content'}) %>
+            </div>
           <% } %>
         </div>
       </div>

@@ -7,11 +7,13 @@
             <li class="message"><span>暂无标签</span></li>
           </div>
         <% } else { %>
-          <div class="layout-content">
-            <%- partial('_partial/tags-header.ejs',  {pjaxClass: 'pjax-a-content'}) %>
+          <div>
+            <div class="layout-content">
+              <%- partial('_partial/tags-header.ejs',  {pjaxClass: 'pjax-a-content'}) %>
+            </div>
+            <%- partial('_partial/short-post.ejs', {posts: page.posts}) %>
+            <%- partial('_partial/pagination.ejs', {pjaxClass: 'pjax-a-content'}) %>
           </div>
-          <%- partial('_partial/short-post.ejs', {posts: page.posts}) %>
-          <%- partial('_partial/pagination.ejs', {pjaxClass: 'pjax-a-content'}) %>
         <% } %>
       </div>
   </div>
