@@ -14,59 +14,27 @@
 
 网站：[椎咲良田](https://sanshiliuxiao.top)
 
-## 主题功能
+## 时间线
 
-* pjax 页面加载更迅速
-* gitalk 博客留言
-* Aplayer 播放器
-* leancloud 访问来源 & 文章热度
-* 点击花火效果
-* 顶部进度条效果
-* 返回顶部挂件
-* 其他
+2019-11-23：再次重构主题。
 
+2019-09-05：不断添加主题功能，主题趋于稳定。
+
+2019-04-20：主题重构完成。
+
+2019-03-18：第一次重构主题。
+
+2019-02-17：主题移植。
 
 ## 食用指南
 
+待重新完善
+
 ### 配置篇
-
-0. 假设已经在本地生成了一个hexo博客站点，目录名为`blog`。
-
-1. 下载好`hexo-theme-aurora`主题，解压、改名为`aurora`放入`blog/themes`目录。
-
-2. 站点配置文件修改，只提供最小化修改，其他配置请参考官方文档[hexo](https://hexo.io/zh-cn/docs/index.html)
-
-   ```
-   # blog/_config.yml
-   
-   ## 这个是必须要关闭的，不然就会使用 hexo 默认的代码高亮模式
-   height:
-   	enable: false
-   
-   themes: aurora
-   ```
-
-3. 主题配置文件修改，参考`/aurora/_config.yml`的各项说明。
-
-4. 修改`blog/scaffolds/post.md`，这样不必每次手动在文章顶部添加[`Front-matter`](https://hexo.io/zh-cn/docs/front-matter)字段
-
-   ```
-   title: {{ title }}
-   date: {{ date }}
-   tags:
-   categories:
-   imageUrl: 
-   ```
 
 ### 页面篇
 
-将`/aurora/page/`下的所有文件，复制到`blog/source/`中。具体字段请看各文件的说明。
-
-`categories`和`tags`内的文件可以不做更改。
-
-`CNAME` 文件的内容需要改成自己的域名。
-
-### 其他
+## 其他
 
 欢迎提 ISSUES，欢迎 PR。
 
