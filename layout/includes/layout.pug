@@ -1,0 +1,31 @@
+
+- var pageTitle = theme.title || ''
+- var pageDescription = page.description || theme.title + theme.subtitle || ''
+- var pageAuthor = theme.author || ''
+- var pageCopyright = theme.author || ''
+
+doctype html
+html(lang='ZH-CN')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no,viewport-fit=cover")
+    meta(name="description" content=pageDescription)
+    meta(name="author" content=pageAuthor)
+    meta(name="copyright" content=pageCopyright)
+    title= pageTitle
+    if theme.css !== undefined && theme.css.length > 0
+      each url in theme.css 
+        link(rel='stylesheet', href=url_for(url) + '?version=' + version())
+  body
+    header
+      include header.pug
+    .main
+        block content
+          h2 世界并不美丽，却也因此而美丽
+    footer
+      include footer.pug
+    if theme.js !== undefined && theme.js.length > 0
+      each url in theme.js 
+        script(src=url_for(url) + '?version=' + version())
+

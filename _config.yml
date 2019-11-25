@@ -1,0 +1,32 @@
+#========================================
+#           站点功能【必需】
+#       请不要更改前面的关键字
+# ========================================
+
+#========================================
+# 涉及 avatar favicon bg 之类的图片参数
+# 参照下例
+# 外链形式（推荐）
+# avatar: https://xxx.jpg
+# 站内相对链接，需要提前将图片
+# 放入source/images文件夹下
+# avatar: /images/yyy.png
+# 涉及color 之类的设置
+# 参照下例，支持 hex、rgb、rgba、hsl、hsla
+# 需要引号引起来
+# c-1: '#B28FCE'
+# c-2: 'rgb(233, 224, 207)'
+#========================================
+
+# 主标题、副标题、作者、头像、网站图标
+title: 椎咲良田
+subtitle: 快走吧，趁风停止之前
+author: 椎咲良田
+avatar: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
+favicon: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
+
+css:
+  - /css/index.css
+js:
+  - /js/utils.js
+  - /js/index.js
