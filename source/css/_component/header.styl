@@ -1,0 +1,84 @@
+.header
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  +pc-layout()
+    padding: 50px 0;
+  +sp-layout()
+    padding: 40px 0;
+    color: white;
+    background-image: $mobile-header-bg;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+  .title, .subtitle
+    font-family: GuDianMingChaoTi;
+    letter-spacing: 4px;
+    +pc-layout()
+      animation: fadeInDown 0.5s ease-out forwards;
+    +sp-layout()
+      animation: fadeInDown 0.5s ease-out forwards;
+  
+  .title
+    transition: color 0.3s ease-out;
+    +pc-layout()
+      font-size: 48px;
+      line-height: 60px;
+      &:hover
+        color: $link-color;
+    +sp-layout()
+      font-size: 44px;
+      line-height: 56px;
+ 
+
+  .subtitle
+    +pc-layout()
+      font-size: 22px;
+      line-height: 32px;
+    +sp-layout()
+      font-size: 20px;
+      line-height: 30px;
+
+  .menu
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    overflow: hidden;
+    +pc-layout()
+      padding 0 32px;
+      height: 60px;
+      background-color: $bg-dark;
+      box-shadow: 0 0 10px $bg-dark-dim inset;
+      transition: all 0.5s ease;
+      animation: fadeIn 0.5s ease-out;
+      &:hover {
+        border-radius: 30px;
+      }
+    +sp-layout()
+      width: 100%;
+      height: 56px;
+      transform: translateY(40px);
+      text-shadow: 0 0 1px $bg-dark-dim;
+      box-shadow: 0 -1px 2px $bg-dark;
+      background-color: rgba(25, 24, 35, 0.3);
+    .menu-item
+      width: 50px;
+      transition: color 0.3s ease;
+      +pc-layout()
+        font-size: $font-size-large;
+        &:hover
+          color: $link-color;
+      +sp-layout()
+        font-size: $font-size-normal;
+      li
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+

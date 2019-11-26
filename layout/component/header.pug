@@ -1,0 +1,10 @@
+.header
+  h1(class="title")= theme.title
+  h2(class="subtitle")= theme.subtitle
+  nav.menu
+      each item in theme.menu
+        if item.enable
+          a(class="menu-item" href=url_for(item.url))
+            li
+              i(class=item.icon)
+              span= item.name

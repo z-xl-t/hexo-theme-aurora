@@ -1,0 +1,33 @@
+pc-layout()
+  @media screen and (min-width: 768px)
+    {block}
+
+sp-layout()
+  @media screen and (max-width: 767px)
+    {block}
+
+/* 鼠标样式 */
+cursor($imgUrl)
+  cursor: $imgUrl, auto !important;
+
+/* 自定义滚动条 */
+scrollBar()
+  ::-webkit-scrollbar
+    width: 5px;
+    height: 5px;
+    background-color: transparent;
+  ::-webkit-scrollbar-thumb
+    border-radius: 3px;
+    background-color: #986db2;
+    background-image: -webkit-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.4) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.4) 75%,
+      transparent 75%,
+      transparent
+    );
+  ::-webkit-scrollbar-track
+    background-color: #e2dfdf;

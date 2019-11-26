@@ -1,5 +1,10 @@
 extends includes/layout.pug
 
 block content
-  .index 首页
+  .index
+    each onePost in page.posts.data
+      a(href=url_for(onePost.path))
+        .post-title= onePost.title
+    include component/pagination.pug
+
 

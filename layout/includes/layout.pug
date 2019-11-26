@@ -14,18 +14,17 @@ html(lang='ZH-CN')
     meta(name="author" content=pageAuthor)
     meta(name="copyright" content=pageCopyright)
     title= pageTitle
-    if theme.css !== undefined && theme.css.length > 0
-      each url in theme.css 
-        link(rel='stylesheet', href=url_for(url) + '?version=' + version())
+    link(rel="shortcut icon", href=url_for(theme.favicon), type="image/x-icon")
+    link(rel="stylesheet", href=url_for('/css/index.css') + '?version=' + version())
+    link(rel="stylesheet", href=url_for('/font/fontello.css') + '?version=' + version())
   body
-    header
-      include header.pug
-    .main
+    .layout
+      header
+        include ../component/header.pug
+      main
         block content
           h2 世界并不美丽，却也因此而美丽
-    footer
-      include footer.pug
-    if theme.js !== undefined && theme.js.length > 0
-      each url in theme.js 
-        script(src=url_for(url) + '?version=' + version())
-
+      footer
+        include ../component/footer.pug
+    script(src=url_for('/js/utils.js') + '?version=' + version())
+    script(src=url_for('/js/index.js') + '?version=' + version())

@@ -1,0 +1,8 @@
+.pagination
+  ul
+    if page.prev
+      li.prev
+        a(href=url_for(page.prev_link)) Prev
+    if page.next
+       li.prev
+        a(href=url_for(page.next_link)) Next

@@ -19,14 +19,62 @@
 #========================================
 
 # 主标题、副标题、作者、头像、网站图标
-title: 椎咲良田
-subtitle: 快走吧，趁风停止之前
-author: 椎咲良田
+title: 蝉時雨
+subtitle: "蝉鸣如雨 花宵道中"
+author: 蝉時雨
 avatar: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
 favicon: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
 
-css:
-  - /css/index.css
-js:
-  - /js/utils.js
-  - /js/index.js
+# 导航栏 
+# 如果不需要某个导航，可以将 enable 置为 false 或 删除
+# icon只有那么几个 在 fontello.styl 中
+menu:
+  index:
+    enable: true
+    name: 首页
+    url: /
+    icon: icon-index
+  archives:
+    enable: true
+    name: 归档
+    url: /archives/
+    icon: icon-archives
+  categories:
+    enable: true
+    name: 分类
+    url: /categories/
+    icon: icon-categories
+  tags:
+    enable: true
+    name: 标签
+    url: /tags/
+    icon: icon-tags
+  books:
+    enable: true
+    name: 书单
+    url: /books/
+    icon: icon-books
+  inspiration:
+    enable: true
+    name: 灵感
+    url: /inspiration/
+    icon: icon-inspiration
+  friends:
+    enable: true
+    name: 友链
+    url: /friends/
+    icon: icon-friends
+  about:
+    enable: true
+    name: 关于
+    url: /about/
+    icon: icon-about
+
+# 底部的信息设置 
+# since 为起始年，可选
+# (sub)title，可选
+footer:
+  enable: true
+  since: 2018
+  title: 椎咲良田
+  subtitle: 快走吧，趁风停止之前

@@ -1,0 +1,16 @@
+.footer.site-info
+  if theme.footer.enable
+    p
+      i.icon-copyright
+      - var current = date(Date.now(), 'YYYY')
+      span= theme.footer.since || current - 1
+      != "&minus;"
+      span= current
+      != "&nbsp;&nbsp;&nbsp;"
+      i.icon-heart
+      != "&nbsp;&nbsp;"
+      span= theme.footer.title || theme.title
+    p
+      a(href="https://github.com/sanshiliuxiao/hexo-theme-aurora.git" target="_blank") hexo-theme-Aurora
+      != "&nbsp; | &nbsp;"
+      = theme.footer.subtitle || theme.subtitle 
