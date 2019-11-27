@@ -1,10 +1,37 @@
 extends includes/layout.pug
 
+include mixins/post/index.pug
+
 block content
   .index
-    each onePost in page.posts.data
-      a(href=url_for(onePost.path))
-        .post-title= onePost.title
+    .content
+      each post in page.posts.data
+        article
+          .post
+            .post-header
+              +post-image(post.image, theme.defaultPostImage)
+              .post-head
+                if post.title
+                  +post-title(3, post.title)
+                if post.imageSource
+                  +post-image-source(post.imageSource)
+            if post.describe
+              .post-body
+                +post-describe(post.describe)
+            .post-meta
+              if post.date
+                +post-date(post.date)
+              // 临时占位 热度 访问，还需要 LeanCloud 支持
+              if post
+                +post-hot(post)
+              if post.tags
+                +post-tags(post.tags)
+              if post.categories
+                +post-categories(post.categories)
+          a.post-link(href=url_for(post.path))
+        
+
+        
     include component/pagination.pug
 
 

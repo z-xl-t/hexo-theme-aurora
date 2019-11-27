@@ -1,8 +1,7 @@
 {
   "name": "hexo-theme-aurora",
   "version": "2.0.0",
-  "description": "hexo theme hexo-theme-aurora",
-  "main": "index.js",
+  "description": "hexo-theme-aurora",
   "repository": "git@github.com:sanshiliuxiao/hexo-theme-aurora.git",
   "author": "sanshiliuxiao@foxmail.com <sanshiliuxiao@foxmail.com>",
   "license": "MIT"

@@ -1,0 +1,54 @@
+mixin post-image(postImage, postDefaultImage)
+  if postImage
+    img.default-image(src=postDefaultImage style={opacity: '0'})
+  else
+    img.default-image(src=postDefaultImage)
+  img.post-image(src=postImage)
+
+mixin post-title($level, postTitle)
+  -var level = $level || 1
+  case level
+    when 1
+      h1.post-title= postTitle
+    when 2
+      h2.post-title= postTitle
+    when 3
+      h3.post-title= postTitle
+    default
+      p.post-title= postTitle
+
+mixin post-image-source(postImageSource)
+  span.post-image-source= postImageSource
+
+//- 在 dateTime 中放入时间， 之后考虑用 timeago.js 进行操作
+mixin post-date(postDate)
+  span.post-date
+    i.icon-calendar
+    span.date.timeago(datetime=postDate)= date(postDate, 'YYYY-MM-DD')
+
+//- post-hot 只是一个占位符，具体数据需要通过 js 进行操作
+mixin post-hot(post)
+  span.post-hot
+    i.icon-fire
+    span.leancloud_visitors(id=leancloud_visitors  data-flag-title=post.title)
+      = '热度 '
+      span.leancloud-visitors-count 0
+      = ' ℃'
+
+mixin post-tags(postTags)
+  span.post-tags
+    i.icon-tag
+    - postTags.data.forEach(function(tag, index) {
+      span.tag= tag.name
+    - })
+
+mixin post-categories(postCategories)
+  span.post-categories
+    i.icon-bookmark-empty
+    - postCategories.data.forEach(function(category, index) {
+      span.category= category.name
+    - })
+
+mixin post-describe(postDescribe)
+  p.post-describe
+    span= postDescribe

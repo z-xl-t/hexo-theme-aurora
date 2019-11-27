@@ -31,3 +31,41 @@ scrollBar()
     );
   ::-webkit-scrollbar-track
     background-color: #e2dfdf;
+
+/* clip条 */
+clip()
+  color: white;
+  text-transform: capitalize;
+  background-image: linear-gradient(to right, $text-clip-start 10%, $text-clip-center 40%, $text-clip-end 70%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  animation: textclip 3s linear infinite;
+
+/* 卡片轮廓 */
+card()
+  border-radius: 3px;
+  background-color: $bg-white-deep;
+  +pc-layout()
+    box-shadow: $card-shadow-base;
+  +sp-layout()
+    box-shadow: $card-shadow-light;
+
+card-lignt()
+  border-radius: 3px;
+  background-color: $bg-white-dim;
+  box-shadow: $card-shadow-light;
+  transition: $transition-base;
+  +pc-layout()
+    &:hover
+      transform: translateY(-4px);
+      box-shadow: $card-shadow-light-hover;
+
+card-page()
+  border-radius: 3px;
+  +pc-layout()
+    background-color: $bg-white-dim;
+    box-shadow: $card-shadow-base;
