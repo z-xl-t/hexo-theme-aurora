@@ -3,20 +3,30 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  position: relative;
   +pc-layout()
     padding: 50px 0;
   +sp-layout()
     margin-bottom: 4%;
     padding: 40px 0;
     color: white;
-    background-image: $mobile-header-bg;
-    background-size: cover;
+  .sp-bg
+    fillParent(absolute, $zIndex-bottom)
     background-position: bottom;
     background-repeat: no-repeat;
-
+    +pc-layout()
+     background-size: 0%;
+    +sp-layout()
+      background-color: #cfd0f8;
+      background-size: cover;    
+      &::after
+        content: '';
+        fillParent(absolute, $zIndex-0)
+        background-color: hsla(0,0%,100%,.4);
   .title, .subtitle
-    font-family: GuDianMingChaoTi;
+
+    font-family: $font-family-base;
+    font-weight: 400;
     letter-spacing: 4px;
     +pc-layout()
       animation: fadeInDown 0.5s ease-out forwards;
@@ -36,6 +46,8 @@
  
 
   .subtitle
+    font-family: $font-family-base;
+    font-weight: normal;
     +pc-layout()
       font-size: 22px;
       line-height: 32px;

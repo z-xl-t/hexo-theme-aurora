@@ -1,6 +1,6 @@
 extends includes/layout.pug
 
-include mixins/post/index.pug
+include mixins/post.pug
 
 block content
   .index
@@ -9,7 +9,7 @@ block content
         article
           .post
             .post-header
-              +post-image(post.image, theme.defaultPostImage)
+              +post-image(post.image, theme.PostImage)
               .post-head
                 if post.title
                   +post-title(3, post.title)
@@ -28,10 +28,8 @@ block content
                 +post-tags(post.tags)
               if post.categories
                 +post-categories(post.categories)
-          a.post-link(href=url_for(post.path))
-        
+            a.post-link(href=url_for(post.path))
 
-        
     include component/pagination.pug
 
 

@@ -1,9 +1,3 @@
-@font-face {
-  font-family: GuDianMingChaoTi;
-  font-weight: bold;
-  src: url('../font/GuDianMingChaoTi.ttf');
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -71,6 +65,7 @@ button
 html, body, .layout
   height: 100%;
   min-height: 100%;
+  font-family: $font-family-base;
   scrollBar();
 
 .layout
@@ -78,6 +73,21 @@ html, body, .layout
   flex-direction: column;
   justify-content: space-between;
   cursor($cursor-img);
+  .pc-bg
+    fillParent(fixed, $zIndex-bottom)
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    +pc-layout()
+      background-size: cover;
+    +sp-layout()
+      background-color: #cfd0f8;
+      background-size: 0;
+    &::after
+      content: '';
+      fillParent(absolute, $zIndex-0)
+      background-color: rgba(255,255,255,0.65);
+ 
   & > *
     flex-shrink: 0;
   header
@@ -87,4 +97,18 @@ html, body, .layout
     margin: 0 auto;
     max-width: 876px;
   footer
-    min-height: 54px;
+    min-height: 80px;
+  .back-to-top
+    position: fixed;
+    top: -1200px;
+    right: 0.25rem;
+    width: 70px;
+    height: 100%;
+    z-index: 99;
+    opacity: 1;
+    transition: all 0.6s ease-out;
+    background: $backToTop-bg no-repeat top;
+    background-size: contain;
+    animation: float 3s linear infinite;
+    +sp-layout()
+      display: none;

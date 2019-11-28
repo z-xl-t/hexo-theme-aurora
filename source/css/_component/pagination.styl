@@ -1,0 +1,63 @@
+.pagination
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  flexCenter()
+  margin-top: 12px auto;
+  .pagination-content
+    flexCenter()
+    .prev, .next
+      width: 100px;
+      height: 50px;
+      margin: 20px;
+      position: relative;
+      flex: 1;
+      line-height: 50px;
+      flexCenter()
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.24);
+      transition: all 0.25s ease-out;
+      text-shadow: 0 1px 1px #b28fce;
+      .rect
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        bottom: -8px;
+        right: -8px;
+        z-index: -1;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        background: transparent;
+      a
+        fillParent(absolute, $zIndex-0)
+        flexCenter()
+        background: transparent;
+        &::before
+          content: '';
+          fillParent(absolute, $zIndex-bottom)
+          flexCenter()
+          background: rgba(152, 109, 178, 0.66);
+          color: #fff;
+          transform: scaleX(0);
+          transition: all 0.25s ease-out;
+      &:hover
+        &.prev
+          transform: translate(0, 2px);
+        &.next
+          transform: translate(0, 2px);
+        & a
+          color: #fff;
+          &::before
+            transform: scaleX(1);
+        & .rect
+          border-color: #b28fce;
+    .prev
+      a
+        &::before
+          transform-origin: bottom right;
+    .next
+      a
+        &::before
+          transform-origin: bottom left;
+          
+
+

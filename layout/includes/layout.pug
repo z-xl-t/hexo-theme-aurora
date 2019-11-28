@@ -17,8 +17,10 @@ html(lang='ZH-CN')
     link(rel="shortcut icon", href=url_for(theme.favicon), type="image/x-icon")
     link(rel="stylesheet", href=url_for('/css/index.css') + '?version=' + version())
     link(rel="stylesheet", href=url_for('/font/fontello.css') + '?version=' + version())
+    link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
   body
     .layout
+      .pc-bg(style={'background-image': "url(" + url_for(theme.pcImage) + ")"})
       header
         include ../component/header.pug
       main
@@ -26,5 +28,10 @@ html(lang='ZH-CN')
           h2 世界并不美丽，却也因此而美丽
       footer
         include ../component/footer.pug
-    script(src=url_for('/js/utils.js') + '?version=' + version())
-    script(src=url_for('/js/index.js') + '?version=' + version())
+      
+      if theme.backToTop.enable
+        span.back-to-top
+    //- 引入 js
+    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/timeago.min.js', '/js/index.js']
+    each item in js
+      script(src=src=url_for(item) + '?version=' + version())

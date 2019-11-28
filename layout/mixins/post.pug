@@ -1,9 +1,9 @@
 mixin post-image(postImage, postDefaultImage)
   if postImage
-    img.default-image(src=postDefaultImage style={opacity: '0'})
+    img.default-image(src=url_for(postDefaultImage) style={opacity: '0'})
+    img.post-image(src=url_for(postImage))
   else
-    img.default-image(src=postDefaultImage)
-  img.post-image(src=postImage)
+    img.default-image(src=url_for(postDefaultImage))
 
 mixin post-title($level, postTitle)
   -var level = $level || 1

@@ -69,3 +69,26 @@ card-page()
   +pc-layout()
     background-color: $bg-white-dim;
     box-shadow: $card-shadow-base;
+
+/* 绝对/固定 定位， 宽高占满父元素 */
+
+fillParent($typeof,$zIndex)
+  position: $typeof;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zIndex;
+
+/* 居中 主轴水平 */
+flexCenter()
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+/* 居中 主轴竖直 */
+flexColumnCenter()
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;

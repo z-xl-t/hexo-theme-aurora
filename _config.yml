@@ -19,9 +19,9 @@
 #========================================
 
 # 主标题、副标题、作者、头像、网站图标
-title: 蝉時雨
-subtitle: 蝉鸣如雨 花宵道中
-author: 蝉時雨
+title: 椎咲良田
+subtitle: "快走吧 趁风停止之前"
+author: 椎咲良田
 description: "世界并不美丽，却也因此而美丽"
 avatar: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
 favicon: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
@@ -78,9 +78,13 @@ footer:
   enable: true
   since: 2018
   title: 椎咲良田
-  subtitle: 快走吧，趁风停止之前
+  subtitle: "快走吧 趁风停止之前"
 
+# 背景图片 电脑页面 手机页面 文章页面
+pcImage: /images/pc.png
+spImage: /images/mobile.png
+PostImage: /images/postDefaultImage .png
 
-# 文章的默认图片
-
-defaultPostImage: /images/postDefaultImage .png
+# 回到顶部挂件
+backToTop:
+  enable: true
