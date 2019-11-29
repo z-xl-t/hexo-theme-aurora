@@ -18,13 +18,15 @@
 # c-2: 'rgb(233, 224, 207)'
 #========================================
 
-# 主标题、副标题、作者、头像、网站图标
+# 主标题、副标题、作者、网站描述、头像、网站图标、域名
 title: 椎咲良田
 subtitle: "快走吧 趁风停止之前"
 author: 椎咲良田
 description: "世界并不美丽，却也因此而美丽"
-avatar: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
-favicon: https://i.loli.net/2019/02/24/5c71bf051a8f2.jpg
+avatar: /images/avatar.jpg
+favicon: /images/favicon.jpg
+domain: sanshiliuxiao.top
+
 
 # 导航栏 
 # 如果不需要某个导航，可以将 enable 置为 false 或 删除
@@ -80,11 +82,40 @@ footer:
   title: 椎咲良田
   subtitle: "快走吧 趁风停止之前"
 
-# 背景图片 电脑页面 手机页面 文章页面
+# 背景图片(电脑页面/手机页面） 默认文章封面 加载图片
 pcImage: /images/pc.png
-spImage: /images/mobile.png
+mobileImage: /images/mobile.png
 PostImage: /images/postDefaultImage .png
+loadingImage: /images/loading.gif
+
+# 琉璃の空主题
+themeBackground:
+  enable: true
+  image:
+    - /images/theme/1.jpg
+    - /images/theme/2.jpg
+    - /images/theme/3.jpg
+    - /images/theme/4.jpg
+    - /images/theme/5.jpg
+    - /images/theme/6.jpg
+    - /images/theme/7.jpg
+    - /images/theme/8.jpg
+    - /images/theme/9.jpg
+
+
 
 # 回到顶部挂件
 backToTop:
   enable: true
+
+# 浏览次数(热度)/ 访问者来源
+# https://leancloud.cn 注册后得到 AppID and AppKey.
+# 第一次需要在leanclud 新建 两个 Class 分别是 Counter 和 Visitor 
+leancloud:
+  enable: true
+  appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
+  appKey: vi0TViY0HvYocUR3HxKGd1l9
+  counter:
+    enable: true
+  visitor:
+    enable: true

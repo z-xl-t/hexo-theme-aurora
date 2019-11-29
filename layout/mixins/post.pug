@@ -24,16 +24,16 @@ mixin post-image-source(postImageSource)
 mixin post-date(postDate)
   span.post-date
     i.icon-calendar
-    span.date.timeago(datetime=postDate)= date(postDate, 'YYYY-MM-DD')
+    span.date.timeago(datetime=postDate)
 
 //- post-hot 只是一个占位符，具体数据需要通过 js 进行操作
 mixin post-hot(post)
   span.post-hot
     i.icon-fire
-    span.leancloud_visitors(id=leancloud_visitors  data-flag-title=post.title)
-      = '热度 '
+    span.leancloud_visitors(id=url_for(post.path) data-flag-title=post.title)
+      = '热度'
       span.leancloud-visitors-count 0
-      = ' ℃'
+      = '℃'
 
 mixin post-tags(postTags)
   span.post-tags

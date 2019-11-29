@@ -1,78 +1,36 @@
+// 已经提前引入的库
+//  jquery.js
+//  timeage.js
+//  leancloud.js
+//  backstretch.js
+// pjax.js
 
-// 已经引入 jquery.js
-// 已经引入 timeage.js
+const ifExistNode = (selector) => $(selector).length !== 0
 
 
-const AuroraUtil = {
-
-  throttle(fn, wait, time) {
-    let previous = null //记录上一次运行的时间
-    let timer = null // 定时器
-    return () => {
-      const now = +new Date()
-      if (!previous) {
-        previous = now
-      }
-      //当上一次执行的时间与当前的时间差大于设置的执行间隔时长的话，就主动执行一次
-      if (now - previous > time) {
-        clearTimeout(timer)
-        fn()
-        previous = now
-      } else {
-        clearTimeout(timer)
-        timer = setTimeout(fn(), wait)
-      }
-    }
-  },
-  scrollSmoothTo(position, cb, scrollSelecter ="body") {
-    if (!window.requestAnimationFrame) {
-      window.requestAnimationFrame = function (callback, element) {
-        return setTimeout(callback, 17);
-      };
-    }
-    // 当前滚动高度
-    var scrollNode = window || document.querySelector(scrollSelecter);
-    var scrollTop =  document.documentElement.scrollTop || document.body.scrollTop || document.querySelector(scrollSelecter).scrollTop ;
-    // 滚动step方法
-    var step = function () {
-      // 距离目标滚动距离
-      var distance = position - scrollTop;
-      // 目标滚动位置
-      scrollTop = scrollTop + distance / 5;
-      if (Math.abs(distance) < 1) {
-        scrollNode.scrollTo(0, position);
-        cb()
-      } else {
-        scrollNode.scrollTo(0, scrollTop);
-        requestAnimationFrame(step);
-      }
-    }
-    step();
-  },
-}
-
+// 返回顶部功能
 const backToTop = {
   init() {
-    console.log('back to top init')
-    this.$window = $(window)
-    this.$backToTop = $('.back-to-top')
-    this.data = {
-      showBackTop: false,
-      topDistance: -950,
-      clientHeight: 0,
-      lastScroll: new Date(),
-      scrollTimer: ''
-    }
-    this.listener = () => this.handleScroll(false)
-    console.log($('.layout'), this.$window, this.$backToTop)
-    this.$window.scroll(this.listener)
-    this.$backToTop.on('click', () => {
-      if (this.data.showBackTop) {
-        this.data.showBackTop = false
-        this.$window.unbind('scroll', this.listener)
-        AuroraUtil.scrollSmoothTo(0, this.hiddenBcakToTop.bind(this))
+    if (ifExistNode('.back-to-top')) {
+      this.$window = $(window)
+      this.$backToTop = $('.back-to-top')
+      this.data = {
+        showBackTop: false,
+        topDistance: -950,
+        clientHeight: 0,
+        lastScroll: new Date(),
+        scrollTimer: ''
       }
-    })
+      this.listener = () => this.handleScroll(false)
+      this.$window.scroll(this.listener)
+      this.$backToTop.on('click', () => {
+        if (this.data.showBackTop) {
+          this.data.showBackTop = false
+          this.$window.unbind('scroll', this.listener)
+          this.scrollSmoothTo(0, this.hiddenBcakToTop.bind(this))
+        }
+      })
+    }
   },
 
   handleScroll(forced) {
@@ -105,16 +63,326 @@ const backToTop = {
   hiddenBcakToTop() {
     this.$backToTop.css('top', '-1200px')
     this.$window.scroll(this.listener)
+  },
+  scrollSmoothTo(position, cb, scrollSelecter = "body") {
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = function (callback, element) {
+        return setTimeout(callback, 17);
+      };
+    }
+    // 当前滚动高度
+    const scrollNode = window || document.querySelector(scrollSelecter);
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || document.querySelector(scrollSelecter).scrollTop;
+    // 滚动step方法
+    const step = () => {
+      // 距离目标滚动距离
+      const distance = position - scrollTop;
+      // 目标滚动位置
+      scrollTop = scrollTop + distance / 5;
+      if (Math.abs(distance) < 1) {
+        scrollNode.scrollTo(0, position);
+        cb()
+      } else {
+        scrollNode.scrollTo(0, scrollTop);
+        requestAnimationFrame(step);
+      }
+    }
+    step();
   }
-
 }
+// 格式化时间功能
 const formatTime = {
   init() {
-    timeago && timeago.render(document.querySelectorAll('.timeago'), 'zh_CN')
+    if (ifExistNode('.timeago')) {
+      timeago && timeago.render(document.querySelectorAll('.timeago'), 'zh_CN')
+      let timeNodes = document.querySelectorAll('.timeago')
+      timeNodes.forEach(item => {
+        item.textContent = item.textContent.replace(/\s/, '')
+      })
+    }
   }
 }
 
-$(function() {
+// 热度和访问者次数功能
+const leancloud = {
+  init() {
+    if (ifExistNode('.leancloud')) {
+      const appId = $('.leancloud-app-id').attr('leancloud-app-id')
+      const appKey = $('.leancloud-app-key').attr('leancloud-app-key')
+      AV.initialize(appId, appKey)
+      this.startHot()
+      this.startVisitor()
+    }
+  },
+  startHot() {
+    if (typeof AV === 'undefined') return
+    if (ifExistNode('.leancloud-app-hot')) {
+      const Counter = AV.Object.extend("Counter");
+      if ($('.post').length == 1 && $('.post-meta .post-hot').length == 1) {
+        this.addHot(Counter);
+      } else if ($('.post-meta .post-hot').length > 0) {
+        this.showHot(Counter);
+      }
+    }
+  },
+  addHot(Counter) {
+    const $visitors = $(".leancloud_visitors");
+    const url = $visitors.attr('id').trim();
+    const title = $visitors.attr('data-flag-title').trim();
+    const query = new AV.Query(Counter);
+    query.equalTo("url", url);
+    query.find({
+      success: function (results) {
+        if (results.length > 0) {
+          const counter = results[0];
+          counter.fetchWhenSave(true);
+          counter.increment("time");
+          counter.save(null, {
+            success: function (counter) {
+              const $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            },
+            error: function (counter, error) {
+              console.log('Failed to save Visitor num, with error message: ' + error.message);
+            }
+          });
+        } else {
+          const newcounter = new Counter();
+          /* Set ACL */
+          const acl = new AV.ACL();
+          acl.setPublicReadAccess(true);
+          acl.setPublicWriteAccess(true);
+          newcounter.setACL(acl);
+          /* End Set ACL */
+          newcounter.set("title", title);
+          newcounter.set("url", url);
+          newcounter.set("time", 1);
+          newcounter.save(null, {
+            success: function (newcounter) {
+              const $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+            },
+            error: function (newcounter, error) {
+              console.log('Failed to create');
+            }
+          });
+        }
+      },
+      error: function (error) {
+        console.log('Error:' + error.code + " " + error.message);
+      }
+    });
+  },
+  showHot(Counter) {
+    const query = new AV.Query(Counter);
+    const entries = [];
+    const $visitors = $(".leancloud_visitors");
+    $visitors.each(function () {
+      entries.push($(this).attr("id").trim());
+    });
+    query.containedIn('url', entries);
+    query
+      .find()
+      .done(function (results) {
+        const COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+        if (results.length === 0) {
+          $visitors.find(COUNT_CONTAINER_REF).text(0);
+          return;
+        }
+        for (let i = 0; i < results.length; i++) {
+          const item = results[i];
+          const url = item.get('url');
+          const time = item.get('time');
+          const element = document.getElementById(url);
+          $(element).find(COUNT_CONTAINER_REF).text(time);
+        }
+        for (let i = 0; i < entries.length; i++) {
+          const url = entries[i];
+          const element = document.getElementById(url);
+          const countSpan = $(element).find(COUNT_CONTAINER_REF);
+          if (countSpan.text() == '') {
+            countSpan.text(0);
+          }
+        }
+      })
+      .fail(function (object, error) {
+        console.log("Error: " + error.code + " " + error.message);
+      });
+  },  
+  startVisitor() {
+    if (typeof AV === 'undefined') return
+    if (ifExistNode('.leancloud-app-visitor')) {
+      const Visitor = AV.Object.extend("Visitor")
+      this.addVistor(Visitor)
+      this.showVistor(Visitor)
+    }
+    
+  },
+  addVistor(Visitor) {
+    const referrer = this.getLocation(document.referrer);
+    const hostname = referrer.hostname;
+    const query = new AV.Query(Visitor);
+    query.equalTo('referrer', hostname);
+    query
+      .find()
+      .done((results) => {
+        if (results.length > 0) {
+          // 存在则增加访问次数
+          const visitors = results[0];
+          visitors.fetchWhenSave(true);
+          visitors.increment("time");
+         
+          visitors.save(null, {
+            success: function () {},
+            error: function (visitors, error) {
+              console.log('Failed to save Visitor num, with error message: ' + error.message);
+            }
+          });
+        } else {
+          // 不存在则新增来访者
+          const newVisitor = new Visitor()
+          /* Set ACL */
+          const acl = new AV.ACL();
+          acl.setPublicReadAccess(true);
+          acl.setPublicWriteAccess(true);
+          newVisitor.setACL(acl);
+          newVisitor.set('referrer', hostname);
+          newVisitor.set('time', 1);
+          newVisitor.save(null, {
+            success: function (newVisitor) {
+              console.log('success')
+            },
+            error: function (newVisitor, error) {
+              console.log('Failed to create');
+            }
+          })
+        }
+      })
+      .fail((error) => {
+        console.log('Error:' + error.code + " " + error.message);
+      })
+    
+    query.equalTo('referrer', 'AllCount')
+    query.find()
+    .done((results) => {
+      if (results.length === 1) {
+          // 存在则增加访问次数
+          const visitors = results[0];
+          visitors.fetchWhenSave(true);
+          visitors.increment("time");
+         
+          visitors.save(null, {
+            success: function () {},
+            error: function (visitors, error) {
+              console.log('Failed to save Visitor num, with error message: ' + error.message);
+            }
+          });
+
+      } else {
+          // 不存在则新增来访者
+          const newVisitor = new Visitor()
+          /* Set ACL */
+          const acl = new AV.ACL();
+          acl.setPublicReadAccess(true);
+          acl.setPublicWriteAccess(true);
+          newVisitor.setACL(acl);
+          newVisitor.set('referrer', 'AllCount');
+          newVisitor.set('time', 1);
+          newVisitor.save(null, {
+            success: function (newVisitor) {
+              console.log('success')
+            },
+            error: function (newVisitor, error) {
+              console.log('Failed to create');
+            }
+          })
+      }
+    })
+    .fail((error) => {
+      console.log('Error:' + error.code + " " + error.message);
+    })
+  },
+  showVistor(Visitor) {
+    const query = new AV.Query(Visitor);
+    query.equalTo('referrer', 'AllCount')
+    query
+      .find()
+      .done((results) => {
+        if (results.length === 1) {
+          const time = results[0].get('time');
+          $('.visitor').text(time)
+        } else {
+          $('.visitor').text(1)
+        }
+      })
+
+  },
+  
+  getLocation(href){
+    // 转换访问来源地址
+    const a = document.createElement('a');
+    a.href = href;
+    return a
+  }
+}
+
+// 动态主题
+const dynamicBackground = {
+  init() {
+    if (ifExistNode('.pc-dynamic-bg')) {
+      const images = Array.from($('.pc-dynamic-bg .image')).map(item => {
+        return $(item).attr('data-image')
+      })
+      $('.pc-dynamic-bg').backstretch(images, {
+        duration: 10000,
+        alignY: 0,
+        transition: 'fade',
+        transitionDuration: 1000
+      })
+    }
+  }
+}
+
+// pjax 功能
+const pjax = {
+  init() {
+    if ($.support.pjax) {
+      this.$pjaxMainPage = $('.pjax-main-page')
+      this.$pjaxMainLoading = $('.pjax-main-loading')
+      this.$pjaxMainLink = $('.pjax-main-link')
+      this.pjaxMain()
+    }
+  },
+  pjaxMain() {
+    // 主页面的切换 如首页切换到归档页
+    $(document).pjax('.pjax-main-link', '.pjax-main-page', {
+      container: '.pjax-main-page',
+      fragment: '.pjax-main-page',
+      timeout: 8000
+    })
+    this.$pjaxMainPage.on('pjax:send', () => {
+      this.$pjaxMainPage.hide()
+      this.$pjaxMainLoading.fadeIn()
+    })
+    this.$pjaxMainPage.on('pjax:complete', () => {
+      
+      // 获取到的 pjax 的内容可能需要重新渲染
+      formatTime.init()
+      leancloud.startHot()
+
+      setTimeout(() => {
+        this.$pjaxMainPage.fadeIn()
+        this.$pjaxMainLoading.hide()
+      }, 500);
+    })
+  }
+}
+
+// 运行
+$(function () {
   backToTop.init()
   formatTime.init()
+  leancloud.init()
+  dynamicBackground.init()
+  pjax.init()
 })

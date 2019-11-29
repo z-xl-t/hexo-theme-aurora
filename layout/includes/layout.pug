@@ -9,29 +9,66 @@ html(lang='ZH-CN')
   head
     meta(charset='UTF-8')
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="referrer" content="no-referrer")
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no,viewport-fit=cover")
     meta(name="description" content=pageDescription)
     meta(name="author" content=pageAuthor)
     meta(name="copyright" content=pageCopyright)
+    meta(name="og:image" content=url_for(theme.avatar))
+    meta(name="og:type" content="website")
+    meta(name="og:site_name" content=theme.title)
+    meta(name="og:url" content=theme.domain)
+    meta(name="og：title" content=theme.title)
+    meta(name="og:description" content=theme.description)
+    <meta name="theme-color" content="#b854d4" />
     title= pageTitle
     link(rel="shortcut icon", href=url_for(theme.favicon), type="image/x-icon")
     link(rel="stylesheet", href=url_for('/css/index.css') + '?version=' + version())
     link(rel="stylesheet", href=url_for('/font/fontello.css') + '?version=' + version())
     link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
+    link(rel="canonical", href="//" + theme.domain)
+    link(rel="dns-prefetch", href="//cdn.jsdelivr.net")
   body
     .layout
-      .pc-bg(style={'background-image': "url(" + url_for(theme.pcImage) + ")"})
       header
         include ../component/header.pug
       main
-        block content
-          h2 世界并不美丽，却也因此而美丽
+        .pjax-main-page
+          block content
+            h2 世界并不美丽，却也因此而美丽
+        .pjax-main-loading
+          if theme.loadingImage
+            img.loading-image(src=url_for(theme.loadingImage))
       footer
         include ../component/footer.pug
-      
-      if theme.backToTop.enable
-        span.back-to-top
-    //- 引入 js
-    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/timeago.min.js', '/js/index.js']
+    .bg
+      //- 动态背景图片
+      if theme.themeBackground.enable
+        .pc-dynamic-bg
+          each item in theme.themeBackground.image
+            span.image(data-image=url_for(item))
+      else
+        //- 静态背景图片
+        .pc-static-bg(style={'background-image': "url(" + url_for(theme.pcImage) + ")"})
+    //- 返回顶部挂件
+    if theme.backToTop.enable
+      span.back-to-top
+    //- 埋点 对 文章热度 和 访问者来源 进行功能控制
+    if theme.leancloud.enable
+      .leancloud
+        script(src=url_for("/js/third-party/leancloud.min.js") + '?version=' + version())
+        .leancloud-app-id(leancloud-app-id=theme.leancloud.appId)
+        .leancloud-app-key(leancloud-app-key=theme.leancloud.appKey)
+        if theme.leancloud.counter.enable
+          .leancloud-app-hot
+        if theme.leancloud.visitor.enable
+          .leancloud-app-visitor
+    
+    //- 引入第三方的 js
+    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/timeago.min.js', '/js/third-party/backstretch.min.js', '/js/third-party/pjax.min.js']
     each item in js
       script(src=src=url_for(item) + '?version=' + version())
+
+    //- 引入 index.js
+    script(src=src=url_for('/js/index.js') + '?version=' + version())
+    

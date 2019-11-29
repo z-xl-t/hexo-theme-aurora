@@ -64,6 +64,7 @@ button
 
 html, body, .layout
   height: 100%;
+  min-width: 375px;
   min-height: 100%;
   font-family: $font-family-base;
   scrollBar();
@@ -73,21 +74,6 @@ html, body, .layout
   flex-direction: column;
   justify-content: space-between;
   cursor($cursor-img);
-  .pc-bg
-    fillParent(fixed, $zIndex-bottom)
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    +pc-layout()
-      background-size: cover;
-    +sp-layout()
-      background-color: #cfd0f8;
-      background-size: 0;
-    &::after
-      content: '';
-      fillParent(absolute, $zIndex-0)
-      background-color: rgba(255,255,255,0.65);
- 
   & > *
     flex-shrink: 0;
   header
@@ -96,19 +82,52 @@ html, body, .layout
     flex: 1;
     margin: 0 auto;
     max-width: 876px;
+    position: relative;
+    .pjax-main-loading
+      display: none;     
+      .loading-image
+        position: absolute;
+        transform: translateX(-50%);
+        max-width: 80px;
+        +pc-layout()
+          top: calc(50% - 120px);
+        +sp-layout()
+          top: calc(50% - 40px);
   footer
     min-height: 80px;
-  .back-to-top
-    position: fixed;
-    top: -1200px;
-    right: 0.25rem;
-    width: 70px;
-    height: 100%;
-    z-index: 99;
-    opacity: 1;
-    transition: all 0.6s ease-out;
-    background: $backToTop-bg no-repeat top;
-    background-size: contain;
-    animation: float 3s linear infinite;
+.bg
+  fillParent(fixed, $zIndex-bottom)
+  background-color: #cfd0f8;
+  &::after
+    content: '';
+    fillParent(absolute, $zIndex-1)
+    background-color: rgba(255,255,255,0.65);
+  .pc-static-bg
+    fillParent(fixed, $zIndex-bottom)
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    +pc-layout()
+      background-size: cover;
+    +sp-layout()
+      
+      background-size: 0;
+  .pc-dynamic-bg
+    fillParent(fixed, $zIndex-bottom)
     +sp-layout()
       display: none;
+
+.back-to-top
+  position: fixed;
+  top: -1200px;
+  right: 0.25rem;
+  width: 70px;
+  height: 100%;
+  z-index: 99;
+  opacity: 1;
+  transition: all 0.6s ease-out;
+  background: $backToTop-bg no-repeat top;
+  background-size: contain;
+  animation: float 3s linear infinite;
+  +sp-layout()
+    display: none;

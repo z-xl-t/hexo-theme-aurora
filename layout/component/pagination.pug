@@ -3,10 +3,10 @@ if page.total > 1
     .pagination-content
       if page.prev
         li.prev
-          a.prev-link(href=url_for(page.prev_link)) Prev
+          a.prev-link.pjax-main-link(href=url_for(page.prev_link)) Prev
           .rect
       if page.next
        li.next
-          a.next-link(href=url_for(page.next_link)) Next
+          a.next-link.pjax-main-link(href=url_for(page.next_link)) Next
           .rect
 

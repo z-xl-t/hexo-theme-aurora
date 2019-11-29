@@ -22,13 +22,13 @@ block content
               if post.date
                 +post-date(post.date)
               // 临时占位 热度 访问，还需要 LeanCloud 支持
-              if post
+              if post && theme.leancloud.enable
                 +post-hot(post)
               if post.tags
                 +post-tags(post.tags)
               if post.categories
                 +post-categories(post.categories)
-            a.post-link(href=url_for(post.path))
+            a.post-link.pjax-main-link(href=url_for(post.path))
 
     include component/pagination.pug
 
