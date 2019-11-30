@@ -65,10 +65,12 @@ html(lang='ZH-CN')
           .leancloud-app-visitor
     
     //- 引入第三方的 js
-    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/timeago.min.js', '/js/third-party/backstretch.min.js', '/js/third-party/pjax.min.js']
+    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/timeago.min.js', '/js/third-party/backstretch.min.js', '/js/third-party/pjax.min.js', '/js/third-party/zooming.min.js']
     each item in js
       script(src=src=url_for(item) + '?version=' + version())
 
+    // 引入 第三方的 highlight
+    script(src=src=url_for('/js/third-party/highlight.min.js') + '?version=' + version())
     //- 引入 index.js
     script(src=src=url_for('/js/index.js') + '?version=' + version())
     

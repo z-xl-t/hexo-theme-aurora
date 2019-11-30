@@ -1,9 +1,11 @@
 // 已经提前引入的库
-//  jquery.js
-//  timeage.js
-//  leancloud.js
-//  backstretch.js
+// jquery.js
+// timeage.js
+// leancloud.js
+// backstretch.js
 // pjax.js
+// zooming.js
+// highlight.js 这个不是原生的，而是 在原生上面做了一定的修改（显示代码的行数），从新打包生成的，
 
 const ifExistNode = (selector) => $(selector).length !== 0
 
@@ -92,9 +94,9 @@ const backToTop = {
 }
 // 格式化时间功能
 const formatTime = {
-  init() {
-    if (ifExistNode('.timeago')) {
-      timeago && timeago.render(document.querySelectorAll('.timeago'), 'zh_CN')
+  render() {
+    if (window.timeago && ifExistNode('.timeago')) {
+      timeago.render(document.querySelectorAll('.timeago'), 'zh_CN')
       let timeNodes = document.querySelectorAll('.timeago')
       timeNodes.forEach(item => {
         item.textContent = item.textContent.replace(/\s/, '')
@@ -208,7 +210,7 @@ const leancloud = {
       .fail(function (object, error) {
         console.log("Error: " + error.code + " " + error.message);
       });
-  },  
+  },
   startVisitor() {
     if (typeof AV === 'undefined') return
     if (ifExistNode('.leancloud-app-visitor')) {
@@ -216,7 +218,7 @@ const leancloud = {
       this.addVistor(Visitor)
       this.showVistor(Visitor)
     }
-    
+
   },
   addVistor(Visitor) {
     const referrer = this.getLocation(document.referrer);
@@ -231,9 +233,9 @@ const leancloud = {
           const visitors = results[0];
           visitors.fetchWhenSave(true);
           visitors.increment("time");
-         
+
           visitors.save(null, {
-            success: function () {},
+            success: function () { },
             error: function (visitors, error) {
               console.log('Failed to save Visitor num, with error message: ' + error.message);
             }
@@ -261,24 +263,24 @@ const leancloud = {
       .fail((error) => {
         console.log('Error:' + error.code + " " + error.message);
       })
-    
+
     query.equalTo('referrer', 'AllCount')
     query.find()
-    .done((results) => {
-      if (results.length === 1) {
+      .done((results) => {
+        if (results.length === 1) {
           // 存在则增加访问次数
           const visitors = results[0];
           visitors.fetchWhenSave(true);
           visitors.increment("time");
-         
+
           visitors.save(null, {
-            success: function () {},
+            success: function () { },
             error: function (visitors, error) {
               console.log('Failed to save Visitor num, with error message: ' + error.message);
             }
           });
 
-      } else {
+        } else {
           // 不存在则新增来访者
           const newVisitor = new Visitor()
           /* Set ACL */
@@ -296,11 +298,11 @@ const leancloud = {
               console.log('Failed to create');
             }
           })
-      }
-    })
-    .fail((error) => {
-      console.log('Error:' + error.code + " " + error.message);
-    })
+        }
+      })
+      .fail((error) => {
+        console.log('Error:' + error.code + " " + error.message);
+      })
   },
   showVistor(Visitor) {
     const query = new AV.Query(Visitor);
@@ -317,8 +319,7 @@ const leancloud = {
       })
 
   },
-  
-  getLocation(href){
+  getLocation(href) {
     // 转换访问来源地址
     const a = document.createElement('a');
     a.href = href;
@@ -365,11 +366,12 @@ const pjax = {
       this.$pjaxMainLoading.fadeIn()
     })
     this.$pjaxMainPage.on('pjax:complete', () => {
-      
-      // 获取到的 pjax 的内容可能需要重新渲染
-      formatTime.init()
-      leancloud.startHot()
 
+      // 获取到的 pjax 的内容可能需要重新操作
+      formatTime.render()
+      leancloud.startHot()
+      imageZooming.listen()
+      codeHighlight.renderCode()
       setTimeout(() => {
         this.$pjaxMainPage.fadeIn()
         this.$pjaxMainLoading.hide()
@@ -378,11 +380,50 @@ const pjax = {
   }
 }
 
+// 文章页面的处理
+
+// 文章图片 image zooming
+const imageZooming = {
+  init() {
+    if (Zooming && ifExistNode('.markdown .img-box')) {
+      this.zooming = new Zooming({
+        bgOpacity: 0.6,
+        zIndex: 100
+      })
+    }
+    this.listen()
+  },
+  listen() {
+    if (this.zooming && ifExistNode('.img-box')) {
+      this.zooming.listen('.img-zoomable')
+    }
+  }
+}
+
+const codeHighlight = {
+  init() {
+    if (hljs && ifExistNode('.markdown')) {
+      this.renderCode()
+    }
+
+  },
+  renderCode() {
+    if (ifExistNode('.markdown')) {
+      hljs.initLineNumbersOnLoad({ target: '.markdown' })
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block)
+      })
+    }
+  }
+}
+
 // 运行
 $(function () {
   backToTop.init()
-  formatTime.init()
+  formatTime.render()
   leancloud.init()
   dynamicBackground.init()
   pjax.init()
+  imageZooming.init()
+  codeHighlight.init()
 })

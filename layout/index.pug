@@ -7,7 +7,7 @@ block content
     .content
       each post in page.posts.data
         article
-          .post
+          .post-overview
             .post-header
               +post-image(post.image, theme.PostImage)
               .post-head
@@ -21,7 +21,6 @@ block content
             .post-meta
               if post.date
                 +post-date(post.date)
-              // 临时占位 热度 访问，还需要 LeanCloud 支持
               if post && theme.leancloud.enable
                 +post-hot(post)
               if post.tags

@@ -1,0 +1,80 @@
+.post
+  width: 99%;
+  margin: 0 auto;
+  position: relative;
+  overflow: unset;
+  card()
+  .post-article
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .post-header
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px 3px 0 0;
+      img
+        transition: transform 0.5s ease-out;
+        &:hover
+          transform: scale(1.04);
+      .post-image
+        position: absolute;
+        left: 0;
+        top: 0;
+      .post-head
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: $bg-white-dim;
+        box-shadow: 0 -1px 2px $bg-dark;
+        +pc-layout()
+          padding: 12px 14px;
+          height: 80px;
+        +sp-layout()
+            padding: 8px 10px;
+            height: 60px;
+        .post-title-wrapper
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          +pc-layout()
+            height: 34px;
+          +sp-layout()
+            height: 24px;
+          .post-title,
+          .post-image-source
+            clip()
+          .post-title
+            font-weight: $font-weight-normal;
+            +pc-layout()
+              font-size: $font-size-larger-max;
+            +sp-layout()
+              font-size: $font-size-larger;
+          .post-image-source
+            font-size: $font-size-base;
+            text-transform: capitalize;
+            +sp-layout()
+              transform: translateY(2px);
+        .post-meta
+            display: flex;
+            margin-top: 8px;
+            clip()
+            word-break: keep-all;
+            & > span
+              display: flex;
+              align-items: center;
+              margin-right: 12px;
+              &: last-child
+                margin-right: 0;
+              span
+                padding-right: 6px;
+                &:last-child
+                  padding-right: 0px;
+              .icon-calendar, 
+              .icon-fire, 
+              .icon-tag,
+              .icon-bookmark-empty
+                margin-right: 4px;
+              .icon-calendar
+              .icon-fire
+                margin-top: -2px;
