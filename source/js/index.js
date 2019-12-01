@@ -348,35 +348,73 @@ const dynamicBackground = {
 const pjax = {
   init() {
     if ($.support.pjax) {
-      this.$pjaxMainPage = $('.pjax-main-page')
-      this.$pjaxMainLoading = $('.pjax-main-loading')
-      this.$pjaxMainLink = $('.pjax-main-link')
       this.pjaxMain()
+      this.pjaxSubsidiary()
     }
   },
   pjaxMain() {
-    // 主页面的切换 如首页切换到归档页
-    $(document).pjax('.pjax-main-link', '.pjax-main-page', {
-      container: '.pjax-main-page',
-      fragment: '.pjax-main-page',
-      timeout: 8000
-    })
-    this.$pjaxMainPage.on('pjax:send', () => {
-      this.$pjaxMainPage.hide()
-      this.$pjaxMainLoading.fadeIn()
-    })
-    this.$pjaxMainPage.on('pjax:complete', () => {
+    // 主页面的切换，如首页切换到归档页，首页到文章详情页
+    this.$pjaxMainPage = $('.pjax-main-page')
+    this.$pjaxMainLoading = $('.pjax-main-loading')
+    this.$pjaxMainLink = $('.pjax-main-link')
+    if (ifExistNode('.pjax-main-link') && ifExistNode('.pjax-main-page')) {
+      $(document).pjax('.pjax-main-link', '.pjax-main-page', {
+        container: '.pjax-main-page',
+        fragment: '.pjax-main-page',
+        timeout: 8000
+      })
+      this.$pjaxMainPage.on('pjax:send', (e) => {
+        e.stopPropagation()
+        this.$pjaxMainPage.hide()
+        this.$pjaxMainLoading.fadeIn()
+      })
+      this.$pjaxMainPage.on('pjax:complete', (e) => {
+        e.stopPropagation()
+        // 获取到的 pjax 的内容可能需要重新操作
+        formatTime.render()
+        leancloud.startHot()
+        imageZooming.listen()
+        codeHighlight.renderCode()
+        setTimeout(() => {
+          this.$pjaxMainPage.fadeIn()
+          this.$pjaxMainLoading.hide()
+        }, 500);
 
-      // 获取到的 pjax 的内容可能需要重新操作
-      formatTime.render()
-      leancloud.startHot()
-      imageZooming.listen()
-      codeHighlight.renderCode()
-      setTimeout(() => {
-        this.$pjaxMainPage.fadeIn()
-        this.$pjaxMainLoading.hide()
-      }, 500);
-    })
+        // 额外重新绑定 pjaxSubsidiary
+        this.pjaxSubsidiary()
+      })
+    }
+
+  },
+  pjaxSubsidiary() {
+    // 在 归档 / 标签 / 分类 / 页面内部切换页面
+    this.$pjaxSubsidiaryPage = $('.pjax-subsidiary-page')
+    this.$pjaxSubsidiaryLoading = $('.pjax-subsidiary-loading')
+    this.$pjaxSubsidiaryLink = $('.pjax-subsidiary-link')
+    if (ifExistNode('.pjax-subsidiary-link') && ifExistNode('.pjax-subsidiary-page')) {
+      $(document).pjax('.pjax-subsidiary-link', '.pjax-subsidiary-page', {
+        container: '.pjax-subsidiary-page',
+        fragment: '.pjax-subsidiary-page',
+        timeout: 8000
+      })
+      this.$pjaxSubsidiaryPage.on('pjax:send', (e) => {
+        e.stopPropagation()
+        this.$pjaxSubsidiaryPage.hide()
+        this.$pjaxSubsidiaryLoading.fadeIn()
+      })
+      this.$pjaxSubsidiaryPage.on('pjax:complete', (e) => {
+        e.stopPropagation()
+        // 获取到的 pjax 的内容可能需要重新操作
+        formatTime.render()
+        leancloud.startHot()
+        setTimeout(() => {
+          this.$pjaxSubsidiaryPage.fadeIn()
+          this.$pjaxSubsidiaryLoading.hide()
+        }, 500);
+      })
+
+
+    }
   }
 }
 

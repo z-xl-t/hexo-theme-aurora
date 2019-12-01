@@ -1,6 +1,7 @@
 extends includes/layout.pug
 
 include mixins/post.pug
+include mixins/pagination.pug
 
 block content
   .index
@@ -29,6 +30,6 @@ block content
                 +post-categories(post.categories)
             a.post-link.pjax-main-link(href=url_for(post.path))
 
-    include component/pagination.pug
+    +pagination('pjax-main-link')  
 
 

@@ -1,5 +1,15 @@
 extends includes/layout.pug
 
+include mixins/quote.pug
+include mixins/postList.pug
+include mixins/pagination.pug
 block content
-  .archive 归档
-
+  .archives
+    if theme.menu.archives.quote.enable
+      +quote(theme.menu.archives.quote.content)
+      .pjax-subsidiary-page
+        +postList(page.posts)
+        +pagination('pjax-subsidiary-link')
+      .pjax-subsidiary-loading.loading
+        if theme.loadingImage
+          img.loading-image(src=url_for(theme.loadingImage))

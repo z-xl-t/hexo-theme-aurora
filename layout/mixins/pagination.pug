@@ -1,0 +1,14 @@
+mixin pagination(pjaxClassName)
+
+  if page.total > 1
+    .pagination
+      .pagination-content
+        if page.prev
+          li.prev
+            a.prev-link(class=pjaxClassName href=url_for(page.prev_link)) Prev
+            .rect
+        if page.next
+          li.next
+              a.next-link(class=pjaxClassName href=url_for(page.next_link)) Next
+              .rect
+

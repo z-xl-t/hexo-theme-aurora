@@ -1,0 +1,45 @@
+.post-list
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: space-between;
+  .post-overview
+    margin-bottom: 16px;
+    border-radius: 3px;
+    +pc-layout()
+      width: 49.2%;
+    +sp-layout()
+      width: 100%;
+    card()
+    .post-header
+      .post-title
+        padding: $card-padding;
+        font-size: $font-size-large;
+        font-weight: $font-weight-normal;
+        line-height: 1.8;
+    .post-meta
+        display: flex;
+        padding: $card-padding;
+        height: 50px;
+        border-top: 1px solid $bg-dark-line;
+        word-break: keep-all;
+        & > span
+          display: flex;
+          align-items: center;
+          margin-right: 12px;
+          &: last-child
+            margin-right: 0;
+          span
+            padding-right: 6px;
+            &:last-child
+              padding-right: 0px;
+          .icon-calendar, 
+          .icon-fire, 
+          .icon-tag,
+          .icon-bookmark-empty
+            margin-right: 4px;
+          .icon-calendar
+          .icon-fire
+            margin-top: -2px;
+    .post-link
+      fillParent(absolute, $zIndex-1)

@@ -28,7 +28,8 @@ favicon: /images/favicon.jpg
 domain: sanshiliuxiao.top
 
 
-# 导航栏 
+
+# 页面的显示与否和一些配置
 # 如果不需要某个导航，可以将 enable 置为 false 或 删除
 # icon只有那么几个 在 fontello.styl 中
 menu:
@@ -37,41 +38,63 @@ menu:
     name: 首页
     url: /
     icon: icon-index
+    # 首页是没有 quote
   archives:
     enable: true
     name: 归档
     url: /archives/
     icon: icon-archives
+    quote:
+      enable: true 
+      content: '華枝春滿 天心月圓'
   categories:
     enable: true
     name: 分类
     url: /categories/
     icon: icon-categories
+    quote:
+      enable: true
+      content: '桜華月想 暮色蒼然'
   tags:
     enable: true
     name: 标签
     url: /tags/
     icon: icon-tags
+    quote:
+      enable: true
+      content: '灯笼流丽，百鬼夜行'
   books:
     enable: true
     name: 书单
     url: /books/
     icon: icon-books
+    quote:
+      enable: true
+      content: '追想風景 彼岸帰航'
   inspiration:
     enable: true
     name: 灵感
     url: /inspiration/
     icon: icon-inspiration
+    quote:
+      enable: true
+      content: '詠奏妖華，明鏡止水'
   friends:
     enable: true
     name: 友链
     url: /friends/
     icon: icon-friends
+    quote:
+      enable: true
+      content: '青青子衿，悠悠我心'
   about:
     enable: true
     name: 关于
     url: /about/
     icon: icon-about
+    quote:
+      enable: true
+      content: '蝉鸣如雨，花宵道中'
 
 # 底部的信息设置 
 # since 为起始年，可选
@@ -102,8 +125,6 @@ themeBackground:
     - /images/theme/8.jpg
     - /images/theme/9.jpg
 
-
-
 # 回到顶部挂件
 backToTop:
   enable: true
@@ -112,10 +133,38 @@ backToTop:
 # https://leancloud.cn 注册后得到 AppID and AppKey.
 # 第一次需要在leanclud 新建 两个 Class 分别是 Counter 和 Visitor 
 leancloud:
-  enable: true
+  enable: false
   appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
   appKey: vi0TViY0HvYocUR3HxKGd1l9
   counter:
     enable: true
   visitor:
     enable: true
+
+
+# 主题配色，目前主要用于文章、说说、关于等卡片配色，以后可能会有其他用途
+# 推荐一个好看的取色站，日本の伝統色：http://nipponcolors.com/
+
+themeColors:
+  - '#B28FCE' # 薄
+  - '#86C166' # 苗
+  - '#F596AA' # 桃
+  - '#F19483' # 曙
+  - '#F9BF45' # 玉子
+  - '#FAD689' # 浅黄
+  - '#E79460' # 洗柿
+  - '#2EA9DF' # 露草
+  - '#FB966E' # 洗朱
+  - '#BC9F77' # 白茶
+  - '#867835' # 黄海松茶
+  - '#B9887D' # 水がき
+
+categoriesImage:
+  enable: true
+  images:
+    - /images/category/1.jpg
+    - /images/category/2.jpg
+    - /images/category/3.jpg
+    - /images/category/4.jpg
+    - /images/category/5.jpg
+    - /images/category/6.jpg

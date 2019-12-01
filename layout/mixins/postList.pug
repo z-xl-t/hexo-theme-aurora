@@ -1,0 +1,24 @@
+include post.pug
+
+mixin postList(posts)
+  -if (theme.themeColors)
+  -   var newColors = shuffle(theme.themeColors)
+  -   var newColorsLength = newColors.length
+  ul.post-list
+    -posts.each(function(post, i){
+      - var color = newColors[i % newColorsLength]
+      li(class="post-overview" style={'border-top': '2px solid ' + color})
+        .post-header
+          if post.title
+            +post-title(3, post.title)
+        .post-meta
+          if post.date
+            +post-date(post.date)
+          if post && theme.leancloud.enable
+            +post-hot(post)
+          if post.tags
+            +post-tags(post.tags)
+          if post.categories
+            +post-categories(post.categories)
+        a.post-link.pjax-main-link(href=url_for(post.path))
+    -})

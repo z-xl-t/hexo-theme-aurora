@@ -35,8 +35,8 @@ html(lang='ZH-CN')
       main
         .pjax-main-page
           block content
-            h2 世界并不美丽，却也因此而美丽
-        .pjax-main-loading
+           h2 世界并不美丽 却也因此而美丽
+        .pjax-main-loading.loading
           if theme.loadingImage
             img.loading-image(src=url_for(theme.loadingImage))
       footer
@@ -70,7 +70,7 @@ html(lang='ZH-CN')
       script(src=src=url_for(item) + '?version=' + version())
 
     // 引入 第三方的 highlight
-    script(src=src=url_for('/js/third-party/highlight.min.js') + '?version=' + version())
+    script(src=src=url_for('/js/highlight.min.js') + '?version=' + version())
     //- 引入 index.js
     script(src=src=url_for('/js/index.js') + '?version=' + version())
     
