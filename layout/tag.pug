@@ -1,7 +1,23 @@
-// 这是二层标签页面，含有该标签的文章，可分页
+//- 这是二层分类页面，含有该分类的文章，可分页
 
 extends includes/layout.pug
+include mixins/quote.pug
+include mixins/postList.pug
+include mixins/pagination.pug
 
 block content
-  .tags 二层标签
-
+  .tags
+    if theme.menu.tags.quote.enable
+      +quote(theme.menu.tags.quote.content)
+    .pjax-subsidiary-page
+      .clean
+        span= 'Tag:'
+        span.clean-btn
+          // 手动模拟 返回
+          a.pjax-subsidiary-link(href=url_for('/tags/'))= page.tag
+            i.icon-cancel-outline
+      +postList(page.posts)
+      +pagination('pjax-subsidiary-link')
+    .pjax-subsidiary-loading.loading
+      if theme.loadingImage
+        img.loading-image(src=url_for(theme.loadingImage))

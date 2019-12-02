@@ -1,0 +1,22 @@
+mixin categoryList(categories)
+  //- 筛选出 顶层分类
+  -var categories = categoriesFilter(categories)
+  ul.category-list
+    -categories.each(function(categroy, i){
+      if theme.categoriesImage.enable
+        - var images = theme.categoriesImage.images
+        - var imagesLength = images.length
+          li(class="category")
+            - var imageUrl = images[i % imagesLength]
+            img.bg(src=url_for(imageUrl))
+            .meta
+              img.avatar(src=url_for(imageUrl))
+              .describe
+                span.name= categroy.name
+                != "&nbsp;"
+                span.number= "("+ categroy.length + ")"
+            a(class="categroy-link pjax-subsidiary-link" href=url_for(categroy.path))
+      else
+        li(class="category")= 666
+    -})
+     

@@ -1,0 +1,47 @@
+.category-list
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .category
+    position: relative;
+    margin-bottom: 16px;
+    height: 160px;
+    card-lignt();
+    overflow: hidden;
+    +pc-layout()
+      width: 32%;
+      &:hover .avatar
+        animation-play-state: paused;
+        transform: rotateZ(360deg);
+    +sp-layout()
+      width: 100%;
+    .bg
+      fillParent(absolute, $zIndex-1)
+      object-fit: cover;
+    .meta
+      fillParent(absolute, $zIndex-2)
+      padding: 0 16px;
+      text-align: justify;
+      text-shadow: 0 0 1px rgba(0,0,0,.3);
+      background-color: hsla(0,0%,100%,.65);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .avatar
+        margin: 0;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 4px solid $bg-white-dim;
+        box-shadow: $card-shadow-base;
+        background-color: $bg-dark;
+        transition: transform 1s ease-out;
+      .describe
+          padding: 0 12px;
+          height: 40px;
+          line-height: 40px;
+          border-radius: 3px;
+          background-color: $bg-white-deep;
+          box-shadow: $card-shadow-light;
+    .categroy-link
+      fillParent(absolute, $zIndex-3)

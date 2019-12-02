@@ -1,0 +1,11 @@
+mixin tagList(tags)
+  -if (theme.themeColors.enable) {
+    -   var newColors = shuffle(theme.themeColors.colors) || []
+    -   var newColorsLength = newColors.length || 1
+  -}
+  ul.tag-list
+    -tags.each(function(tag, i){
+      - var color = (newColors && newColorsLength) ? newColors[i % newColorsLength] : '' 
+      li(style={color: (color || '#000')})
+        a(class="tag-link pjax-subsidiary-link" href=url_for(tag.path))= tag.name
+    -})

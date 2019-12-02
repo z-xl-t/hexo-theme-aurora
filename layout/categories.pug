@@ -1,5 +1,13 @@
 extends includes/layout.pug
 
+include mixins/quote.pug
+include mixins/categoryList.pug
 block content
-  .categories 分类
-
+  .categories
+    if theme.menu.categories.quote.enable
+      +quote(theme.menu.categories.quote.content)
+      .pjax-subsidiary-page
+        +categoryList(site.categories)
+      .pjax-subsidiary-loading.loading
+        if theme.loadingImage
+          img.loading-image(src=url_for(theme.loadingImage))

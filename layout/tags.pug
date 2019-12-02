@@ -1,5 +1,13 @@
 extends includes/layout.pug
 
+include mixins/quote.pug
+include mixins/tagList.pug
 block content
-  .tags 标签
-
+  .tags
+    if theme.menu.tags.quote.enable
+      +quote(theme.menu.tags.quote.content)
+      .pjax-subsidiary-page
+        +tagList(site.tags)
+      .pjax-subsidiary-loading.loading
+        if theme.loadingImage
+          img.loading-image(src=url_for(theme.loadingImage))

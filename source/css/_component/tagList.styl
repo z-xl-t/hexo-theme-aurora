@@ -1,0 +1,21 @@
+.tag-list
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  li
+    flex-shrink: 0;
+    +pc-layout()
+      margin: 10px 12px;
+    +sp-layout()
+      margin: 10px 6px;
+    border-radius: 3px;
+    background-color: $bg-dark;
+    transition: background 0.3s ease-out;
+    .tag-link
+      padding: 4px 10px 6px;
+      transition: color 0.3s ease-out;
+    &:hover
+      background-color: $bg-dark-deep;
+      .tag-link
+        color: $whitesmoke;
+  

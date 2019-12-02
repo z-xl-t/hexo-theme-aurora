@@ -1,13 +1,15 @@
 include post.pug
 
 mixin postList(posts)
-  -if (theme.themeColors)
-  -   var newColors = shuffle(theme.themeColors)
-  -   var newColorsLength = newColors.length
+  -if (theme.themeColors.enable) {
+    -   var newColors = shuffle(theme.themeColors.colors) || []
+    -   var newColorsLength = newColors.length || 1
+  -}
+
   ul.post-list
     -posts.each(function(post, i){
-      - var color = newColors[i % newColorsLength]
-      li(class="post-overview" style={'border-top': '2px solid ' + color})
+      - var color = (newColors && newColorsLength) ? newColors[i % newColorsLength] : ''      
+      li(class="post-overview" style={'border-top': (color ? '2px solid ' + color: '')})
         .post-header
           if post.title
             +post-title(3, post.title)
