@@ -1,5 +1,48 @@
 extends includes/layout.pug
 
+include mixins/quote.pug
+
 block content
-  .books 书籍
+  .books
+    if theme.menu.categories.quote.enable
+      +quote(theme.menu.categories.quote.content)
+    ul.book-list
+      - var showMaxNumber = page.books.showMaxNumber || 0
+      - var currentIndex = 0
+      if showMaxNumber !== 0
+        each book, i in page.books.bookList
+          - currentIndex = currentIndex + 1
+          - var bookImgUrl = book.bookImgUrl || '';
+          - var bookName = book.bookName || '';
+          - var bookDescription = book.bookDescription || '';
+          - var bookAuthor = book.bookAuthor || '';
+          - var bookPublicationTime =book.bookPublicationTime || '';
+          - var readingProgress = book.readingProgress || '';
+          - var readingNotesName = book.readingNotesName;
+          - var readingNotesUrl = book.readingNotesUrl || '';
+          - var recommendationIndex = book.recommendationIndex || 0;
+          if currentIndex <= showMaxNumber
+            li.book
+              .book-info
+                if bookImgUrl
+                  img(src=bookImgUrl)
+                .meta
+                  if bookName
+                    h3= bookName
+                  if bookAuthor
+                    p= '作者：' + bookAuthor
+                  if bookPublicationTime
+                    p= '出版时间：' + bookPublicationTime
+                  if readingProgress
+                    p= '阅读进度：' + readingProgress
+                  if readingNotesName && readingNotesUrl
+                    p.notes= '读书笔记：'
+                      a(href=url_for(readingNotesUrl))= readingNotesName
+                  if recommendationIndex
+                    p.rec-idx= '推荐指数：'
+                      -for (var i=0; i< recommendationIndex; ++ i) {
+                        span.icon-star
+                      -}
+              if bookDescription
+                .book-desc= bookDescription
 

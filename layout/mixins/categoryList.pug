@@ -11,7 +11,7 @@ mixin categoryList(categories)
             img.bg(src=url_for(imageUrl))
             .meta
               img.avatar(src=url_for(imageUrl))
-              .describe
+              .info
                 span.name= categroy.name
                 != "&nbsp;"
                 span.number= "("+ categroy.length + ")"

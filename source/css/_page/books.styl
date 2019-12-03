@@ -1,0 +1,39 @@
+.books
+  width:100%;
+  min-height: 100%;
+  card-page();
+  padding: 16px;
+  .book-list
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .book
+      margin-bottom: 16px;
+      card-lignt();
+      +pc-layout()
+        width: 48%;
+      +sp-layout()
+        width: 100%;
+      .book-info
+        display: flex;
+        justify-content: flex-start;
+        padding: 12px 12px 0;
+        line-height: 1.7;
+        img
+          margin: 0 12px 0 0;
+          width: 120px;
+          height: 160px;
+          box-shadow: $card-shadow-light;
+          object-fit: cover;
+        h3
+          font-size: $font-size-large;
+        a
+          transition: color 0.3s ease-out;
+          &:hover
+            color: $link-color;
+        .icon-star
+          margin-right: 4px;
+          color: $purple;
+      .book-desc
+        padding: 12px;
+

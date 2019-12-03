@@ -16,9 +16,9 @@ block content
                   +post-title(3, post.title)
                 if post.imageSource
                   +post-image-source(post.imageSource)
-            if post.describe
+            if post.description
               .post-body
-                +post-describe(post.describe)
+                +post-description(post.description)
             .post-meta
               if post.date
                 +post-date(post.date)
