@@ -25,7 +25,7 @@ block content
             li.book
               .book-info
                 if bookImgUrl
-                  img(src=bookImgUrl)
+                  img(src=url_for(bookImgUrl))
                 .meta
                   if bookName
                     h3= bookName

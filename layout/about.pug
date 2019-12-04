@@ -34,7 +34,7 @@ block content
       .contact
         each con in contact
           a(href=con.link)
-            img.icon(src=con.icon)
+            img.icon(src=url_for(con.icon))
     if introduction
       ul.introduction
         - var currentIndex = 0
