@@ -1,0 +1,57 @@
+.friend-list
+  display: grid;
+  +pc-layout()
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  +sp-layout()
+    grid-template-columns: 1fr 1fr;
+  .friend
+    transition: $transition-base;
+    box-shadow: $card-shadow-light;
+    position: relative;
+    margin: 0 auto 16px;
+    overflow: hidden;
+    +pc-layout()
+      width: 196px;
+      height: 110px;
+      &:hover
+        box-shadow: $card-shadow-light-hover;
+        .site-img
+          transform: scale(1.06);
+        .site-info
+          transform: translateY(-100%);
+        .name
+          color: $link-color;
+    +sp-layout()
+      width: 160px;
+      height: 100px;
+    .site-img
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-out;
+      img
+        width: 100%;
+        height: 100%;
+    .site-info
+      fillParent(absolute,$zIndex-0)
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 3px;
+      background-color: $bg-white;
+      transition: transform 0.5s cubic-bezier(0.6, 0.2, 0.1, 1) 0s;
+      .avatar
+        border-radius: 50%;
+        box-shadow: 0 0 10px $grey-dark;
+        overflow: hidden;
+        +pc-layout()
+          margin-bottom: -16px;
+          width: 50px;
+          height: 50px;
+        +sp-layout()
+          margin-bottom: -20px;
+          width: 40px;
+          height: 40px;
+    .site-link
+      fillParent(absolute,$zIndex-2)

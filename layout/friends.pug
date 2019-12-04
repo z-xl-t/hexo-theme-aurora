@@ -1,5 +1,17 @@
 extends includes/layout.pug
 
+include mixins/quote.pug
+include mixins/friendList.pug
+
 block content
-  #friends 友链
+  .friends
+    if theme.menu.friends.quote.enable
+      +quote(theme.menu.friends.quote.content)
+    if (page.description)
+      .description
+        each desc in page.description
+          p!= desc
+      +friendList(page.friends)
+
+
 

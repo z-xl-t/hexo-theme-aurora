@@ -1,0 +1,17 @@
+mixin friendList(friends)
+  ul.friend-list
+    each f in friends
+      - var name = f.name
+      - var siteUrl = f.siteUrl
+      - var siteImg = f.siteImg
+      - var avatar = f.avatar
+      li.friend
+        .site-img
+          img(src=url_for(siteImg))
+        .site-info
+          .avatar
+            img(src=avatar)
+          .name= name
+        a.site-link(target="_blank" href=url_for(siteUrl))
+
+
