@@ -1,5 +1,55 @@
 extends includes/layout.pug
 
+include mixins/quote.pug
+
 block content
-  .about 关于
+  .about
+    if theme.menu.about.quote.enable
+    +quote(theme.menu.about.quote.content)
+    - var info = page.info
+    - var contact = page.contact
+    - var introduction = page.introduction
+    if info
+      .info-header
+        .avatar
+          img(src=(info.avatar || theme.avatar), alt="avatar")
+        .info
+          if info.name
+            span
+              i.icon.icon-fort-awesome
+              span= info.name
+          if info.sign 
+            span
+              i.icon.icon-pagelines
+              span= info.sign
+          if info.graduation
+            span
+              i.icon.icon-graduation-cap
+              span= info.graduation
+          if info.profession 
+            span
+              i.icon.icon-tripadvisor
+              span= info.profession
+    if contact
+      .contact
+        each con in contact
+          a(href=con.link)
+            img.icon(src=con.icon)
+    if introduction
+      ul.introduction
+        - var currentIndex = 0
+        -if (theme.themeColors.enable) {
+          -   var newColors = shuffle(theme.themeColors.colors) || []
+          -   var newColorsLength = newColors.length || 1
+        -}
+        each intor in introduction
+          - currentIndex = currentIndex + 1
+          - var color = (newColors && newColorsLength) ? newColors[currentIndex % newColorsLength] : '' 
+          li.intor(style={'border-top': (color ? '2px solid ' + color: ''), color: (color ? color : 'currentColor')})
+            span.name-warpper
+              span.name!= intor.name
+            each c in intor.content
+              p.content!= c
+
+
 

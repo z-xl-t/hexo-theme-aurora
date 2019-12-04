@@ -1,0 +1,136 @@
+.about
+  width:100%;
+  min-height: 100%;
+  card-page();
+  padding: 16px;
+  .info-header
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    +pc-layout()
+      flex-direction: row;
+    +sp-layout()
+      flex-direction: column;
+    .avatar
+      display: block;
+      margin: 0;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      transition: transform 1s ease-out;
+      overflow: hidden
+      +pc-layout()
+        width: $avatar-size-pc;
+        height: $avatar-size-pc;
+        min-width: $avatar-size-pc;
+        min-height: $avatar-size-pc;
+        box-shadow: $card-shadow-base;
+        &:hover
+          animation-play-state: paused;
+          transform: rotateZ(360deg);
+      +sp-layout()
+        margin-bottom: 16px;
+        width: $avatar-size-sp;
+        height: $avatar-size-sp;
+        min-width: $avatar-size-sp;
+        min-height: $avatar-size-sp;
+        box-shadow: $card-shadow-light;
+      img
+        width: 100%;
+        height: 100%;
+    .info
+      margin-left: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.8;
+      text-align: left;
+      span > span 
+        margin: 0 10px;
+      .icon
+        margin-right: 3px;
+  .contact
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 22px;
+    a
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: 4px solid $bg-white-dim;
+      box-shadow: $card-shadow-light;
+      background-color: $bg-dark;
+      transition: all 0.3s ease-out;
+      +pc-layout()
+        margin: 0 30px;
+        width: $contact-size-pc;
+        height: $contact-size-pc;
+        min-width: $contact-size-pc;
+        min-height: $contact-size-pc;
+        &:nth-child(n+1)
+          &:hover
+            background-color: #ffba84
+            box-shadow: 0 0 10px #ffba84
+        &:nth-child(n+2)
+          &:hover
+            background-color: #2ea9df
+            box-shadow: 0 0 10px #2ea9df
+        &:nth-child(n+3)
+          &:hover
+            background-color: #986db2
+            box-shadow: 0 0 10px #986db2
+        &:nth-child(n+4)
+          &:hover
+            background-color: #f596aa
+            box-shadow: 0 0 10px #f596aa
+      +sp-layout()
+        margin: 0 20px;
+        width: $contact-size-sp;
+        height: $contact-size-sp;
+        min-width: $contact-size-sp;
+        min-height: $contact-size-sp;
+      img
+        +pc-layout()
+          width: 30px;
+          height: 30px;
+        +sp-layout()
+          width: 24px;
+          height: 24px;
+  .introduction
+    .intor
+      margin-bottom: 16px;
+      padding: $card-padding-large;
+      text-align: justify;
+      overflow: unset;
+      card-lignt();
+      &:last-child
+        margin-bottom: 0;
+      .name-warpper
+        display: inline-block;
+        position: relative;
+        left: -32px;
+        margin-bottom: 10px;
+        padding: 0 14px 0 32px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 0 3px 3px 0;
+        background-color: currentColor;
+        &:after
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 0;
+          height: 0;
+          background-color: transparent;
+          border-style: solid;
+          border-width: 0 16px 16px 0;
+          border-color: transparent;
+          border-right-color: currentColor;
+          -webkit-filter: brightness(120%);
+          filter: brightness(120%);
+        .name
+          color: #fff;
+      .content
+        margin: 0 16px 10px;
+        color: $text-color;
