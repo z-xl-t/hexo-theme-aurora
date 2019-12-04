@@ -1,0 +1,12 @@
+extends includes/layout.pug
+
+include mixins/inspirationList.pug
+include mixins/quote.pug
+
+block content
+  .inspirations
+    if theme.menu.inspirations.quote.enable
+      +quote(theme.menu.inspirations.quote.content)
+      +inspirationList(page.inspirations)
+
+

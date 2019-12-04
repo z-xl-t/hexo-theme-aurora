@@ -1,0 +1,65 @@
+.inspiration-list
+  li
+    margin-bottom: 16px;
+    padding: $card-padding-large;
+    text-align: justify;
+    overflow: unset;
+    card-lignt();
+    &:last-child
+      margin-bottom: 0;
+    .time-wrapper
+      display: inline-block;
+      position: relative;
+      left: -32px;
+      margin-bottom: 10px;
+      padding: 0 14px 0 32px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 0 3px 3px 0;
+      background-color: currentColor;
+      &:after
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 0;
+        height: 0;
+        background-color: transparent;
+        border-style: solid;
+        border-width: 0 16px 16px 0;
+        border-color: transparent;
+        border-right-color: currentColor;
+        -webkit-filter: brightness(120%);
+        filter: brightness(120%);
+      .time
+        color: #fff;
+    .moment
+      color: $text-color;
+    .img-box
+      margin-bottom: 25px;
+      text-align: center;
+      &:last-child
+        margin-bottom: 0;
+      img
+        margin: 0 auto;
+        max-width: 100%;
+        border-radius: 3px;
+        box-shadow: $img-shadow;
+        border: 6px solid transparent;
+        transition: all 0.3s ease-out;
+        &:hover
+          border-color: $purple-dark;
+      img[src*='full']
+        margin-left: -16px;
+        width: calc(100% + 32px);
+        max-width: calc(100% + 32px);
+        border: none;
+        border-radius: unset;
+      img[style*='cursor: grab']
+        border-color: transparent;
+        border-radius: unset;
+      span
+        color: $text-color;
+        display: block;
+        padding-top: 10px;
+        font-style: italic;

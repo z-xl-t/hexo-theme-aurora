@@ -1,0 +1,28 @@
+mixin inspirationList(inspirations)
+    ul.inspiration-list
+      - var showMaxNumber = inspirations.showMaxNumber || 0
+      - var currentIndex = 0
+      if showMaxNumber !== 0
+        -if (theme.themeColors.enable) {
+          -   var newColors = shuffle(theme.themeColors.colors) || []
+          -   var newColorsLength = newColors.length || 1
+        -}
+        each ins in inspirations.inspirationList
+          - currentIndex = currentIndex + 1
+          - var time = ins.time;
+          - var moment = ins.moment;
+          - var imgUrl = ins.imgUrl;
+          - var imgDesc = ins.imgDesc;
+          if currentIndex <= showMaxNumber
+            - var color = (newColors && newColorsLength) ? newColors[currentIndex % newColorsLength] : '' 
+            li(style={'border-top': (color ? '2px solid ' + color: ''), color: (color ? color : 'currentColor')})
+              if time
+                span.time-wrapper
+                  span.time= time
+              if moment
+                p.moment= moment
+              if imgUrl
+                .img-box
+                  img(src=url_for(imgUrl))
+                  if imgDesc
+                    span= '◭ ' + imgDesc

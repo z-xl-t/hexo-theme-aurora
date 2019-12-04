@@ -71,10 +71,10 @@ menu:
     quote:
       enable: true
       content: '追想風景 彼岸帰航'
-  inspiration:
+  inspirations:
     enable: true
     name: 灵感
-    url: /inspiration/
+    url: /inspirations/
     icon: icon-inspiration
     quote:
       enable: true
