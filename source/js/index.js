@@ -108,7 +108,7 @@ const formatTime = {
 // 热度和访问者次数功能
 const leancloud = {
   init() {
-    if (ifExistNode('.leancloud')) {
+    if (window.AV && ifExistNode('.leancloud')) {
       const appId = $('.leancloud-app-id').attr('leancloud-app-id')
       const appKey = $('.leancloud-app-key').attr('leancloud-app-key')
       AV.initialize(appId, appKey)
@@ -407,6 +407,7 @@ const pjax = {
         // 获取到的 pjax 的内容可能需要重新操作
         formatTime.render()
         leancloud.startHot()
+        imageZooming.listen()
         setTimeout(() => {
           this.$pjaxSubsidiaryPage.fadeIn()
           this.$pjaxSubsidiaryLoading.hide()
@@ -423,24 +424,25 @@ const pjax = {
 // 文章图片 image zooming
 const imageZooming = {
   init() {
-    if (Zooming && ifExistNode('.markdown .img-box')) {
-      this.zooming = new Zooming({
-        bgOpacity: 0.6,
-        zIndex: 100
-      })
-    }
     this.listen()
   },
   listen() {
-    if (this.zooming && ifExistNode('.img-box')) {
-      this.zooming.listen('.img-zoomable')
+    if (Zooming && ifExistNode('.markdown .img-box')) {
+      const zooming = new Zooming({
+        bgOpacity: 0.6,
+        zIndex: 100
+      })
+      if (ifExistNode('.markdown .img-box')) {
+        zooming.listen('.img-zoomable')
+      }
     }
+
   }
 }
 
 const codeHighlight = {
   init() {
-    if (hljs && ifExistNode('.markdown')) {
+    if (window.hljs && ifExistNode('.markdown')) {
       this.renderCode()
     }
 

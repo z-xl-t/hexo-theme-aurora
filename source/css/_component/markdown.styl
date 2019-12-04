@@ -145,21 +145,20 @@
     td, th
       padding: 0 36px;
       border: 1px solid #dfdfdf;
-
+  img
+    margin: 0 auto;
+    max-width: 100%;
+    border-radius: 3px;
+    box-shadow: $img-shadow;
+    border: 6px solid transparent;
+    transition: all 0.3s ease-out;
+    &:hover
+      border-color: $purple-dark;
   .img-box
     margin-bottom: 25px;
     text-align: center;
     &:last-child
       margin-bottom: 0;
-    img
-      margin: 0 auto;
-      max-width: 100%;
-      border-radius: 3px;
-      box-shadow: $img-shadow;
-      border: 6px solid transparent;
-      transition: all 0.3s ease-out;
-      &:hover
-        border-color: $purple-dark;
     img[src*='full']
       margin-left: -16px;
       width: calc(100% + 32px);
