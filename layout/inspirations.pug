@@ -8,5 +8,5 @@ block content
     if theme.menu.inspirations.quote.enable
       +quote(theme.menu.inspirations.quote.content)
       +inspirationList(page.inspirations)
-
-
+  if theme.gitalk.enable && page.comments
+    include component/gitalk.pug

@@ -1,0 +1,102 @@
+#gitalk
+  +include sp-layout()
+    padding: 0 16px;
+  .gt-comment-body,
+  .gt-btn-text,
+  textarea
+    font-family: $font-family-base;
+    color: $text-color;
+  .gt-container
+    text-align: left;
+    a
+      color: $link-color;
+      border-bottom: none;
+    .gt-svg svg
+      fill: $purple-dim;
+    .gt-comment-date,
+    .gt-container .gt-comment-text
+      color: $grey-dim;
+    .gt-ico-text
+      color: $purple-deep;
+    .gt-btn-login
+      margin-top: 0;
+      border: none;
+      background-color: $purple-dim !important;
+      span
+        line-height: 1;
+        color: white;
+      @media screen and (max-width: 479px)
+        margin-top: 9px !important;
+    .gt-avatar
+      border-radius: 3px;
+  .gt-meta
+    padding-top: 0;
+    border-bottom: 1px solid $bg-white;
+    .gt-counts
+      float: left;
+    .gt-popup
+      margin-top: 10px;
+      .is--active::before
+        background: $purple;
+  .gt-header
+    textarea,
+    .gt-header-preview
+      border: none;
+      min-height: 100px;
+      max-height: 200px;
+      background-color: $bg-white-dim;
+      background-image: $gitalk-bg;
+      background-size: 120px;
+      background-repeat: no-repeat;
+      background-position: 99% bottom;
+      overflow: scroll;
+    textarea
+      height: 120px !important;
+      @include scrollBar;
+    .gt-header-controls-tip
+      float: left;
+    .gt-btn
+      border: none;
+      background-color: $bg-white-dim;
+    .gt-btn-public
+      background-color: $purple-dim;
+      span
+        color: white;
+    .gt-avatar-github
+      svg
+        fill: $purple-dim;
+    .gt-btn-text
+      color: $purple-dim;
+  .gt-comments
+    .gt-comment-content
+      border-radius: 3px;
+      background-color: $bg-white-dim;
+      +pc-layout()
+        box-shadow: $card-shadow-base;
+        transition: $transition-base;
+        &:hover
+          transform: translateY(-4px);
+          box-shadow: $card-shadow-base-hover;
+      +sp-layout()
+        box-shadow: $card-shadow-light;
+    .gt-btn-loadmore
+      border: none;
+      background-color: $purple-dim;
+      span
+        color: white;
+    .gt-comment-body
+      max-height: 500px;
+      overflow: auto;
+      scrollBar();
+    blockquote
+      border-left-color: $purple;
+  textarea,
+  .gt-btn-login,
+  .gt-btn-preview,
+  .gt-btn-loadmore,
+  .gt-btn-public,
+  .gt-avatar
+    +pc-layout()
+      box-shadow: $card-shadow-base;
+    +sp-layout()
+      box-shadow: $card-shadow-light;

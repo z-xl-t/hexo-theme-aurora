@@ -50,6 +50,7 @@ block content
               span.name!= intor.name
             each c in intor.content
               p.content!= c
-
+  if theme.gitalk.enable && page.comments
+    include component/gitalk.pug 
 
 

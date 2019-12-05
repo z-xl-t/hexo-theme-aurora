@@ -125,6 +125,10 @@ themeBackground:
     - /images/theme/8.jpg
     - /images/theme/9.jpg
 
+# 文章内图片的放大功能, 需要配合 {% imgBox imagePath descrition %} 使用
+zoomingImage:
+  enable: true
+
 # 回到顶部挂件
 backToTop:
   enable: true
@@ -171,3 +175,48 @@ categoriesImage:
     - /images/category/4.jpg
     - /images/category/5.jpg
     - /images/category/6.jpg
+
+# gitalk 评论功能
+# https://github.com/gitalk/gitalk
+
+gitalk:
+  enable: true
+  owner: sanshiliuxiao
+  repo: comments
+  admin: sanshiliuxiao
+  clientID: d4600bd6df9724fbf03d
+  clientSecret: 6c9ddc5b05b0ec3d0ad1e7089b04d35f098a5c8f
+
+# 加载音乐插件 
+APlayer:
+  enable: true,
+  list: [
+    {
+      name: Once more,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/13boxb.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb87157c617e.jpg
+    },
+    {
+      name: All or None,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/4x69y9.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb87157b537a.jpg
+    },
+    {
+      name: Karma,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/r5dsuh.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb871583cfb7.jpg,
+    },
+    {
+      name: 星の奏でる歌,
+      artist: 阿保剛,
+      url: https://files.catbox.moe/m1wd57.mp3,
+      cover: https://i.loli.net/2019/04/18/5cb871585123b.jpg
+    }
+  ]
+
+# 顶部进度条
+progressBar: 
+  enable: true

@@ -26,3 +26,5 @@ block content
                 +post-categories(post.categories)
         .post-content
           .markdown!= post.content
+  if theme.gitalk.enable && page.comments
+    include component/gitalk.pug 

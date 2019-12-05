@@ -1,6 +1,5 @@
 
 - var pageTitle = theme.title || ''
-- var pageDescription = page.description || theme.description || ''
 - var pageAuthor = theme.author || ''
 - var pageCopyright = theme.author || ''
 
@@ -11,7 +10,6 @@ html(lang='ZH-CN')
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="referrer" content="no-referrer")
     meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no,viewport-fit=cover")
-    meta(name="description" content=pageDescription)
     meta(name="author" content=pageAuthor)
     meta(name="copyright" content=pageCopyright)
     meta(name="og:image" content=url_for(theme.avatar))
@@ -19,7 +17,6 @@ html(lang='ZH-CN')
     meta(name="og:site_name" content=theme.title)
     meta(name="og:url" content=theme.domain)
     meta(name="og：title" content=theme.title)
-    meta(name="og:description" content=theme.description)
     <meta name="theme-color" content="#b854d4" />
     title= pageTitle
     link(rel="shortcut icon", href=url_for(theme.favicon), type="image/x-icon")
@@ -28,6 +25,10 @@ html(lang='ZH-CN')
     link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
     link(rel="canonical", href="//" + theme.domain)
     link(rel="dns-prefetch", href="//cdn.jsdelivr.net")
+
+    //- 加载 gitalk 的 js 和 css
+    link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
+    script(src=url_for('/lib/gitalk/gitalk.min.js'))
   body
     .layout
       header
@@ -50,6 +51,7 @@ html(lang='ZH-CN')
       else
         //- 静态背景图片
         .pc-static-bg(style={'background-image': "url(" + url_for(theme.pcImage) + ")"})
+    
     //- 返回顶部挂件
     if theme.backToTop.enable
       span.back-to-top
@@ -64,13 +66,36 @@ html(lang='ZH-CN')
         if theme.leancloud.visitor.enable
           .leancloud-app-visitor
     
-    //- 引入第三方的 js
-    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/timeago.min.js', '/js/third-party/backstretch.min.js', '/js/third-party/pjax.min.js', '/js/third-party/zooming.min.js']
-    each item in js
-      script(src=src=url_for(item) + '?version=' + version())
+    //- 播放器功能
+    if theme.APlayer.enable
+      //- 加载 APlayer 的 js 和 css
+      link(rel="stylesheet", href=url_for('/lib/APlayer/APlayer.min.css'))
+      script(src=url_for('/lib/APlayer/APlayer.min.js'))
+      #aplayer
+      script.
+        let list = JSON.parse('!{JSON.stringify(theme.APlayer.list)}')
+          const ap = new APlayer({
+              container: document.getElementById('aplayer'),
+              theme: '#b28fce',
+              audio: list,
+              fixed: true
+          });
+          ap.list.show()
 
-    // 引入 第三方的 highlight
-    script(src=src=url_for('/js/highlight.min.js') + '?version=' + version())
+    //- 引入第三方的 js
+    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/isMobile.min.js', '/js/third-party/timeago.min.js', '/js/third-party/pjax.min.js']
+    each item in js
+      script(src=url_for(item) + '?version=' + version())
+    //- 文章图片的全屏功能
+    if (theme.zoomingImage.enable)
+      script(src=url_for('/js/third-party/zooming.min.js') + '?version=' + version())
+    //- 动态背景
+    if (theme.themeBackground.enable)
+      script(src=url_for('/js/third-party/backstretch.min.js') + '?version=' + version())
+
+    //- 额外的 js 文件
+    //- 引入 第三方的 highlight, 改造重新打包后的文件
+    script(src=url_for('/js/highlight.min.js') + '?version=' + version())
     //- 引入 index.js
-    script(src=src=url_for('/js/index.js') + '?version=' + version())
+    script(src=url_for('/js/index.js') + '?version=' + version())
     

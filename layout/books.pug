@@ -45,4 +45,5 @@ block content
                       -}
               if bookDescription
                 .book-desc= bookDescription
-
+  if theme.gitalk.enable && page.comments
+    include component/gitalk.pug 

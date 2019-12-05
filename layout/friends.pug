@@ -7,11 +7,12 @@ block content
   .friends
     if theme.menu.friends.quote.enable
       +quote(theme.menu.friends.quote.content)
-    if (page.description)
-      .description
-        each desc in page.description
-          p!= desc
+    if (page.introduction)
+      .introduction
+        each intro in page.introduction
+          p!= intro
       +friendList(page.friends)
 
-
+  if theme.gitalk.enable && page.comments
+    include component/gitalk.pug 
 
