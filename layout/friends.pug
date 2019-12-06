@@ -8,9 +8,9 @@ block content
     if theme.menu.friends.quote.enable
       +quote(theme.menu.friends.quote.content)
     if (page.introduction)
-      .introduction
+      .introduction.markdown
         each intro in page.introduction
-          p!= intro
+          div!= intro
       +friendList(page.friends)
 
   if theme.gitalk.enable && page.comments

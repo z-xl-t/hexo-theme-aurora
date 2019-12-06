@@ -15,7 +15,7 @@ const  ifIsMobile =  isMobile && isMobile.phone || false
 // 返回顶部功能
 const backToTop = {
   init() {
-    if (ifExistNode('.back-to-top')) {
+    if (ifExistNode('.back-to-top') && !ifIsMobile) {
       this.$window = $(window)
       this.$backToTop = $('.back-to-top')
       this.data = {
@@ -51,7 +51,7 @@ const backToTop = {
     const clientHeight = document.documentElement.clientHeight
     const pageYOffset = document.documentElement.scrollTop || document.body.scrollTop || document.getElementsByClassName('.layout').scrollTop
     // 判断位置，控制滚动到顶部
-    const showBackTop = pageYOffset >= 200
+    const showBackTop = pageYOffset >= 10
     if (showBackTop !== this.data.showBackTop || this.data.clientHeight !== clientHeight) {
       this.data.showBackTop = showBackTop
       this.data.topDistance = -950 + (showBackTop ? clientHeight : 0)

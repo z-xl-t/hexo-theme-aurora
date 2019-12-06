@@ -20,7 +20,7 @@ mixin inspirationList(inspirations)
                 span.time-wrapper
                   span.time= time
               if moment
-                p.moment= moment
+                div.moment.markdown!= moment
               if imgUrl
                 .img-box
                   img(src=url_for(imgUrl))

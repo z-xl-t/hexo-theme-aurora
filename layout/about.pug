@@ -45,11 +45,11 @@ block content
         each intor in introduction
           - currentIndex = currentIndex + 1
           - var color = (newColors && newColorsLength) ? newColors[currentIndex % newColorsLength] : '' 
-          li.intor(style={'border-top': (color ? '2px solid ' + color: ''), color: (color ? color : 'currentColor')})
+          li.intor.markdown(style={'border-top': (color ? '2px solid ' + color: ''), color: (color ? color : 'currentColor')})
             span.name-warpper
               span.name!= intor.name
             each c in intor.content
-              p.content!= c
+              div.content!= c
   if theme.gitalk.enable && page.comments
     include component/gitalk.pug 
 

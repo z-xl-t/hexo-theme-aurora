@@ -34,9 +34,10 @@ html(lang='ZH-CN')
       header
         include ../component/header.pug
       main
+        .main-wrapper
         .pjax-main-page
           block content
-           h2 世界并不美丽 却也因此而美丽
+            h2 世界并不美丽 却也因此而美丽
         .pjax-main-loading.loading
           if theme.loadingImage
             img.loading-image(src=url_for(theme.loadingImage))
