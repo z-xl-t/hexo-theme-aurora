@@ -13,8 +13,10 @@
     +sp-layout()
       width: 100%;
     .post-header
+      padding: $card-padding;
+      +sp-layout()
+        padding: 0 6px;
       .post-title
-        padding: $card-padding;
         font-size: $font-size-large;
         font-weight: $font-weight-normal;
         line-height: 1.8;
@@ -24,6 +26,10 @@
         height: 50px;
         border-top: 1px solid $bg-dark-line;
         word-break: keep-all;
+        +sp-layout()
+          padding: 0 6px;
+          & > span
+            margin-right: 6px !important;
         & > span
           display: flex;
           align-items: center;

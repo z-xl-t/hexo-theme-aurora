@@ -51,7 +51,7 @@ const backToTop = {
     const clientHeight = document.documentElement.clientHeight
     const pageYOffset = document.documentElement.scrollTop || document.body.scrollTop || document.getElementsByClassName('.layout').scrollTop
     // 判断位置，控制滚动到顶部
-    const showBackTop = pageYOffset >= 10
+    const showBackTop = pageYOffset >= 50
     if (showBackTop !== this.data.showBackTop || this.data.clientHeight !== clientHeight) {
       this.data.showBackTop = showBackTop
       this.data.topDistance = -950 + (showBackTop ? clientHeight : 0)
@@ -394,7 +394,6 @@ const headerIcon = {
       for (let i=0; i<6; ++i) {
         $(`.markdown h${i+1}`).each((idx, ele) => {
           $(ele).prepend($(`<i class=${this.icon[i]}></i>`))
-          console.log(idx, ele, $(ele))
         })
       }
    

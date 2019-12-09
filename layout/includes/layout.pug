@@ -25,10 +25,6 @@ html(lang='ZH-CN')
     link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
     link(rel="canonical", href="//" + theme.domain)
     link(rel="dns-prefetch", href="//cdn.jsdelivr.net")
-
-    //- 加载 gitalk 的 js 和 css
-    link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
-    script(src=url_for('/lib/gitalk/gitalk.min.js'))
   body
     .layout
       header
@@ -82,6 +78,10 @@ html(lang='ZH-CN')
               fixed: true
           });
           ap.list.show()
+
+    //- 加载 gitalk 的 js 和 css
+    link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
+    script(src=url_for('/lib/gitalk/gitalk.min.js'))
 
     //- 引入第三方的 js
     - var js = ['/js/third-party/jquery.min.js', '/js/third-party/isMobile.min.js', '/js/third-party/timeago.min.js', '/js/third-party/pjax.min.js']

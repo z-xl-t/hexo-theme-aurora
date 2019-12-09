@@ -6,6 +6,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 16px;
     +pc-layout()
       flex-direction: row;
     +sp-layout()
@@ -50,7 +51,6 @@
   .contact
     display: flex;
     justify-content: center;
-    margin: 16px 0 22px;
     a
       display: flex;
       justify-content: center;
@@ -97,6 +97,7 @@
           width: 24px;
           height: 24px;
   .introduction
+    margin-top: 22px;
     .intor
       margin-bottom: 16px;
       padding: $card-padding-large;
@@ -133,3 +134,4 @@
           color: #fff;
       .content
         color: $text-color;
+        word-break: break-all;

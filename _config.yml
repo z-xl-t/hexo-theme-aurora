@@ -18,6 +18,13 @@
 # c-2: 'rgb(233, 224, 207)'
 #========================================
 
+#==========================================================
+# 如果觉得 图片放在 images 里面太慢，可以考虑使用外链的形式。
+# 这里 给出一篇 cdn 加速的参考文章
+# https://chanshiyu.com/#/post/94
+# 或者找一个图床平台 如 sm.ms
+#==========================================================
+
 # 主标题、副标题、作者、网站描述、头像、网站图标、域名
 title: 椎咲良田
 subtitle: "快走吧 趁风停止之前"
@@ -111,7 +118,7 @@ mobileImage: /images/mobile.png
 PostImage: /images/postDefaultImage .png
 loadingImage: /images/loading.gif
 
-# 琉璃の空主题
+# 琉璃の空主题 如果开启此主题 默认的 pcImage 不加载。
 themeBackground:
   enable: true
   image:
@@ -137,7 +144,7 @@ backToTop:
 # https://leancloud.cn 注册后得到 AppID and AppKey.
 # 第一次需要在leanclud 新建 两个 Class 分别是 Counter 和 Visitor 
 leancloud:
-  enable: false
+  enable: true
   appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
   appKey: vi0TViY0HvYocUR3HxKGd1l9
   counter:
@@ -216,7 +223,3 @@ APlayer:
       cover: https://i.loli.net/2019/04/18/5cb871585123b.jpg
     }
   ]
-
-# 顶部进度条
-progressBar: 
-  enable: true
