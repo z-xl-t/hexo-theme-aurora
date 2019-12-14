@@ -12,6 +12,10 @@
       position: relative;
       overflow: hidden;
       border-radius: 3px 3px 0 0;
+      +pc-layout()
+        min-height: 80px;
+      +sp-layout()
+        min-height: 60px;
       img
         transition: transform 0.5s ease-out;
         &:hover
@@ -79,4 +83,5 @@
               .icon-fire
                 margin-top: -2px;
     .post-content
+      padding-top: 25px;
       padding-bottom: 25px;
