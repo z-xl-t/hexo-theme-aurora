@@ -75,6 +75,14 @@
     description: ""
     comments: true
     ```
+5. 文章内图片的展示
+
+
+如果在文章中直接使用 `![](imgUrl)` 语法, 则只会生成一张最大宽度为文章页面宽度的图片。
+
+如果你想图片拥有点击放大查看的效果，请在配置文件中开启 zoomingImage 功能并且使用 `{% imgBox imagePath descrition %}` 语法
+
+
 ### 页面篇
 
   将 `hexo-theme-aurora/page` 下的所有文件，复制到 `blog/source` 下，其中 `CNAME`,修改为自己的域名（如果有域名的话）
