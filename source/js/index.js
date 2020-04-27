@@ -10,7 +10,7 @@
 
 const ifExistNode = (selector) => $(selector).length !== 0
 
-const  ifIsMobile =  isMobile && isMobile.phone || false
+const ifIsMobile = isMobile && isMobile.phone || false
 
 // 返回顶部功能
 const backToTop = {
@@ -113,7 +113,7 @@ const leancloud = {
     if (window.AV && ifExistNode('.leancloud')) {
       const appId = $('.leancloud-app-id').attr('leancloud-app-id')
       const appKey = $('.leancloud-app-key').attr('leancloud-app-key')
-      AV.initialize(appId, appKey)
+      AV.init(appId, appKey)
       this.startHot()
       this.startVisitor()
     }
@@ -135,47 +135,32 @@ const leancloud = {
     const title = $visitors.attr('data-flag-title').trim();
     const query = new AV.Query(Counter);
     query.equalTo("url", url);
-    query.find({
-      success: function (results) {
-        if (results.length > 0) {
-          const counter = results[0];
-          counter.fetchWhenSave(true);
-          counter.increment("time");
-          counter.save(null, {
-            success: function (counter) {
-              const $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text(counter.get('time'));
-            },
-            error: function (counter, error) {
-              console.log('Failed to save Visitor num, with error message: ' + error.message);
-            }
-          });
-        } else {
-          const newcounter = new Counter();
-          /* Set ACL */
-          const acl = new AV.ACL();
-          acl.setPublicReadAccess(true);
-          acl.setPublicWriteAccess(true);
-          newcounter.setACL(acl);
-          /* End Set ACL */
-          newcounter.set("title", title);
-          newcounter.set("url", url);
-          newcounter.set("time", 1);
-          newcounter.save(null, {
-            success: function (newcounter) {
-              const $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-            },
-            error: function (newcounter, error) {
-              console.log('Failed to create');
-            }
-          });
-        }
-      },
-      error: function (error) {
-        console.log('Error:' + error.code + " " + error.message);
+    query.find().then(results => {
+      if (results.length > 0) {
+        const counter = results[0];
+        counter.fetchWhenSave(true);
+        counter.increment("time");
+        counter.save().then((results) => {
+          const $element = $(document.getElementById(url));
+          $element.find('.leancloud-visitors-count').text(results.get('time'));
+        })
+      } else {
+        const newcounter = new Counter();
+        /* Set ACL */
+        const acl = new AV.ACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+        newcounter.setACL(acl);
+        /* End Set ACL */
+        newcounter.set("title", title);
+        newcounter.set("url", url);
+        newcounter.set("time", 1);
+        newcounter.save().then(() => {
+          const $element = $(document.getElementById(url));
+          $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+        })
       }
-    });
+    })
   },
   showHot(Counter) {
     const query = new AV.Query(Counter);
@@ -185,21 +170,18 @@ const leancloud = {
       entries.push($(this).attr("id").trim());
     });
     query.containedIn('url', entries);
-    query
-      .find()
-      .done(function (results) {
-        const COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-        if (results.length === 0) {
-          $visitors.find(COUNT_CONTAINER_REF).text(0);
-          return;
-        }
-        for (let i = 0; i < results.length; i++) {
-          const item = results[i];
-          const url = item.get('url');
-          const time = item.get('time');
-          const element = document.getElementById(url);
-          $(element).find(COUNT_CONTAINER_REF).text(time);
-        }
+    query.find().then(results => {
+      const COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+      if (results.length === 0) {
+        $visitors.find(COUNT_CONTAINER_REF).text(0);
+        return;
+      }
+      for(let i=0; i < results.length; ++i) {
+        const item = results[i];
+        const url = item.get('url');
+        const time = item.get('time');
+        const element = document.getElementById(url);
+        $(element).find(COUNT_CONTAINER_REF).text(time);
         for (let i = 0; i < entries.length; i++) {
           const url = entries[i];
           const element = document.getElementById(url);
@@ -208,10 +190,8 @@ const leancloud = {
             countSpan.text(0);
           }
         }
-      })
-      .fail(function (object, error) {
-        console.log("Error: " + error.code + " " + error.message);
-      });
+      }
+    })
   },
   startVisitor() {
     if (typeof AV === 'undefined') return
@@ -227,99 +207,63 @@ const leancloud = {
     const hostname = referrer.hostname;
     const query = new AV.Query(Visitor);
     query.equalTo('referrer', hostname);
-    query
-      .find()
-      .done((results) => {
-        if (results.length > 0) {
-          // 存在则增加访问次数
-          const visitors = results[0];
-          visitors.fetchWhenSave(true);
-          visitors.increment("time");
-
-          visitors.save(null, {
-            success: function () { },
-            error: function (visitors, error) {
-              console.log('Failed to save Visitor num, with error message: ' + error.message);
-            }
-          });
-        } else {
-          // 不存在则新增来访者
-          const newVisitor = new Visitor()
-          /* Set ACL */
-          const acl = new AV.ACL();
-          acl.setPublicReadAccess(true);
-          acl.setPublicWriteAccess(true);
-          newVisitor.setACL(acl);
-          newVisitor.set('referrer', hostname);
-          newVisitor.set('time', 1);
-          newVisitor.save(null, {
-            success: function (newVisitor) {
-              console.log('success')
-            },
-            error: function (newVisitor, error) {
-              console.log('Failed to create');
-            }
-          })
-        }
-      })
-      .fail((error) => {
-        console.log('Error:' + error.code + " " + error.message);
-      })
-
-    query.equalTo('referrer', 'AllCount')
-    query.find()
-      .done((results) => {
+    query.find().then(results => {
+      if (results.length > 0) {
+        // 存在则增加访问次数
+        const visitors = results[0];
+        console.log(results)
+        visitors.fetchWhenSave(true);
+        visitors.increment("time");
+        visitors.save()
+      } else {
+        // 不存在则新增来访者
+        const newVisitor = new Visitor()
+        /* Set ACL */
+        const acl = new AV.ACL();
+        acl.setPublicReadAccess(true);
+        acl.setPublicWriteAccess(true);
+        newVisitor.setACL(acl);
+        newVisitor.set('referrer', hostname);
+        newVisitor.set('time', 1);
+        newVisitor.save().then(results => {
+        })
+      }
+      query.equalTo('referrer', 'AllCount')
+      query.find().then(results => {
         if (results.length === 1) {
           // 存在则增加访问次数
           const visitors = results[0];
           visitors.fetchWhenSave(true);
           visitors.increment("time");
-
-          visitors.save(null, {
-            success: function () { },
-            error: function (visitors, error) {
-              console.log('Failed to save Visitor num, with error message: ' + error.message);
-            }
-          });
-
+          visitors.save()
+  
         } else {
           // 不存在则新增来访者
           const newVisitor = new Visitor()
-          /* Set ACL */
           const acl = new AV.ACL();
           acl.setPublicReadAccess(true);
           acl.setPublicWriteAccess(true);
           newVisitor.setACL(acl);
           newVisitor.set('referrer', 'AllCount');
           newVisitor.set('time', 1);
-          newVisitor.save(null, {
-            success: function (newVisitor) {
-              console.log('success')
-            },
-            error: function (newVisitor, error) {
-              console.log('Failed to create');
-            }
-          })
+          newVisitor.save()
         }
       })
-      .fail((error) => {
-        console.log('Error:' + error.code + " " + error.message);
-      })
+    })
+
+
   },
   showVistor(Visitor) {
     const query = new AV.Query(Visitor);
     query.equalTo('referrer', 'AllCount')
-    query
-      .find()
-      .done((results) => {
-        if (results.length === 1) {
-          const time = results[0].get('time');
-          $('.visitor').text(time)
-        } else {
-          $('.visitor').text(1)
-        }
-      })
-
+    query.find().then(results => {
+      if (results.length === 1) {
+        const time = results.get('time');
+        $('.visitor').text(time)
+      } else {
+        $('.visitor').text(1)
+      }
+    })
   },
   getLocation(href) {
     // 转换访问来源地址
@@ -391,12 +335,12 @@ const headerIcon = {
   },
   render() {
     if (ifExistNode('.markdown')) {
-      for (let i=0; i<6; ++i) {
-        $(`.markdown h${i+1}`).each((idx, ele) => {
+      for (let i = 0; i < 6; ++i) {
+        $(`.markdown h${i + 1}`).each((idx, ele) => {
           $(ele).prepend($(`<i class=${this.icon[i]}></i>`))
         })
       }
-   
+
     }
   },
 }
@@ -446,6 +390,7 @@ const pjax = {
         imageZooming.listen()
         codeHighlight.renderCode()
         headerIcon.render()
+
         setTimeout(() => {
           this.$pjaxMainPage.fadeIn()
           this.$pjaxMainLoading.hide()
@@ -491,3 +436,7 @@ const pjax = {
     }
   }
 }
+
+/**
+ * 
+ */
