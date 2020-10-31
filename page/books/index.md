@@ -7,6 +7,7 @@ books:
   showMaxNumber: 4
   bookList:
     b-4:
+      bookSourceUrl: 'https://movie.douban.com/subject/1512037/'
       bookImgUrl: '/images/avatar.jpg'
       bookName: '奇诺之旅(系列丛书)'
       bookAuthor: '[日] 时雨泽惠一'
@@ -17,6 +18,7 @@ books:
       readingNotesUrl: 'javascript:;'
       recommendationIndex: 5
     b-3:
+      bookSourceUrl: 'https://book.douban.com/subject/27094416/'
       bookImgUrl: 'https://i.loli.net/2019/08/27/pq7Nki4YCA69Mvu.jpg'
       bookName: '羊与钢的森林'
       bookAuthor: '[日] 宫下奈都'
@@ -27,6 +29,7 @@ books:
       readingNotesUrl: 'https://sanshiliuxiao.top/book/20190607-%E7%BE%8A%E4%B8%8E%E9%92%A2%E7%9A%84%E6%A3%AE%E6%9E%97/'
       recommendationIndex: 5
     b-2:
+      bookSourceUrl: 'https://book.douban.com/subject/1442869/'
       bookImgUrl: 'https://i.loli.net/2019/08/27/gthK2aAoQL7jiHn.jpg'
       bookName: '献给阿尔吉侬的花束'
       bookAuthor: '[美] 丹尼尔·凯斯'
@@ -38,6 +41,7 @@ books:
       recommendationIndex: 5
     
     b-1:
+      bookSourceUrl: 'https://book.douban.com/subject/5916234/'
       bookImgUrl: 'https://i.loli.net/2019/08/27/LcDvn4jIZAq2fSE.jpg'
       bookName: '番茄工作法图解'
       bookAuthor: '[瑞典] Staffan Nöteberg'
@@ -56,3 +60,8 @@ books:
 上述字段可以不用修改， 如果想改的话， 最好之修改 date 字段，因为 gitalk 评论功能的 id， 就是由该字段决定，请保持每一个页面的 date 不同。
 
 由于静态博客的限制， 无法模拟成原主题的 动态加载功能。故根据 showMaxNumber 字段对 渲染页面做限制。
+
+
+如果不使用 bookSourceUrl 字段，则点击书籍封面，不会进行跳转。
+
+bookImgUrl 字段 允许直接使用相对路径，加在本地的 图片，图片的存放地点为 /hexo-auroara-theme/source/images/xxx.jpg

@@ -12,6 +12,7 @@ block content
       if showMaxNumber !== 0
         each book, i in page.books.bookList
           - currentIndex = currentIndex + 1
+          - var bookSourceUrl = book.bookSourceUrl || '';
           - var bookImgUrl = book.bookImgUrl || '';
           - var bookName = book.bookName || '';
           - var bookDescription = book.bookDescription || '';
@@ -25,8 +26,12 @@ block content
             li.book
               .book-info
                 if bookImgUrl
-                  img(src=url_for(bookImgUrl))
-                .meta
+                  .book-image-container
+                    .book-image
+                      img(src=url_for(bookImgUrl))
+                    if bookSourceUrl
+                      a.book-source-url(href=url_for(bookSourceUrl) target='_blank')
+                .book-meta
                   if bookName
                     h3= bookName
                   if bookAuthor
