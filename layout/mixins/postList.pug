@@ -13,14 +13,15 @@ mixin postList(posts)
         .post-header
           if post.title
             +post-title(3, post.title)
-        .post-meta
-          if post.date
-            +post-date(post.date)
-          if post && theme.leancloud.enable
-            +post-hot(post)
-          if post.tags
-            +post-tags(post.tags)
-          if post.categories
-            +post-categories(post.categories)
+        .post-meta-wrapper
+          .post-meta
+            if post.date
+              +post-date(post.date)
+            if post && theme.leancloud.enable
+              +post-hot(post)
+            if post.tags
+              +post-tags(post.tags)
+            if post.categories
+              +post-categories(post.categories)
         a.post-link.pjax-main-link(href=url_for(post.path))
     -})
