@@ -15,6 +15,27 @@
       +pc-layout()
         margin-bottom: 15px;
         width: 49.2%;
+        &::before
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 150px;
+          height: 100%;
+          transform: skewX(-30deg);
+          transition: left 1s ease 0s;
+          z-index: $zIndex-1;
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0) 100%
+          );
+        &:hover
+          transform: translateY(-6px);
+          box-shadow: $card-shadow-hover;
+          &::before
+            left: 150%;
       +sp-layout()
         width: 94%;
         margin: 0 3% 4%;
