@@ -51,4 +51,6 @@ block content
               if bookDescription
                 .book-desc= bookDescription
   if theme.gitalk.enable && page.comments
-    include component/gitalk.pug 
+    include component/gitalk.pug
+  if theme.valine.enable && page.comments
+    include component/valine.pug    

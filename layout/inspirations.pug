@@ -10,3 +10,6 @@ block content
       +inspirationList(page.inspirations)
   if theme.gitalk.enable && page.comments
     include component/gitalk.pug
+  if theme.valine.enable && page.comments
+    include component/valine.pug    
+    

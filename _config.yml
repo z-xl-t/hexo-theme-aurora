@@ -188,6 +188,14 @@ gitalk:
   admin: sanshiliuxiao
   clientID: 921d6f0be7c36e212658
   clientSecret: 2614ce5f405d03d99d9b76da0dc0a6f75b376bd9
+  
+# valine 评论功能
+# https://valine.js.org
+# 可以参考https://valine.js.org/quickstart.html获取appId和appKey
+valine: 
+    enable: false   
+    appId:                                                                                           #Leancloud应用的AppID
+    appKey:                                                                                       #Leancloud应用的AppKey  
 
 # 加载音乐插件 
 APlayer:
