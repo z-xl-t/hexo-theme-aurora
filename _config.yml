@@ -182,7 +182,7 @@ categoriesImage:
 # https://github.com/gitalk/gitalk
 
 gitalk:
-  enable: true
+  enable: false
   owner: sanshiliuxiao
   repo: comments
   admin: sanshiliuxiao
@@ -192,11 +192,12 @@ gitalk:
 # valine 评论功能
 # https://valine.js.org
 # 可以参考https://valine.js.org/quickstart.html获取appId和appKey
+# Leancloud应用的AppID
+# Leancloud应用的AppKey 
 valine: 
     enable: false   
-    appId:                                                                                           #Leancloud应用的AppID
-    appKey:                                                                                       #Leancloud应用的AppKey  
-
+    appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
+    appKey: vi0TViY0HvYocUR3HxKGd1l9
 # 加载音乐插件 
 APlayer:
   enable: true,

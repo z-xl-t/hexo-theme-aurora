@@ -1,8 +1,10 @@
-#valine
+.valine-wrapper
+  #valine
 
 script.
   var valine = new Valine({
       el: '#valine',  
       appId: '!{theme.valine.appId}',
-      appKey: '!{theme.valine.appKey}'
+      appKey: '!{theme.valine.appKey}',
+      placeholder: '说点什么'
   })
