@@ -24,7 +24,7 @@ block content
                 +post-tags(post.tags)
               if post.categories
                 +post-categories(post.categories)
-        .post-content
+        .post-content.heti
           .markdown!= post.content
   if theme.gitalk.enable && page.comments
     include component/gitalk.pug
