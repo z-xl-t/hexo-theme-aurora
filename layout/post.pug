@@ -26,7 +26,16 @@ block content
                 +post-categories(post.categories)
         .post-content.heti
           .markdown!= post.content
+            if theme.googleAds.enable && theme.googleAds.postPage.enable
+              <h2>Google广告</h2>
+              .google-ads-post-wrapper
+                  .google-seat
+                      p!= "假装这里有广告"
+                  .google-ads-content
+                   
   if theme.gitalk.enable && page.comments
     include component/gitalk.pug
   if theme.valine.enable && page.comments
-    include component/valine.pug    
+    include component/valine.pug   
+  if theme.waline.enable && page.comments
+    include component/waline.pug    

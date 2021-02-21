@@ -1,0 +1,37 @@
+#sakura-panel
+  img.sakura-icon(src="https://i.loli.net/2020/12/27/rPA2XaEJsnq5UIC.png", alt="sakura")
+  .sakura-mask
+  .sakura-container
+    .wrapper
+      .short-line
+        div.line
+        div.line
+      .main
+        .body
+          - var number = theme.sakura.content.length || 0
+          .swiper-wrapper
+            ul.swiper
+              if (number > 0)
+                each item in theme.sakura.content
+                  li.swiper-item
+                    .header
+                      h2!= item.title
+                    .container
+                      each subItem in item.list
+                        .item
+                          h3!= subItem.title
+                          img.qr-code(src=subItem.qrCodeUrl)
+          if (number > 1) 
+            button.left-btn
+              i.icon.icon-left-open-outline
+            button.right-btn
+              i.icon.icon-right-open-outline
+        .footer
+          p.like
+            span= "已有 "
+            span.like-num.leancloud-app-like= "0"
+            span= " 人点赞了哦！"
+          .star(data-title="点赞一下 (<ゝω・)☆")
+      .long-line
+        div.line
+        div.line

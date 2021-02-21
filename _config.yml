@@ -146,6 +146,8 @@ leancloud:
     enable: true
   visitor:
     enable: true
+  like:
+    enable: true
 
 
 # 主题配色，目前主要用于文章、说说、关于等卡片配色，以后可能会有其他用途
@@ -186,8 +188,8 @@ gitalk:
   owner: sanshiliuxiao
   repo: comments
   admin: sanshiliuxiao
-  clientID: 921d6f0be7c36e212658
-  clientSecret: 2614ce5f405d03d99d9b76da0dc0a6f75b376bd9
+  clientID: a325b3db69f4506ab13a
+  clientSecret: a033bc0d51708f80589bb93102980851dd7f80e8
   
 # valine 评论功能
 # https://valine.js.org
@@ -198,6 +200,16 @@ valine:
     enable: false   
     appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
     appKey: vi0TViY0HvYocUR3HxKGd1l9
+
+
+# Waline 评论功能
+# https://waline.js.org/quick-start.html
+
+waline: 
+    enable: true
+    serverURL: "https://waline-comments-seven.vercel.app/"
+
+
 # 加载音乐插件 
 APlayer:
   enable: true,
@@ -230,3 +242,37 @@ APlayer:
 
 openCDN:
   enable: true
+
+# sakura 
+# 点赞人数需要同时配置 leancloud 的 like 选项为 true
+sakura:
+  enable: true
+  content: [
+    {
+      title: "联系方式",
+      list: [
+        {
+          title: "Q Q",
+          qrCodeUrl: /images/qq.png
+        },
+        {
+          title: "微信",
+          qrCodeUrl: /images/vx.png
+        }
+      ]
+    }
+  ]
+
+
+# google ads
+
+googleAds:
+  enable: true
+  adClient: ca-pub-9441161448418285
+  adJs: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
+  postPage:
+    enable: true
+    adsSolt: 3867936552
+  aboutPage:
+    enable: true
+    adsSolt: 6860833347

@@ -28,10 +28,15 @@ html(lang='ZH-CN')
     //- gitalk 需要放在前面，
     //- 否则直接访问 带有 gitalk 不会初始化 
     //- 加载 gitalk 的 js 和 css
-    link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
-    script(src=url_for('/lib/gitalk/gitalk.min.js'))
+    if theme.gitalk.enable
+      link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
+      script(src=url_for('/lib/gitalk/gitalk.min.js'))
     //- 加载 valine 的 js
-    script(src=url_for('/lib/valine/Valine.min.js'))    
+    if theme.valine.enable
+      script(src=url_for('/lib/valine/valine.min.js')) 
+    //- 加载 waline 的 js
+    if theme.waline.enable
+      script(src=url_for('/lib/waline/waline.min.js')) 
   body
     .layout
       header
@@ -46,6 +51,9 @@ html(lang='ZH-CN')
             img.loading-image(src=url_for(theme.loadingImage))
       footer
         include ../component/footer.pug
+
+    if theme.sakura.enable
+      include ../component/sakuraPanel.pug
     .bg
       //- 动态背景图片
       if theme.themeBackground.enable
@@ -70,6 +78,14 @@ html(lang='ZH-CN')
         if theme.leancloud.visitor.enable
           .leancloud-app-visitor
     
+    if theme.googleAds.enable
+      script(src=theme.googleAds.adJs, data-ad-client=theme.googleAds.adClient)
+      .google-ads-ad-client(data-ads-ad-client=theme.googleAds.adClient)
+    if theme.googleAds.postPage.enable
+      .google-ads-post-page(data-ads-solt=theme.googleAds.postPage.adsSolt)
+    if theme.googleAds.aboutPage.enable
+      .google-ads-about-page(data-ads-solt=theme.googleAds.aboutPage.adsSolt)
+
     //- 播放器功能
     if theme.APlayer.enable
       //- 加载 APlayer 的 js 和 css

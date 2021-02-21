@@ -50,8 +50,19 @@ block content
               span.name!= intor.name
             each c in intor.content
               div.content!= c
+    if theme.googleAds.enable && theme.googleAds.aboutPage.enable
+      .google-ads-about-wrapper
+        .intor.markdown(style="border-top:2px solid #F9BF45;color:#F9BF45;")
+          span.name-warpper
+              span.name!= "Google广告"
+          .google-ads-about
+            .google-ads-content
+            .google-seat
+              p!= "假装这里有广告"
   if theme.gitalk.enable && page.comments
     include component/gitalk.pug 
   if theme.valine.enable && page.comments
     include component/valine.pug
+  if theme.waline.enable && page.comments
+    include component/waline.pug   
 

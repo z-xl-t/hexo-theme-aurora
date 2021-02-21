@@ -17,3 +17,5 @@ block content
     include component/gitalk.pug 
   if theme.valine.enable && page.comments
     include component/valine.pug 
+  if theme.waline.enable && page.comments
+    include component/waline.pug   

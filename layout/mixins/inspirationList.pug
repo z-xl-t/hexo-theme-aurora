@@ -23,6 +23,6 @@ mixin inspirationList(inspirations)
                 div.moment.markdown!= moment
               if imgUrl
                 .img-box
-                  img(src=url_for(imgUrl))
+                  img.img-zoomable(src=url_for(imgUrl))
                   if imgDesc
                     span= '◭ ' + imgDesc
