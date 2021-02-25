@@ -108,7 +108,7 @@ footer:
 # 背景图片(电脑页面/手机页面） 默认文章封面 加载图片
 pcImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/pc.png
 mobileImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/mobile.png
-PostImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/postDefaultImage.png
+PostImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/postDefaultImage .png
 loadingImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/loading.gif
 
 # 琉璃の空主题 如果开启此主题 默认的 pcImage 不加载。
@@ -194,8 +194,8 @@ gitalk:
 # valine 评论功能
 # https://valine.js.org
 # 可以参考https://valine.js.org/quickstart.html获取appId和appKey
-# Leancloud应用的AppID
-# Leancloud应用的AppKey 
+# Leancloud应用（国际版）的AppID
+# Leancloud应用（国际版）的AppKey 
 valine: 
     enable: false   
     appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
@@ -276,3 +276,8 @@ googleAds:
   aboutPage:
     enable: true
     adsSolt: 6860833347
+
+# 添加 Heti 字体控制开关
+
+heti:
+  enable: false

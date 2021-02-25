@@ -20,14 +20,20 @@ html(lang='ZH-CN')
     <meta name="theme-color" content="#b854d4" />
     title= pageTitle
     link(rel="shortcut icon", href=url_for(theme.favicon), type="image/x-icon")
-    link(rel="stylesheet", href=url_for('/css/index.css') + '?version=' + version())
     link(rel="stylesheet", href=url_for('/font/fontello.css') + '?version=' + version())
     link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
     link(rel="canonical", href="//" + theme.domain)
     link(rel="dns-prefetch", href="//cdn.jsdelivr.net")
+    
+    link(rel="stylesheet", href=url_for('css/third-party/normalize.css'))
+    
+    link(rel="stylesheet", href=url_for('css/hird-party/highlight-dune-dark.css'))
+    if theme.heti.enable
+      link(rel="stylesheet", href=url_for('css/third-party/heti.min.css'))
     //- gitalk 需要放在前面，
     //- 否则直接访问 带有 gitalk 不会初始化 
     //- 加载 gitalk 的 js 和 css
+    
     if theme.gitalk.enable
       link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
       script(src=url_for('/lib/gitalk/gitalk.min.js'))
@@ -37,6 +43,8 @@ html(lang='ZH-CN')
     //- 加载 waline 的 js
     if theme.waline.enable
       script(src=url_for('/lib/waline/waline.min.js')) 
+    
+    link(rel="stylesheet", href=url_for('/css/index.css') + '?version=' + version())
   body
     .layout
       header
