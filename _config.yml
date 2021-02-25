@@ -108,7 +108,7 @@ footer:
 # 背景图片(电脑页面/手机页面） 默认文章封面 加载图片
 pcImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/pc.png
 mobileImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/mobile.png
-PostImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/postDefaultImage .png
+PostImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/postDefaultImage.png
 loadingImage: https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/loading.gif
 
 # 琉璃の空主题 如果开启此主题 默认的 pcImage 不加载。
