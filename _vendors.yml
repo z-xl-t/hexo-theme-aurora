@@ -1,0 +1,27 @@
+home:
+  js: /js/index.js
+  css: /css/index.css
+
+# css
+font: /lib/font/fontello.css
+normalize: /lib/normalize/normalize.css
+
+# js
+waline: /lib/waline/waline.min.js
+leancloud: /lib/leancloud/leancloud.min.js
+jquery: /lib/jquery/jquery.min.js
+ismobile: /lib/ismobile/ismobile.min.js
+timeago: /lib/timeago/timeago.min.js
+pjax: /lib/pjax/pjax.min.js
+zooming: /lib/zooming/zooming.min.js
+backstretch: /lib/backstretch/backstretch.min.js
+
+# css and js
+highlight:
+  js: /lib/highlight/highlight.min.js
+  css: /lib/highlight/highlight-dune-dark.css
+
+aplayer:
+  js: /lib/aplayer/aplayer.min.js
+  css:  /lib/aplayer/aplayer.min.css
+

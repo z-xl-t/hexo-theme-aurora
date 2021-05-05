@@ -17,34 +17,20 @@ html(lang='ZH-CN')
     meta(name="og:site_name" content=theme.title)
     meta(name="og:url" content=theme.domain)
     meta(name="og：title" content=theme.title)
+    !=meta_generator()
     <meta name="theme-color" content="#b854d4" />
     title= pageTitle
     link(rel="shortcut icon", href=url_for(theme.favicon), type="image/x-icon")
-    link(rel="stylesheet", href=url_for('/font/fontello.css') + '?version=' + version())
-    link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
+    link(rel="stylesheet", href=url_for(theme.vendors.font) + '?version=' + version())
+    //- link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira+Mono|Noto+Serif+SC&amp;display=swap")
     link(rel="canonical", href="//" + theme.domain)
     link(rel="dns-prefetch", href="//cdn.jsdelivr.net")
     
-    link(rel="stylesheet", href=url_for('css/third-party/normalize.css'))
+    link(rel="stylesheet", href=url_for(theme.vendors.normalize) + '?version=' + version())
     
-    link(rel="stylesheet", href=url_for('css/hird-party/highlight-dune-dark.css'))
-    if theme.heti.enable
-      link(rel="stylesheet", href=url_for('css/third-party/heti.min.css'))
-    //- gitalk 需要放在前面，
-    //- 否则直接访问 带有 gitalk 不会初始化 
-    //- 加载 gitalk 的 js 和 css
+    link(rel="stylesheet", href=url_for(theme.vendors.highlight.css) + '?version=' + version())
     
-    if theme.gitalk.enable
-      link(rel="stylesheet", href=url_for('/lib/gitalk/gitalk.min.css'))
-      script(src=url_for('/lib/gitalk/gitalk.min.js'))
-    //- 加载 valine 的 js
-    if theme.valine.enable
-      script(src=url_for('/lib/valine/valine.min.js')) 
-    //- 加载 waline 的 js
-    if theme.waline.enable
-      script(src=url_for('/lib/waline/waline.min.js')) 
-    
-    link(rel="stylesheet", href=url_for('/css/index.css') + '?version=' + version())
+    link(rel="stylesheet", href=url_for(theme.vendors.home.css) + '?version=' + version())
   body
     .layout
       header
@@ -78,7 +64,7 @@ html(lang='ZH-CN')
     //- 埋点 对 文章热度 和 访问者来源 进行功能控制
     if theme.leancloud.enable
       .leancloud
-        script(src=url_for("/js/third-party/leancloud.min.js") + '?version=' + version())
+        script(src=url_for(theme.vendors.leancloud) + '?version=' + version())
         .leancloud-app-id(leancloud-app-id=theme.leancloud.appId)
         .leancloud-app-key(leancloud-app-key=theme.leancloud.appKey)
         if theme.leancloud.counter.enable
@@ -86,6 +72,7 @@ html(lang='ZH-CN')
         if theme.leancloud.visitor.enable
           .leancloud-app-visitor
     
+    //- 谷歌广告的id埋点
     if theme.googleAds.enable
       script(src=theme.googleAds.adJs, data-ad-client=theme.googleAds.adClient)
       .google-ads-ad-client(data-ads-ad-client=theme.googleAds.adClient)
@@ -94,11 +81,16 @@ html(lang='ZH-CN')
     if theme.googleAds.aboutPage.enable
       .google-ads-about-page(data-ads-solt=theme.googleAds.aboutPage.adsSolt)
 
+    //- 加载 评论 waline 的 js
+    if theme.waline.enable
+      script(src=url_for(theme.vendors.waline) + '?version=' + version())
+    
+
     //- 播放器功能
     if theme.APlayer.enable
       //- 加载 APlayer 的 js 和 css
-      link(rel="stylesheet", href=url_for('/lib/APlayer/APlayer.min.css'))
-      script(src=url_for('/lib/APlayer/APlayer.min.js'))
+      link(rel="stylesheet", href=url_for(theme.vendors.aplayer.css) + '?version=' + version())
+      script(src=url_for(theme.vendors.aplayer.js) + '?version=' + version())
       #aplayer
       script.
         let list = JSON.parse('!{JSON.stringify(theme.APlayer.list)}')
@@ -110,20 +102,21 @@ html(lang='ZH-CN')
           });
           ap.list.show()
 
-    //- 引入第三方的 js
-    - var js = ['/js/third-party/jquery.min.js', '/js/third-party/isMobile.min.js', '/js/third-party/timeago.min.js', '/js/third-party/pjax.min.js']
-    each item in js
-      script(src=url_for(item) + '?version=' + version())
+    script(src=url_for(theme.vendors.jquery) + '?version=' + version())
+    script(src=url_for(theme.vendors.ismobile) + '?version=' + version())
+    script(src=url_for(theme.vendors.timeago) + '?version=' + version())
+    script(src=url_for(theme.vendors.pjax) + '?version=' + version())
+
+    
     //- 文章图片的全屏功能
     if (theme.zoomingImage.enable)
-      script(src=url_for('/js/third-party/zooming.min.js') + '?version=' + version())
+      script(src=url_for(theme.vendors.zooming) + '?version=' + version())
     //- 动态背景
     if (theme.themeBackground.enable)
-      script(src=url_for('/js/third-party/backstretch.min.js') + '?version=' + version())
+      script(src=url_for(theme.vendors.backstretch) + '?version=' + version())
 
-    //- 额外的 js 文件
     //- 引入 第三方的 highlight, 改造重新打包后的文件
-    script(src=url_for('/js/highlight.min.js') + '?version=' + version())
+    script(src=url_for(theme.vendors.highlight.js) + '?version=' + version())
     //- 引入 index.js
-    script(src=url_for('/js/index.js') + '?version=' + version())
+    script(src=url_for(theme.vendors.home.js) + '?version=' + version())
     

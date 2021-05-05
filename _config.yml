@@ -180,28 +180,6 @@ categoriesImage:
     - https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/category/5.jpg
     - https://cdn.jsdelivr.net/gh/sanshiliuxiao/blog-static/category/6.jpg
 
-# gitalk 评论功能
-# https://github.com/gitalk/gitalk
-
-gitalk:
-  enable: false
-  owner: sanshiliuxiao
-  repo: comments
-  admin: sanshiliuxiao
-  clientID: a325b3db69f4506ab13a
-  clientSecret: a033bc0d51708f80589bb93102980851dd7f80e8
-  
-# valine 评论功能
-# https://valine.js.org
-# 可以参考https://valine.js.org/quickstart.html获取appId和appKey
-# Leancloud应用（国际版）的AppID
-# Leancloud应用（国际版）的AppKey 
-valine: 
-    enable: false   
-    appId: QAIKomD08e9fmVRQP4tkzUDf-MdYXbMMI
-    appKey: vi0TViY0HvYocUR3HxKGd1l9
-
-
 # Waline 评论功能
 # https://waline.js.org/quick-start.html
 
@@ -240,8 +218,6 @@ APlayer:
     }
   ]
 
-openCDN:
-  enable: true
 
 # sakura 
 # 点赞人数需要同时配置 leancloud 的 like 选项为 true
@@ -276,8 +252,3 @@ googleAds:
   aboutPage:
     enable: true
     adsSolt: 6860833347
-
-# 添加 Heti 字体控制开关
-
-heti:
-  enable: false

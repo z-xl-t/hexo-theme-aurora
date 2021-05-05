@@ -7,11 +7,7 @@ block content
   .inspirations
     if theme.menu.inspirations.quote.enable
       +quote(theme.menu.inspirations.quote.content)
-      +inspirationList(page.inspirations)
-  if theme.gitalk.enable && page.comments
-    include component/gitalk.pug
-  if theme.valine.enable && page.comments
-    include component/valine.pug    
+      +inspirationList(page.inspirations) 
   if theme.waline.enable && page.comments
     include component/waline.pug    
     
