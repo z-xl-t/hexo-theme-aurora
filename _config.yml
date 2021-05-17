@@ -252,3 +252,11 @@ googleAds:
   aboutPage:
     enable: true
     adsSolt: 6860833347
+
+# 又拍云联盟
+# https://www.upyun.com/league
+
+upyun: 
+  enable: true
+  url: https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral
+  img: images/upyun.png

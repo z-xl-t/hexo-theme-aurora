@@ -10,7 +10,13 @@
       i.icon-heart
       != "&nbsp;&nbsp;"
       span= theme.footer.title || theme.title
+    if theme.upyun.enable 
+      p.upyun
+        != "本网站由 "
+        a(href=theme.upyun.url target="_blank")
+          img(src=theme.upyun.img)
+        != "提供 CDN 加速服务"
     p
       a(href="https://github.com/sanshiliuxiao/hexo-theme-aurora.git" target="_blank") hexo-theme-Aurora
       != "&nbsp; | &nbsp;"
-      = theme.footer.subtitle || theme.subtitle 
+      = theme.footer.subtitle || theme.subtitle
