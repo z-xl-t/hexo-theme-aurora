@@ -2,7 +2,9 @@
   #waline
 
 script.
-  var valine = new Waline({
-      el: '#waline',
-      serverURL: '!{theme.waline.serverURL}', 
-  })
+  setTimeout(function(){
+    new Waline({
+        el: '#waline',
+        serverURL: '!{theme.waline.serverURL}', 
+    });
+  }, 1000);

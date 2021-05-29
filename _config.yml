@@ -257,6 +257,6 @@ googleAds:
 # https://www.upyun.com/league
 
 upyun: 
-  enable: true
+  enable: false
   url: https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral
   img: images/upyun.png
